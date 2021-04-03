@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="SimolatorDesktopApp_1.View.controls.JoystickDashBoard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SimolatorDesktopApp_1.View.controls"
+             xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+             mc:Ignorable="d" Height="800" Width="1100"  Background="#323C54">
+
+    <UserControl.Resources>
+        <ControlTemplate x:Key="simpleSlider" TargetType="{x:Type Slider}">
+            <Border SnapsToDevicePixels="true " Background="#FF34323A" 
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" MinHeight="{TemplateBinding MinHeight}"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Rectangle x:Name="PART_SelectionRange"/>
+                    <Track x:Name="PART_Track" Grid.Row="1" Orientation="Horizontal" >
+                        <Track.Thumb>
+                            <Thumb x:Name="Thumb">
+                                <Thumb.Template>
+                                    <ControlTemplate TargetType="Thumb">
+                                        <Rectangle Fill="#33DBC6"
+                                    Stroke="Black"
+                                    StrokeThickness="1"
+                                    Width="50"
+                                    Height="75"
+                                    HorizontalAlignment="Center"
+                                    SnapsToDevicePixels="True"/>
+                                    </ControlTemplate>
+                                </Thumb.Template>
+                            </Thumb>
+                        </Track.Thumb>
+                    </Track>
+                </Grid>
+            </Border>
+        </ControlTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--   inner joystick and its components  !-->
+        <local:Joystick  Grid.Row="1" Grid.Column="0"  Grid.ColumnSpan="3" Grid.RowSpan="2"
+            x:Name="innerJoystick"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center"/>
+
+        <!--   slider of Throttle  !-->
+        <Slider  Grid.Row="1"  Grid.ColumnSpan="3" Grid.Column="3"  x:Name="ThrottleSlider"
+                 TickFrequency="0.1" Value="{Binding Path=VM_Throttle}" Maximum="1" Minimum="0" VerticalAlignment="Center" Width="500" Template="{StaticResource simpleSlider}" />
+        <Label  Grid.ColumnSpan="3" Grid.Row="1" Grid.Column="3" Content="&lt;- Throttle -&gt;" HorizontalAlignment="Center"  VerticalAlignment="Top" FontSize="45"  Foreground="#747E96" />
+
+        <!--   slider of Ruder  !-->
+        <Slider Grid.Row="2"  Grid.ColumnSpan="3" Grid.Column="3" x:Name="RudderSlider" Width="500" VerticalAlignment="Center"
+                TickFrequency="0.1" Minimum ="-1" Maximum="1" Value="{Binding VM_Rudder}" Template="{StaticResource simpleSlider}"/>
+        <Label Grid.Row="2"  Grid.ColumnSpan="3" Grid.Column="3" Content="&lt;- Rudder -&gt;" FontSize="45" Foreground="#747E96" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+        <!--   elevator  !-->
+        <Label Grid.Row="1" Grid.Column="0" Content="&lt;- Elevator -&gt;" HorizontalAlignment="Left"  VerticalAlignment="Center" FontSize="45" Foreground="#747E96" Grid.ColumnSpan="2" Margin="76,55,0,82" >
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+
+        <!--   aileron  !-->
+        <Label Grid.Row="3"  Grid.ColumnSpan="3" Grid.Column="0" Content="&lt;- Aileron -&gt;" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="45" Foreground="#747E96"/>
+    </Grid>
+</UserControl>

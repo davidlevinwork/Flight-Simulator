@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="SimolatorDesktopApp_1.View.controls.DashBoardFlight"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SimolatorDesktopApp_1.View.controls"
+             mc:Ignorable="d"  Background="#323C54"
+             d:DesignHeight="800" d:DesignWidth="1100" FontSize="45">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="2.1*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2.1*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!--   header  !-->
+        <Label Content="Flight Dash Board"  Grid.Row="0" Margin="0" FontSize="100" FontWeight="Bold" Grid.ColumnSpan="5" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontStretch="Normal" Foreground="#FFFFFB"/>
+        <!--   labels  !-->
+        <Label Content="Air Speed" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left"  VerticalAlignment="Center"  FontStretch="Normal" Foreground="#747e96"/>
+        <Label Content="Roll"  Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left"  VerticalAlignment="Center"  FontStretch="Normal"  Foreground="#747e96"/>
+        <Label Content="Pitch" Grid.Row="3" Grid.Column="1"  HorizontalAlignment="Left"  VerticalAlignment="Center"  FontStretch="Normal"  Foreground="#747e96"/>
+        <Label Content="Altimeter"  Grid.Row="1" Grid.Column="3" HorizontalAlignment="Left"  VerticalAlignment="Center"   FontStretch="Normal"  Foreground="#747e96"/>
+        <Label Content="Heading" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left"  VerticalAlignment="Center" FontStretch="Normal" Foreground="#747e96" />
+        <Label Content="Yaw" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Left"  VerticalAlignment="Center" FontStretch="Normal" Foreground="#747e96"/>
+
+        <!--   values  !-->
+
+        <Label x:Name="air_speed_value" Content="{Binding VM_AirSpeed}" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left"  VerticalAlignment="Center" Foreground="#FF95D4FF"/>
+        <Label x:Name="roll_value" Content="{Binding VM_Roll}"   Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left"  VerticalAlignment="Center" Foreground="#FF95D4FF"/>
+        <Label x:Name="pitch_value" Content="{Binding VM_Pitch}" Grid.Row="3" Grid.Column="2"  HorizontalAlignment="Left"  VerticalAlignment="Center" Foreground="#FF95D4FF"/>
+        <Label x:Name="altimeter_value" Content="{Binding VM_Altimeter}" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="#FF95D4FF"/>
+        <Label x:Name="flight_direction_value" Content="{Binding VM_Heading}" Grid.Row="2" Grid.Column="4" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="#FF95D4FF"/>
+        <Label x:Name="yaw_value" Content="{Binding VM_Yaw}" Grid.Row="3" Grid.Column="4" HorizontalAlignment="Center"  VerticalAlignment="Center" Foreground="#FF95D4FF"/>
+    </Grid>
+</UserControl>
