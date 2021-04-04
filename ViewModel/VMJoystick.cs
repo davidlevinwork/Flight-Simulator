@@ -80,8 +80,5 @@ namespace SimolatorDesktopApp_1.ViewModel
                 _joystickModel.Throttle = value;
             }
         }
+    }
 }
-}
-
-
-

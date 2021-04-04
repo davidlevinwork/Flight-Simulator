@@ -24,7 +24,7 @@ namespace SimolatorDesktopApp_1.View.controls
         public JoystickDashBoard()
         {
             InitializeComponent();
-         
+
             _vmJoystickDashBoard = new VMJoystickDashBoard((Application.Current as App)._joystickDashBoardModel);
             DataContext = _vmJoystickDashBoard;
         }

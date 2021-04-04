@@ -40,6 +40,17 @@ namespace SimolatorDesktopApp_1.ViewModel
             set { _SliderModel.Speed = value; }
         }
 
+        public string VM_TimerString
+        {
+            get {
+                Console.WriteLine(_SliderModel.TimerString);
+                return _SliderModel.TimerString; 
+            }
+            set {
+                _SliderModel.TimerString = value; 
+            }
+        }
+
         private void INotifyPropertyChanged(string propName)
         {
             if (this.PropertyChanged != null)
@@ -78,5 +89,7 @@ namespace SimolatorDesktopApp_1.ViewModel
         {
             _SliderModel.Speed = speedRate;
         }
+
+
     }
 }

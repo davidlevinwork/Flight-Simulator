@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:SimolatorDesktopApp_1.View.controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    
+
     <Grid RenderTransformOrigin="0.498,0.496">
         <Canvas  x:Name="Base" Margin="0" Width="340" Height="340">
             <Ellipse HorizontalAlignment="Left" Height="340" VerticalAlignment="Top" Width="340">
