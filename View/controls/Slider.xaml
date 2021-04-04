@@ -5,19 +5,19 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SimolatorDesktopApp_1.View.controls"
              mc:Ignorable="d" 
-             Height="150" Width="800">
+             Height="150" Width="460">
     <Grid>
-        <Slider Value="{Binding VM_IndexLine ,Mode=OneWay}" x:Name="_SliderButton" Minimum="0" Maximum="{Binding VM_MaxLine}" ValueChanged="SliderValueChanged" HorizontalAlignment="Left" Width="519" Margin="12,81,0,0" VerticalAlignment="Top" Height="25"/>
+        <Slider Value="{Binding VM_IndexLine ,Mode=OneWay}" x:Name="_SliderButton" Minimum="0" Maximum="{Binding VM_MaxLine}" ValueChanged="SliderValueChanged" HorizontalAlignment="Left" Width="260" Margin="10,61,0,0" VerticalAlignment="Top" Height="25"/>
 
 
-        <StackPanel AllowDrop="True" Background="LightGray" Drop="CsvDropStackPanel_Drop" Height="49" VerticalAlignment="Top" Margin="688,9,7,0" >
+        <StackPanel AllowDrop="True" Background="LightGray" Drop="CsvDropStackPanel_Drop" Height="100" VerticalAlignment="Top" Margin="342,18,7,0" >
             <Label x:Name="CsvFileNameLabel" FontSize="12" HorizontalAlignment="Center" Content="Drag CSV File"/>
         </StackPanel>
-        <Label x:Name="_timeTextBox" HorizontalAlignment="Center" Height="39" Margin="540,70,177,0" FontSize="20" VerticalAlignment="Top" Width="83" Content="00:00:00" IsEnabled="False"/>
+        <TextBlock x:Name="_timeTextBlock" Foreground="AliceBlue" HorizontalAlignment="Center" Height="25" Margin="275,58,123,0" FontSize="15" VerticalAlignment="Top" Width="62" Text="{Binding VM_TimerString}"/>
 
         <Button x:Name="_leftJumpButton" Height="17" Width="18" Margin="30,27,401.6,106.4" Click="LeftJumpButton">
             <StackPanel>
-                <Image Source="/View/Resources/leftSpeed.png" Width="14" RenderTransformOrigin="-2.143,0.974"/>
+                <Image Source="/View/Resources/leftSpeed.png" Width="14"></Image>
             </StackPanel>
         </Button>
 
@@ -45,8 +45,8 @@
             </StackPanel>
         </Button>
 
-        <Label Content="Speed:"  HorizontalAlignment="Left" Foreground="AliceBlue" FontSize="15" Margin="629,74,0,48" VerticalAlignment="Center" Height="28" Width="58"/>
-        <ComboBox x:Name="_SpeedComboBox"  FontSize="13" VerticalContentAlignment="Center" Margin="690,81,11,48" ItemsSource="{Binding VM_Speed, Mode=OneWay}" SelectionChanged="ComboBoxSelectedSpeed" IsEditable="True" IsReadOnly="True">
+        <Label Content="Speed:"  HorizontalAlignment="Left" Foreground="AliceBlue" FontSize="10" Margin="161,23,0,102.4" VerticalAlignment="Center" Height="25" Width="39"/>
+        <ComboBox x:Name="_SpeedComboBox" VerticalContentAlignment="Center" Margin="200,25,203,104.4" ItemsSource="{Binding VM_Speed, Mode=OneWay}" SelectionChanged="ComboBoxSelectedSpeed" IsEditable="True" IsReadOnly="True">
             <ComboBoxItem Content="0.25">
             </ComboBoxItem>
             <ComboBoxItem Content="0.5">

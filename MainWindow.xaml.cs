@@ -26,13 +26,15 @@ namespace SimolatorDesktopApp_1
     /// </summary>
     public partial class MainWindow : Window
     {
-        bool readGuide = false, readyToConnect = false;
+        bool readGuide = true, readyToConnect = true; // both need to be false. need to add guide. 
+        /// </summary>
         public enum Status { active, connect, disconnect, inActive }
         private const string disconnected = "Simulator Disconnected";
         private const string connected = "Simulator Connected";
         public MainWindow()
         {
             InitializeComponent();
+            // Media.Source = new Uri(Environment.CurrentDirectory+ @"\load1.jpg");
         }
 
         /*
@@ -59,11 +61,12 @@ namespace SimolatorDesktopApp_1
         }
         */
 
+        /*
         private void button1_Click(object sender, EventArgs e)
         {
-            //firstButton.Background = Brushes.LimeGreen;
-            //firstButton.Content = "Do it now. before loading the csv file";
-            //firstButton.FontSize = 7;
+            firstButton.Background = Brushes.LimeGreen;
+            firstButton.Content = "Do it now. before loading the csv file";
+            firstButton.FontSize = 7;
             //Console.WriteLine("clicked");
             readGuide = true;
             Form form = new Form();
@@ -80,6 +83,8 @@ namespace SimolatorDesktopApp_1
             pb.BorderStyle = BorderStyle.Fixed3D;
             form.Controls.Add(pb);
         }
+
+        */
 
         private void ConnectControl_Loaded(object sender, RoutedEventArgs e)
         {
@@ -114,11 +119,6 @@ namespace SimolatorDesktopApp_1
         }
 
         private void MediaElement_MediaEnded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void MediaElement_MediaEnded_1(object sender, RoutedEventArgs e)
         {
 
         }

@@ -77,7 +77,7 @@ namespace SimolatorDesktopApp_1.ViewModel
                 _dashBoardModel.Yaw = value;
             }
         }
-        public double VM_FlightDirection
+        public double VM_Heading
         {
             get { return _dashBoardModel.Heading; }
             set

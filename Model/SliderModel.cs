@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,8 @@ namespace SimolatorDesktopApp_1.Model
         private string[] _linesArray;
         private bool stopFlag = false;
         private bool puaseFlag = false;
+        private double _timer = 0;
+        private TimeSpan time;
         private double _speed = 1.0;
         private Thread t;
         private ManualResetEvent _manualResetEvent = new ManualResetEvent(true);
@@ -34,6 +37,7 @@ namespace SimolatorDesktopApp_1.Model
             _dashBoardModel = (Application.Current as App)._dashBoardModel;
             _joystickModel = (Application.Current as App)._joystickModel;
             _joystickDashBoardModel = (Application.Current as App)._joystickDashBoardModel;
+            time = TimeSpan.FromSeconds(_timer);
         }
         public int IndexLine
         {
@@ -53,7 +57,10 @@ namespace SimolatorDesktopApp_1.Model
                 _dashBoardModel.updateValues(commands);
                 _joystickModel.updateValues(commands);
                 _joystickDashBoardModel.updateValues(commands);
+                TimerString = _indexLine.ToString();
+                Console.WriteLine(TimerString);
                 INotifyPropertyChanged("IndexLine");
+
             }
         }
 
@@ -80,6 +87,21 @@ namespace SimolatorDesktopApp_1.Model
             {
                 _speed = value;
                 INotifyPropertyChanged("Speed");
+            }
+        }
+
+        public string TimerString
+        {
+            get
+            {
+                return time.ToString(@"hh\:mm\:ss");
+            }
+            set
+            {
+                double d_time = double.Parse(value, CultureInfo.InvariantCulture);
+                _timer = (d_time / 10);
+                time = TimeSpan.FromSeconds(_timer);
+                INotifyPropertyChanged("TimerString");
             }
         }
 
