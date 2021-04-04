@@ -1,11 +1,16 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Linq;
+using System.Xml.XPath;
 
 namespace SimolatorDesktopApp_1.Model
 {
@@ -39,11 +44,39 @@ namespace SimolatorDesktopApp_1.Model
 
         public void Connect(string ip, int port)
         {
+            try {
+                XDocument doc2 = XDocument.Load("C:/Program Files/FlightGear 2020.3.6/data/Protocol/playback_small.xml");
+                string xmlFile = doc2.ToString();
+                string[] words = xmlFile.Split(' ');
+                Dictionary<int, string> featuresMap = new Dictionary<int, string>();
+                int location = 0;
+                for (int i = 0; i < words.Length; i++)
+                {
+                    if (words[i].Contains("<output>"))
+                    {
+                        while (!words[i].Contains("</output>"))
+                        {
+                            if (words[i].StartsWith("<name>"))
+                            {
+                                string sub = words[i].Split('>')[1];
+                                sub = sub.Split('<')[0];
+                                featuresMap.Add(location++, sub);
+                            }
+                            i++;
+                        }
+                        break;
+                    }
+                }
+            }
+            catch
+            {
+                Console.WriteLine("need to upload xml file");
+            }
             aClient = new TcpClient(ip, port);
             stream = aClient.GetStream();
             IsConnected = true; // set property connect
-           // SimulatorModel simulatorModel = new SimulatorModel(this);
-           // simulatorModel.startSimulator();
+            // SimulatorModel simulatorModel = new SimulatorModel(this);
+            // simulatorModel.startSimulator();
         }
 
         public void Disconnect()

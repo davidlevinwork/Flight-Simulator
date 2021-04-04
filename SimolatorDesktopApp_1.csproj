@@ -101,8 +101,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\DashBoardModel.cs" />
+    <Compile Include="Model\FilesUpload.cs" />
     <Compile Include="Model\ISimulatorConnector.cs" />
-    <Compile Include="Model\IuploadFile.cs" />
     <Compile Include="Model\JoystickDashBoardModel.cs" />
     <Compile Include="Model\JoystickModel.cs" />
     <Compile Include="Model\SimulatorConnectorModel.cs" />

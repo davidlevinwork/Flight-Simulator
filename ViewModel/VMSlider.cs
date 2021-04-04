@@ -43,7 +43,6 @@ namespace SimolatorDesktopApp_1.ViewModel
         public string VM_TimerString
         {
             get {
-                Console.WriteLine(_SliderModel.TimerString);
                 return _SliderModel.TimerString; 
             }
             set {

@@ -11,7 +11,7 @@
 
 
         <StackPanel AllowDrop="True" Background="LightGray" Drop="CsvDropStackPanel_Drop" Height="100" VerticalAlignment="Top" Margin="342,18,7,0" >
-            <Label x:Name="CsvFileNameLabel" FontSize="12" HorizontalAlignment="Center" Content="Drag CSV File"/>
+            <Label x:Name="_csvFileNameLabel" FontSize="12" HorizontalAlignment="Center" Content="Drag CSV File"/>
         </StackPanel>
         <TextBlock x:Name="_timeTextBlock" Foreground="AliceBlue" HorizontalAlignment="Center" Height="25" Margin="275,58,123,0" FontSize="15" VerticalAlignment="Top" Width="62" Text="{Binding VM_TimerString}"/>
 
@@ -64,5 +64,6 @@
             <ComboBoxItem Content="2.0">
             </ComboBoxItem>
         </ComboBox>
+
     </Grid>
 </UserControl>

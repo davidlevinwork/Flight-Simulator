@@ -49,13 +49,14 @@ namespace SimolatorDesktopApp_1.View.controls
                 string fileType = i < 0 ? "" : tempFileName.Substring(i + 1);
                 if (String.Equals("csv", fileType))
                 {
-                    CsvFileNameLabel.Content = fileName;
+                    _csvFileNameLabel.Content = fileName;
+                    Console.WriteLine(pathCsv);
                     _VMSlider.VMUploadCsvFile(pathCsv);
                     ifValidCsvFile = true;
                 }
                 else
                 {
-                    CsvFileNameLabel.Content = "Invalid file type";
+                    _csvFileNameLabel.Content = "Invalid file type";
                     ifValidCsvFile = false;
                 }
             }
@@ -109,6 +110,5 @@ namespace SimolatorDesktopApp_1.View.controls
         {
             _VMSlider.VMupdateIndexSlider((int)_SliderButton.Value);
         }
-        
     }
 }

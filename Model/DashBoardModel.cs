@@ -18,6 +18,7 @@ namespace SimolatorDesktopApp_1.Model
         private double _yaw = 0;
         private double _hedaing = 0;
         private SimulatorConnectorModel _simulatorConnectorModel;
+        private FilesUpload _filesUpload;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -27,15 +28,22 @@ namespace SimolatorDesktopApp_1.Model
         public DashBoardModel( )
         {
             _simulatorConnectorModel = (Application.Current as App)._simultorConnectorModel;
+            _filesUpload = (Application.Current as App)._filesUpload;
         }
         public void updateValues(string[] commands)
         {
-            Altimeter = double.Parse(commands[25], CultureInfo.InvariantCulture);
-            AirSpeed = double.Parse(commands[24], CultureInfo.InvariantCulture);
-            Roll = double.Parse(commands[17], CultureInfo.InvariantCulture);
-            Pitch = double.Parse(commands[18], CultureInfo.InvariantCulture);
-            Yaw = double.Parse(commands[20], CultureInfo.InvariantCulture);
-            Heading = double.Parse(commands[19], CultureInfo.InvariantCulture);
+            //Altimeter = double.Parse(commands[25], CultureInfo.InvariantCulture);
+            Altimeter = double.Parse(commands[_filesUpload.FeaturesMap.FirstOrDefault(x => x.Value == "altimeter_indicated-altitude-ft").Key], CultureInfo.InvariantCulture);
+            //AirSpeed = double.Parse(commands[24], CultureInfo.InvariantCulture);
+            AirSpeed = double.Parse(commands[_filesUpload.FeaturesMap.FirstOrDefault(x => x.Value == "airspeed-kt").Key], CultureInfo.InvariantCulture);
+            //Roll = double.Parse(commands[17], CultureInfo.InvariantCulture);
+            Roll = double.Parse(commands[_filesUpload.FeaturesMap.FirstOrDefault(x => x.Value == "roll-deg").Key], CultureInfo.InvariantCulture);
+            //Pitch = double.Parse(commands[18], CultureInfo.InvariantCulture);
+            Pitch = double.Parse(commands[_filesUpload.FeaturesMap.FirstOrDefault(x => x.Value == "pitch-deg").Key], CultureInfo.InvariantCulture);
+            //Yaw = double.Parse(commands[20], CultureInfo.InvariantCulture);
+            Yaw = double.Parse(commands[_filesUpload.FeaturesMap.FirstOrDefault(x => x.Value == "side-slip-deg").Key], CultureInfo.InvariantCulture);
+            //Heading = double.Parse(commands[19], CultureInfo.InvariantCulture);
+            Heading = double.Parse(commands[_filesUpload.FeaturesMap.FirstOrDefault(x => x.Value == "heading-deg").Key], CultureInfo.InvariantCulture);
         }
         public void INotifyPropertyChanged(string propName)
         {

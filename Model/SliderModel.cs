@@ -28,11 +28,13 @@ namespace SimolatorDesktopApp_1.Model
         private DashBoardModel _dashBoardModel;
         private JoystickModel _joystickModel;
         private JoystickDashBoardModel _joystickDashBoardModel;
+        private FilesUpload _filesUpload;
         public event PropertyChangedEventHandler PropertyChanged;
 
         /* Constructors: */
         public SliderModel(SimulatorConnectorModel simulatorConnectorModel)
         {
+            _filesUpload = (Application.Current as App)._filesUpload;
             _simulatorConnectorModel = simulatorConnectorModel;
             _dashBoardModel = (Application.Current as App)._dashBoardModel;
             _joystickModel = (Application.Current as App)._joystickModel;
@@ -58,7 +60,6 @@ namespace SimolatorDesktopApp_1.Model
                 _joystickModel.updateValues(commands);
                 _joystickDashBoardModel.updateValues(commands);
                 TimerString = _indexLine.ToString();
-                Console.WriteLine(TimerString);
                 INotifyPropertyChanged("IndexLine");
 
             }
@@ -158,7 +159,7 @@ namespace SimolatorDesktopApp_1.Model
         {
             try
             {
-                _linesArray = File.ReadAllLines(pathCsv);
+                _linesArray = _filesUpload.csvUpload(pathCsv);
                 MaxLine = _linesArray.Length; // set number of lines
             }
             catch(Exception e)
