@@ -17,12 +17,14 @@ namespace SimolatorDesktopApp_1.Model
         private double _throttle = 0;
         private Thickness _location;
         private SimulatorConnectorModel _simulatorConnectorModel;
+        private FilesUpload _filesUpload;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public JoystickModel()
         {
             _simulatorConnectorModel = (Application.Current as App)._simultorConnectorModel;
+            _filesUpload = (Application.Current as App)._filesUpload;
             _location = new Thickness(0, 0, 0, 0);
         }
 
@@ -36,11 +38,10 @@ namespace SimolatorDesktopApp_1.Model
 
         public void updateValues(string[] commands)
         {
-            Aileron = double.Parse(commands[0], CultureInfo.InvariantCulture);
-            Elevator = double.Parse(commands[1], CultureInfo.InvariantCulture);
-            Rudder = double.Parse(commands[2], CultureInfo.InvariantCulture);
-            Throttle = double.Parse(commands[6], CultureInfo.InvariantCulture);
-
+            Aileron = double.Parse(commands[_filesUpload.FeaturesMap.FirstOrDefault(x => x.Value == "aileron").Key], CultureInfo.InvariantCulture);
+            Elevator = double.Parse(commands[_filesUpload.FeaturesMap.FirstOrDefault(x => x.Value == "elevator").Key], CultureInfo.InvariantCulture);
+            Rudder = double.Parse(commands[_filesUpload.FeaturesMap.FirstOrDefault(x => x.Value == "rudder").Key], CultureInfo.InvariantCulture);
+            Throttle = double.Parse(commands[_filesUpload.FeaturesMap.FirstOrDefault(x => x.Value == "throttle").Key], CultureInfo.InvariantCulture);
             Location = new Thickness(_aileron * 200, 0, 0, _elevator * 200);
 
         }

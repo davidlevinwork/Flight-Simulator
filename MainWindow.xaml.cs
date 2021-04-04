@@ -13,12 +13,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+//using DragEventArgs = System.Windows.DragEventArgs;
+
+
 
 namespace SimolatorDesktopApp_1
 {
+    using DragEventArgs = System.Windows.DragEventArgs;
     using SimolatorDesktopApp_1.Model;
     using System.IO;
-    using DragEventArgs = System.Windows.DragEventArgs;
 
 
     /// <summary>
@@ -133,6 +136,31 @@ namespace SimolatorDesktopApp_1
                // LabelConnectStatus.Content = "Status: Connected";
                 // LabelConnectStatus.Background = Brushes.LimeGreen;
                 simulatorModel.startSimulator();
+            }
+        }
+
+        private void XmlDropStackPanel_Drop(object sender, DragEventArgs e) ///////////////////////
+        {
+            if (e.Data.GetDataPresent(System.Windows.DataFormats.FileDrop))
+            {
+
+                string[] filePath = (string[])e.Data.GetData(System.Windows.DataFormats.FileDrop);
+                string pathXml = filePath[0];
+                string fileName = Path.GetFileName(filePath[0]);
+                string tempFileName = fileName;
+                int i = tempFileName.LastIndexOf('.');
+                string fileType = i < 0 ? "" : tempFileName.Substring(i + 1);
+                if (String.Equals("xml", fileType) || String.Equals("xaml", fileType))
+                {
+                    _xmlFileNameLabel.Content = fileName;
+                    (System.Windows.Application.Current as App)._filesUpload.xmlUpload();
+                    //ifValidXmlFile = true;
+                }
+                else
+                {
+                    _xmlFileNameLabel.Content = "Invalid file type";
+                    //ifValidXmlFile = false;
+                }
             }
         }
     }
