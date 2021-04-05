@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="SimolatorDesktopApp_1.View.controls.GraphsUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:oxy="clr-namespace:OxyPlot.Wpf;assembly=OxyPlot.Wpf" 
+             xmlns:local="clr-namespace:SimolatorDesktopApp_1.View.controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="550">
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <oxy:PlotView x:Name="Plot1" Model="{Binding VM_Plot}" Margin="10" Grid.Row="0" Grid.Column="1">
+        </oxy:PlotView>
+        <ListView Name="ListView" HorizontalAlignment="Left" Height="430" Margin="10,10,0,0" VerticalAlignment="Top" Width="164" Grid.RowSpan="2">
+            <ListView.View>
+                <GridView x:Name="GridViewFeatures">
+                    <GridViewColumn Header="Features" Width="170" />
+                    
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</UserControl>

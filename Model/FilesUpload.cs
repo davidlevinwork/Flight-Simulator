@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -8,11 +9,22 @@ using System.Xml.Linq;
 
 namespace SimolatorDesktopApp_1.Model
 {
-    public class FilesUpload
+    public class FilesUpload : INotifyPropertyChanged
     {
         private Dictionary<int, string> _featuresMap = new Dictionary<int, string>();
         private string[] _userCsvFile;
         bool isCsvUploaded = false, isXmlUploaded = false;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void INotifyPropertyChanged(string propName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
+        }
+
         public FilesUpload()
         {
             //_featuresMap = new Dictionary<int, string>();
@@ -27,6 +39,16 @@ namespace SimolatorDesktopApp_1.Model
             
             set
             { 
+            }
+        }
+
+        public bool IsXmlUploaded
+        {
+            get { return isXmlUploaded; }
+            set
+            {
+                isXmlUploaded = value;
+                INotifyPropertyChanged("IsXmlUploaded");
             }
         }
 
