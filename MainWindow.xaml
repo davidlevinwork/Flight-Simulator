@@ -29,9 +29,8 @@
         </Viewbox>
         <!-- Slider controller -->
         <Controls:Slider Grid.Column="0" Grid.Row="1" Margin="-1,10.4,0.6,200.4" />
-        <Border Background="Gray" Margin="0,0,0.2,0.2">
-            <Image Grid.Column="1" HorizontalAlignment="Left" Height="241" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="298"/>
-        </Border>
+
+        <Controls:GraphsUserControl />
 
         <StackPanel Grid.Row="0" Grid.Column="1" AllowDrop="True" Background="LightGray" Drop="XmlDropStackPanel_Drop" Height="100" VerticalAlignment="Top" Margin="32.667,29,30.667,0" >
             <Label x:Name="_xmlFileNameLabel" FontSize="12" HorizontalAlignment="Center" Content="Drag xml File"/>

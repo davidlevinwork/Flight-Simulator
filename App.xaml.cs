@@ -20,6 +20,8 @@ namespace SimolatorDesktopApp_1
         public SimulatorConnectorModel _simultorConnectorModel { get; private set; }
         public DashBoardModel _dashBoardModel { get; private set; }
         public JoystickModel _joystickModel { get; private set; }
+        public GraphsModel _graphModel { get; private set; }
+
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             _filesUpload = new FilesUpload();
@@ -27,7 +29,7 @@ namespace SimolatorDesktopApp_1
             _dashBoardModel = new DashBoardModel();
             _joystickModel = new JoystickModel();
             _joystickDashBoardModel = new JoystickDashBoardModel();
-
+            _graphModel = new GraphsModel();
             // Create main application window
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();

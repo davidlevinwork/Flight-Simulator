@@ -16,7 +16,7 @@ namespace SimolatorDesktopApp_1.ViewModel
         public VMSlider(SliderModel sliderModel)
         {
             _SliderModel = sliderModel;
-            sliderModel.PropertyChanged +=
+            _SliderModel.PropertyChanged +=
                 delegate (Object sender, PropertyChangedEventArgs e)
                 {
                     INotifyPropertyChanged("VM_" + e.PropertyName);
