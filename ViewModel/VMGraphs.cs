@@ -27,13 +27,37 @@ namespace SimolatorDesktopApp_1.ViewModel
                    INotifyPropertyChanged("VM_" + e.PropertyName);
                };
         }
-        public PlotModel VM_Plot
+
+        public PlotModel VM_PlotFeature1
         {
-            get { return _graphsModel.Plot; }
+            get { return _graphsModel.PlotFeature1; }
             set
             {
-                _graphsModel.Plot = value;
+                _graphsModel.PlotFeature1 = value;
             }
+        }
+
+        public PlotModel VM_PlotFeature2
+        {
+            get { return _graphsModel.PlotFeature2; }
+            set
+            {
+                _graphsModel.PlotFeature2 = value;
+            }
+        }
+
+        public PlotModel VM_PlotCorrelatedFeatures
+        {
+            get { return _graphsModel.PlotCorrelatedFeatures; }
+            set
+            {
+                _graphsModel.PlotCorrelatedFeatures = value;
+            }
+        }
+
+        internal void vmSelectedFeature(string selectedItem)
+        {
+            _graphsModel.SelectedFeature(selectedItem);
         }
 
         public ObservableCollection<string> VM_AddToList
@@ -42,13 +66,9 @@ namespace SimolatorDesktopApp_1.ViewModel
             set
             {
                 _toViewListFeatures = value;
-                Console.WriteLine(_toViewListFeatures.Count);
                 INotifyPropertyChanged("VM_AddToList");
             }
         }
-
-
-
 
         private void INotifyPropertyChanged(string propName)
         {
