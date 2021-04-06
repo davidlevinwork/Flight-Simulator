@@ -1,10 +1,14 @@
-﻿using System;
+﻿using SimolatorDesktopApp_1.ViewModel;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using System.Xml.Linq;
 
 namespace SimolatorDesktopApp_1.Model
@@ -12,10 +16,17 @@ namespace SimolatorDesktopApp_1.Model
     public class FilesUpload : INotifyPropertyChanged
     {
         private Dictionary<int, string> _featuresMap = new Dictionary<int, string>();
+        private VMGraphs _vmGraphs = (Application.Current as App)._vmGraphs;
         private string[] _userCsvFile;
+        private ObservableCollection<string> _toViewListFeatures = new ObservableCollection<string>();
         bool isCsvUploaded = false, isXmlUploaded = false;
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public FilesUpload()
+        {
+            //_graphsModel = (Application.Current as App)._graphModel;
+        }
 
         public void INotifyPropertyChanged(string propName)
         {
@@ -23,11 +34,6 @@ namespace SimolatorDesktopApp_1.Model
             {
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
-        }
-
-        public FilesUpload()
-        {
-            //_featuresMap = new Dictionary<int, string>();
         }
 
         public Dictionary<int, string> FeaturesMap
@@ -83,7 +89,12 @@ namespace SimolatorDesktopApp_1.Model
                     }
                 }
                 isXmlUploaded = true;
-                if(isCsvUploaded)
+                for(int i = 0; i < _featuresMap.Count; i++)
+                {
+                    _toViewListFeatures.Add(_featuresMap[i]);
+                }
+                _vmGraphs.VM_AddToList = _toViewListFeatures;
+                if (isCsvUploaded)
                 {
                     writeNewCSVFile();
                     isXmlUploaded = false;
