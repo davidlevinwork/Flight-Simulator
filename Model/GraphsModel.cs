@@ -44,6 +44,11 @@ namespace SimolatorDesktopApp_1.Model
             _featureSelect = selectedItem;
         }
 
+        public void updateAllValues(Dictionary<int, string[]> allValues)
+        {
+
+        }
+
         public void updateGraph(string[] lineValues, Dictionary<int,string> featuresMap, int lineIndex)
         {
             _plot1.Series.Clear();
