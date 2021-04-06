@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,50 +15,100 @@ namespace SimolatorDesktopApp_1.Model
 {
     public class GraphsModel : INotifyPropertyChanged
     {
-        private PlotModel _plot;
+        private PlotModel _plot1;
+        private PlotModel _plot2;
+        private PlotModel _plot3;
+        private string _featureSelect = "";
+        private double[] values = new double[2500];
+        private int _numOfValues = 0;
         public GraphsModel()
         {
-            _plot = new PlotModel();
-            _plot.LegendTitle = "Legend";
-            _plot.LegendOrientation = LegendOrientation.Horizontal;
-            _plot.LegendPlacement = LegendPlacement.Outside;
-            _plot.LegendPosition = LegendPosition.TopRight;
-            _plot.LegendBackground = OxyColor.FromAColor(200, OxyColors.White);
-            _plot.LegendBorder = OxyColors.Black;
+            _plot1 = new PlotModel();
+            _plot2 = new PlotModel();
+            _plot3 = new PlotModel();
+            _plot1.LegendTitle = "Legend";
+            _plot1.LegendOrientation = LegendOrientation.Horizontal;
+            _plot1.LegendPlacement = LegendPlacement.Outside;
+            _plot1.LegendPosition = LegendPosition.TopRight;
+            _plot1.LegendBackground = OxyColor.FromAColor(200, OxyColors.White);
+            _plot1.LegendBorder = OxyColors.Black;
             var dateAxis = new DateTimeAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, IntervalLength = 80 };
-            _plot.Axes.Add(dateAxis);
-            var valueAxis = new LinearAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Title = "Value" };
-            _plot.Axes.Add(valueAxis);
-
-            var series1 = new LineSeries { Title = "Series 1", MarkerType = MarkerType.Circle };
-            series1.Points.Add(new DataPoint(0, 0));
-            series1.Points.Add(new DataPoint(10, 18));
-            series1.Points.Add(new DataPoint(20, 12));
-            series1.Points.Add(new DataPoint(30, 8));
-            series1.Points.Add(new DataPoint(40, 15));
-
-            var series2 = new LineSeries { Title = "Series 2", MarkerType = MarkerType.Square };
-            series2.Points.Add(new DataPoint(0, 4));
-            series2.Points.Add(new DataPoint(10, 12));
-            series2.Points.Add(new DataPoint(20, 16));
-            series2.Points.Add(new DataPoint(30, 25));
-            series2.Points.Add(new DataPoint(40, 5));
-
-            _plot.Series.Add(series1);
-
+            _plot1.Axes.Add(dateAxis);
+            var valueAxis = new LinearAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot };
+            _plot1.Axes.Add(valueAxis);
 
         }
 
-        public PlotModel Plot
+        public void SelectedFeature(string selectedItem)
+        {
+            _featureSelect = selectedItem;
+        }
+
+        public void updateGraph(string[] lineValues, Dictionary<int,string> featuresMap, int lineIndex)
+        {
+            _plot1.Series.Clear();
+            double value = double.Parse(lineValues[featuresMap.FirstOrDefault(x => x.Value == _featureSelect).Key], CultureInfo.InvariantCulture);
+            values[_numOfValues++] = value;
+            LineSeries lineSeries = new LineSeries();
+
+            for(int i = 0; i < _numOfValues; i++)
+            {
+                lineSeries.Points.Add(new DataPoint(i, values[i]));
+                Console.WriteLine(values[i]);
+            }
+            Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
+            // lineSeries.Title = Limi
+            _plot1.Series.Add(lineSeries);
+            //var series1 = new LineSeries { Title = "Series 1", MarkerType = MarkerType.Circle };
+            //series1.Points.Add(new DataPoint((double)lineIndex/10.0, value));
+            _plot1.InvalidatePlot(true);
+            Console.WriteLine((double)lineIndex / 10.0);
+            Console.WriteLine(value);
+            PlotFeature1 = _plot1;
+            //var series2 = new LineSeries { Title = "Series 2", MarkerType = MarkerType.Square };
+
+            // _plot1.Series.Add(series2);
+        }
+
+
+
+        public PlotModel PlotFeature1
         {
             get
             {
-                return _plot;
+                return _plot1;
             }
             set
             {
-                _plot = value;
-                INotifyPropertyChanged("Plot");
+                _plot1 = value;
+                INotifyPropertyChanged("PlotFeature1");
+            }
+        }
+
+        public PlotModel PlotFeature2
+        {
+            get
+            {
+                return _plot2;
+            }
+            set
+            {
+                _plot2 = value;
+                INotifyPropertyChanged("PlotFeature2");
+            }
+        }
+
+        public PlotModel PlotCorrelatedFeatures
+        {
+            get
+            {
+                return _plot3;
+            }
+            set
+            {
+                _plot3 = value;
+                INotifyPropertyChanged("PlotCorrelatedFeatures");
             }
         }
 

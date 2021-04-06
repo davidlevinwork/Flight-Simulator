@@ -50,7 +50,7 @@ namespace SimolatorDesktopApp_1.View.controls
 
         private void ListViewFeatures_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            _vmGraphs.vmSelectedFeature(ListViewFeatures.SelectedItem.ToString());
         }
     }
 }

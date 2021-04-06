@@ -20,13 +20,19 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <oxy:PlotView x:Name="Plot1" Model="{Binding VM_Plot}" Margin="10" Grid.Row="0" Grid.Column="1">
+        <oxy:PlotView x:Name="Plot1" Model="{Binding VM_PlotFeature1}" Margin="10" Grid.Row="0" Grid.Column="1">
         </oxy:PlotView>
+
+        <oxy:PlotView x:Name="Plot2" Model="{Binding VM_PlotFeature2}" Margin="10" Grid.Row="0" Grid.Column="2">
+        </oxy:PlotView>
+
+        <oxy:PlotView x:Name="Plot3" Model="{Binding VM_PlotCorrelatedFeatures}" Margin="10,10.2,10.4,9.6" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+        </oxy:PlotView>
+
         <ListView x:Name="ListViewFeatures" ItemsSource="{Binding Path=VM_AddToList}" HorizontalAlignment="Left" Height="430" Margin="10,10,0,0" VerticalAlignment="Top" Width="164" Grid.RowSpan="2" SelectionChanged="ListViewFeatures_SelectionChanged">
             <ListView.View>
                 <GridView x:Name="GridViewFeatures">
                     <GridViewColumn Header="Features" Width="170"/>
-                    
                 </GridView>
             </ListView.View>
         </ListView>
