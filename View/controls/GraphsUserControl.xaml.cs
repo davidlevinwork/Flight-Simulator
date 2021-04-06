@@ -25,19 +25,31 @@ namespace SimolatorDesktopApp_1.View.controls
 
         private VMGraphs _vmGraphs;
         private FilesUpload _filesUpload;
+
         public GraphsUserControl()
         {
             _filesUpload = (Application.Current as App)._filesUpload;
-            _vmGraphs = new VMGraphs((Application.Current as App)._graphModel);
+            _vmGraphs = (Application.Current as App)._vmGraphs;
             DataContext = _vmGraphs;
             InitializeComponent();
+            //paintGraph();
+        }
 
+        /*
+        private void paintGraph()
+        {
             this.ListViewFeatures.View = GridViewFeatures;
-
             for (int i = 0; i < _filesUpload.FeaturesMap.Count; i++)
             {
-                this.ListViewFeatures.Items.Add(_filesUpload.FeaturesMap[i]);
+                //this.ListViewFeatures.Items.Add(_filesUpload.FeaturesMap[i]);
             }
+            this.ListViewFeatures.Items.Add("a");
+            this.ListViewFeatures.Items.Add("b");
+        }
+        */
+
+        private void ListViewFeatures_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
         }
     }

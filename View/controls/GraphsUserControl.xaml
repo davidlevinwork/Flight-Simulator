@@ -22,10 +22,10 @@
 
         <oxy:PlotView x:Name="Plot1" Model="{Binding VM_Plot}" Margin="10" Grid.Row="0" Grid.Column="1">
         </oxy:PlotView>
-        <ListView Name="ListView" HorizontalAlignment="Left" Height="430" Margin="10,10,0,0" VerticalAlignment="Top" Width="164" Grid.RowSpan="2">
+        <ListView x:Name="ListViewFeatures" ItemsSource="{Binding Path=VM_AddToList}" HorizontalAlignment="Left" Height="430" Margin="10,10,0,0" VerticalAlignment="Top" Width="164" Grid.RowSpan="2" SelectionChanged="ListViewFeatures_SelectionChanged">
             <ListView.View>
                 <GridView x:Name="GridViewFeatures">
-                    <GridViewColumn Header="Features" Width="170" />
+                    <GridViewColumn Header="Features" Width="170"/>
                     
                 </GridView>
             </ListView.View>
