@@ -29,6 +29,7 @@ namespace SimolatorDesktopApp_1.Model
         private JoystickModel _joystickModel;
         private JoystickDashBoardModel _joystickDashBoardModel;
         private FilesUpload _filesUpload;
+        private GraphsModel _graphsModel;
         public event PropertyChangedEventHandler PropertyChanged;
 
         /* Constructors: */
@@ -39,6 +40,7 @@ namespace SimolatorDesktopApp_1.Model
             _dashBoardModel = (Application.Current as App)._dashBoardModel;
             _joystickModel = (Application.Current as App)._joystickModel;
             _joystickDashBoardModel = (Application.Current as App)._joystickDashBoardModel;
+            _graphsModel = (Application.Current as App)._graphModel;
             time = TimeSpan.FromSeconds(_timer);
         }
         public int IndexLine
@@ -59,6 +61,7 @@ namespace SimolatorDesktopApp_1.Model
                 _dashBoardModel.updateValues(commands);
                 _joystickModel.updateValues(commands);
                 _joystickDashBoardModel.updateValues(commands);
+                _graphsModel.updateGraph(_filesUpload.GetAllValues, _indexLine);
                 TimerString = _indexLine.ToString();
                 INotifyPropertyChanged("IndexLine");
 
