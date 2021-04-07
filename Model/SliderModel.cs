@@ -61,7 +61,7 @@ namespace SimolatorDesktopApp_1.Model
                 _dashBoardModel.updateValues(commands);
                 _joystickModel.updateValues(commands);
                 _joystickDashBoardModel.updateValues(commands);
-                _graphsModel.updateGraph(commands, _filesUpload.FeaturesMap, _indexLine);
+                _graphsModel.updateGraph(_filesUpload.GetAllValues, _indexLine);
                 TimerString = _indexLine.ToString();
                 INotifyPropertyChanged("IndexLine");
 

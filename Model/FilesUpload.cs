@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -17,8 +18,10 @@ namespace SimolatorDesktopApp_1.Model
     {
         private Dictionary<int, string> _featuresMap = new Dictionary<int, string>();
         private VMGraphs _vmGraphs = (Application.Current as App)._vmGraphs;
+        private GraphsModel _graphsModel = (Application.Current as App)._graphModel;
         private string[] _userCsvFile;
         private ObservableCollection<string> _toViewListFeatures = new ObservableCollection<string>();
+        Dictionary<string, double[]> _allValues = new Dictionary<string, double[]>();
         bool isCsvUploaded = false, isXmlUploaded = false;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -33,6 +36,18 @@ namespace SimolatorDesktopApp_1.Model
             if (this.PropertyChanged != null)
             {
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+            }
+        }
+
+        public Dictionary<string, double[]> GetAllValues
+        {
+            get
+            {
+                return _allValues;
+            }
+            set
+            {
+                _allValues = value;
             }
         }
 
@@ -91,6 +106,8 @@ namespace SimolatorDesktopApp_1.Model
                 isXmlUploaded = true;
                 for(int i = 0; i < _featuresMap.Count; i++)
                 {
+                    if (i > 0 && _featuresMap[i] == _featuresMap[i - 1])
+                        _featuresMap[i] = _featuresMap[i] + "2";
                     _toViewListFeatures.Add(_featuresMap[i]);
                 }
                 _vmGraphs.VM_AddToList = _toViewListFeatures;
@@ -143,7 +160,30 @@ namespace SimolatorDesktopApp_1.Model
             {
                 line += _userCsvFile[i] + Environment.NewLine;
             }
+            updateDictionary();
             File.WriteAllText(path, line);
+        }
+
+        public void updateDictionary()
+        {
+            Dictionary<string, double[]> allValues = new Dictionary<string, double[]>();
+            for (int i = 0; i < _featuresMap.Count; i++)
+            {
+                //if (i > 0 && _featuresMap[i] == _featuresMap[i - 1])
+                //    _featuresMap[i] = _featuresMap[i] + "2";
+                allValues.Add(_featuresMap[i], new double[2174]);
+                Console.WriteLine(_featuresMap[i]);
+            }
+
+            for(int i = 0; i < 2174; i++)
+            {
+                string[] line = _userCsvFile[i].Split(',');
+                for (int j = 0; j < allValues.Count; j++)
+                {
+                    allValues[_featuresMap[j]][i] = double.Parse(line[j], CultureInfo.InvariantCulture);
+                }
+            }
+            GetAllValues = allValues;
         }
     }
 }
