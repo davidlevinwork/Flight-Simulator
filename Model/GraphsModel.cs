@@ -21,19 +21,20 @@ namespace SimolatorDesktopApp_1.Model
         private string _featureSelect = "";
         private double[] values = new double[2500];
         private int _numOfValues = 0;
-        private Dictionary<string, double[]> _allValuesMap = new Dictionary<string, double[]>();
+        private Dictionary<string, double[]> _allValuesMap;
         public GraphsModel()
         {
+            _allValuesMap = new Dictionary<string, double[]>();
             _plot1 = new PlotModel();
             _plot2 = new PlotModel();
             _plot3 = new PlotModel();
-            _plot1.LegendTitle = "Legend";
+            //_plot1.LegendTitle = "Legend";
             _plot1.LegendOrientation = LegendOrientation.Horizontal;
             _plot1.LegendPlacement = LegendPlacement.Outside;
-            _plot1.LegendPosition = LegendPosition.TopRight;
-            _plot1.LegendBackground = OxyColor.FromAColor(200, OxyColors.White);
+            _plot1.LegendPosition = LegendPosition.TopLeft;
+            //_plot1.LegendBackground = OxyColor.FromAColor(200, OxyColors.White);
             _plot1.LegendBorder = OxyColors.Black;
-            var dateAxis = new DateTimeAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, IntervalLength = 80 };
+            var dateAxis = new DateTimeAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, IntervalLength = 100 };
             _plot1.Axes.Add(dateAxis);
             var valueAxis = new LinearAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot };
             _plot1.Axes.Add(valueAxis);
