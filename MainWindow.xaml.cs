@@ -153,7 +153,7 @@ namespace SimolatorDesktopApp_1
                 if (String.Equals("xml", fileType) || String.Equals("xaml", fileType))
                 {
                     _xmlFileNameLabel.Content = fileName;
-                    (System.Windows.Application.Current as App)._filesUpload.xmlUpload();
+                    (System.Windows.Application.Current as App)._popOutModel.makeLearnNormal(pathXml);
                     //ifValidXmlFile = true;
                 }
                 else

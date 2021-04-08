@@ -17,7 +17,7 @@ namespace SimolatorDesktopApp_1
     public partial class App : Application
     {
         public JoystickDashBoardModel _joystickDashBoardModel { get; private set; }
-
+        public FunctionsDLL _functionsDLL { get; private set; }
         public GraphsModel _graphModel { get; private set; }
         public VMGraphs _vmGraphs { get; private set; }
         public FilesUpload _filesUpload { get; private set; }
@@ -25,12 +25,15 @@ namespace SimolatorDesktopApp_1
         public DashBoardModel _dashBoardModel { get; private set; }
         public JoystickModel _joystickModel { get; private set; }
  
+        public PopOutModel _popOutModel { get; private set; }
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            _functionsDLL = new FunctionsDLL();
             _graphModel = new GraphsModel();
             _vmGraphs = new VMGraphs(_graphModel);
             _filesUpload = new FilesUpload();
+            _popOutModel = new PopOutModel();
             _simultorConnectorModel = new SimulatorConnectorModel();
             _dashBoardModel = new DashBoardModel();
             _joystickModel = new JoystickModel();
