@@ -43,12 +43,20 @@ namespace SimolatorDesktopApp_1.Model
             _plot2.LegendOrientation = LegendOrientation.Horizontal;
             _plot2.LegendPlacement = LegendPlacement.Outside;
             _plot2.LegendPosition = LegendPosition.TopLeft;
-            //_plot1.LegendBackground = OxyColor.FromAColor(200, OxyColors.White);
             _plot2.LegendBorder = OxyColors.Black;
 
             var valueAxis2 = new LinearAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot };
             _plot2.Axes.Add(valueAxis2);
+
+            //var valueAxis3 = new LinearAxis() { MajorGridlineStyle = LineStyle.None, MinorGridlineStyle = LineStyle.Dot };
+            //_plot3.Axes.Add(valueAxis3);
+
+            _plot3.LegendOrientation = LegendOrientation.Horizontal;
+            _plot3.LegendPlacement = LegendPlacement.Outside;
+            _plot3.LegendPosition = LegendPosition.TopLeft;
+            _plot3.LegendBorder = OxyColors.Black;
         }
+
 
         public void SelectedFeature(string selectedItem)
         {
@@ -66,34 +74,61 @@ namespace SimolatorDesktopApp_1.Model
                 return;
             _plot1.Series.Clear();
             _plot2.Series.Clear();
+            _plot3.Series.Clear();
             LineSeries lineSeries = new LineSeries();
             LineSeries lineSeries2 = new LineSeries();
-            if (lineIndex < 40)
+            LineSeries lineSeries3 = new LineSeries { LineStyle = LineStyle.Dot};
+            LineSeries lineSeries4 = new LineSeries();
+            StringBuilder f1 = new StringBuilder(_featureSelect);
+            StringBuilder f1Saver = new StringBuilder(_featureSelect);
+            StringBuilder buffer = new StringBuilder();
+            StringBuilder f2 = _functionsDll.myGetMyCorrelatedFeature(f1, buffer);
+            //Console.WriteLine(f1 + "                " + f2);
+            _plot1.LegendTitle = _featureSelect;
+            _plot2.LegendTitle = buffer.ToString();
+            //_functionsDll.myGetLinearReg(f1, f2);
+            if (f2.ToString() != "")
+            {
+                _functionsDll.myGetLinearReg(f1Saver, f2);
+                float y1 = _functionsDll.myGetYLine((float)valuesMap[_featureSelect][0]);
+                float y2 = _functionsDll.myGetYLine((float)valuesMap[_featureSelect][valuesMap[_featureSelect].Length - 1]);
+                lineSeries4.Points.Add(new DataPoint((float)valuesMap[_featureSelect][0], y1));
+                lineSeries4.Points.Add(new DataPoint((float)valuesMap[_featureSelect][valuesMap[_featureSelect].Length - 1], y2));
+            }
+            if (lineIndex < 300)
             {
                 for (int i = 0; i <= lineIndex; i++)
                 {
                     lineSeries.Points.Add(new DataPoint(i, valuesMap[_featureSelect][i]));
-                    lineSeries2.Points.Add(new DataPoint(i, valuesMap[_featureSelect][i]));
+                    if(!f2.ToString().Equals(""))
+                    {
+                        lineSeries2.Points.Add(new DataPoint(i, valuesMap[f2.ToString()][i]));
+                        lineSeries3.Points.Add(new DataPoint(valuesMap[_featureSelect][i], valuesMap[f2.ToString()][i]));
+                    }
                 }
             }
             else
             {
-                StringBuilder f1 = new StringBuilder(_featureSelect);
-                StringBuilder buffer = new StringBuilder();
-                StringBuilder f2 = _functionsDll.myGetMyCorrelatedFeature(f1, buffer);
-                for (int i = lineIndex - 40; i <= lineIndex; i++)
+                for (int i = lineIndex - 300; i <= lineIndex; i++)
                 {
                     lineSeries.Points.Add(new DataPoint(i, valuesMap[_featureSelect][i]));
-                    if(f2.ToString() != "")
-                        lineSeries2.Points.Add(new DataPoint(i, valuesMap[buffer.ToString()][i]));
+                    if (f2.ToString() != "")
+                    {
+                        lineSeries2.Points.Add(new DataPoint(i, valuesMap[f2.ToString()][i]));
+                        lineSeries3.Points.Add(new DataPoint(valuesMap[_featureSelect][i], valuesMap[f2.ToString()][i]));
+                    }
                 }
             }
             _plot1.Series.Add(lineSeries);
             _plot2.Series.Add(lineSeries2);
+            _plot3.Series.Add(lineSeries3);
+            _plot3.Series.Add(lineSeries4);
             _plot1.InvalidatePlot(true);
             _plot2.InvalidatePlot(true);
+            _plot3.InvalidatePlot(true);
             PlotFeature1 = _plot1;
             PlotFeature2 = _plot2;
+            PlotCorrelatedFeatures = _plot3;
         }
 
 

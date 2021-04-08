@@ -10,26 +10,29 @@ namespace SimolatorDesktopApp_1.Model
 {
     public class FunctionsDLL
     {
-        public FunctionsDLL()
-        {
+        public FunctionsDLL() { }
 
-        }
-
-        [DllImport("shared_DLL.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("DllCircle.dll", CallingConvention = CallingConvention.Cdecl)]
         private static extern IntPtr getTimeSeries
             ([MarshalAs(UnmanagedType.LPStr)] StringBuilder csvFileName);
 
-        [DllImport("shared_DLL.dll", CallingConvention = CallingConvention.Cdecl)]
-        private static extern void getMyCorrelatedFeature(IntPtr hybrid, StringBuilder str, StringBuilder buffer);
+        [DllImport("DllCircle.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern void getMyCorrelatedFeature(IntPtr time_series, StringBuilder f1, StringBuilder buffer);
 
-        [DllImport("shared_DLL.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("DllCircle.dll", CallingConvention = CallingConvention.Cdecl)]
         private static extern IntPtr getHybridDetector();
 
-        [DllImport("shared_DLL.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("DllCircle.dll", CallingConvention = CallingConvention.Cdecl)]
         private static extern void callLearnNormal(IntPtr hybrid, IntPtr ts);
+
+        [DllImport("DllCircle.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern IntPtr getLinearReg(IntPtr time_series, StringBuilder f1, StringBuilder f2);
+        [DllImport("DllCircle.dll", CallingConvention = CallingConvention.Cdecl)]
+        private static extern float getYLine(IntPtr line, float x);
 
         private static IntPtr hybrid = IntPtr.Zero;
         private static IntPtr time_series = IntPtr.Zero;
+        private static IntPtr line = IntPtr.Zero;
 
         public void myGetTimeSeries()
         {
@@ -51,8 +54,18 @@ namespace SimolatorDesktopApp_1.Model
 
         public StringBuilder myGetMyCorrelatedFeature(StringBuilder src, StringBuilder dst)
         {
-            getMyCorrelatedFeature(hybrid, src, dst);
+            getMyCorrelatedFeature(time_series, src, dst);
             return dst;
+        }
+
+        public void myGetLinearReg(StringBuilder f1, StringBuilder f2)
+        {
+            line = getLinearReg(time_series, f1, f2);
+        }
+
+        public float myGetYLine(float x)
+        {
+            return getYLine(line, x);
         }
 
     }

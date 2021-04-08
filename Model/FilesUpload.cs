@@ -127,6 +127,7 @@ namespace SimolatorDesktopApp_1.Model
             try 
             {
                 _userCsvFile = File.ReadAllLines(csvPath);
+                Console.WriteLine(_userCsvFile.Length);
                 writeDetectCSVFile();
                 return _userCsvFile;
             }
@@ -187,8 +188,7 @@ namespace SimolatorDesktopApp_1.Model
                 allValues.Add(_featuresMap[i], new double[_userCsvFile.Length]);
                 Console.WriteLine(_featuresMap[i]);
             }
-
-            for(int i = 0; i < _userCsvFile.Length; i++)
+            for (int i = 0; i < _userCsvFile.Length; i++)
             {
                 string[] line = _userCsvFile[i].Split(',');
                 for (int j = 0; j < allValues.Count; j++)

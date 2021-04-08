@@ -45,8 +45,8 @@ namespace SimolatorDesktopApp_1.Model
                 //console.writeline("learnnnnnnnnn !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
                 _functionsDll.myGetTimeSeries();
-                _functionsDll.myGetHybridDetector();
-                _functionsDll.myCallLearnNormal();
+                //_functionsDll.myGetHybridDetector();
+                //_functionsDll.myCallLearnNormal();
                 Console.WriteLine("learnnnnnnnnn !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             });
             t.Start();
