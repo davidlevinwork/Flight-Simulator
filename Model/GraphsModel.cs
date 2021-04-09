@@ -21,7 +21,7 @@ namespace SimolatorDesktopApp_1.Model
         private PlotModel _plot3;
         private string _featureSelect = "";
         private int _numOfValues = 0;
-        private FunctionsDLL _functionsDll = (Application.Current as App)._functionsDLL;
+        private CircleDLL _functionsDll = (Application.Current as App)._functionsDLL;
         private Dictionary<string, double[]> _allValuesMap;
         public GraphsModel()
         {
@@ -29,14 +29,11 @@ namespace SimolatorDesktopApp_1.Model
             _plot1 = new PlotModel();
             _plot2 = new PlotModel();
             _plot3 = new PlotModel();
-            //_plot1.LegendTitle = "Legend";
             _plot1.LegendOrientation = LegendOrientation.Horizontal;
             _plot1.LegendPlacement = LegendPlacement.Outside;
             _plot1.LegendPosition = LegendPosition.TopLeft;
-            //_plot1.LegendBackground = OxyColor.FromAColor(200, OxyColors.White);
+            _plot1.LegendBackground = OxyColor.FromAColor(200, OxyColors.Blue);
             _plot1.LegendBorder = OxyColors.Black;
-           // var dateAxis = new DateTimeAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, IntervalLength = 100 };
-            //_plot1.Axes.Add(dateAxis);
             var valueAxis = new LinearAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot };
             _plot1.Axes.Add(valueAxis);
 
@@ -57,7 +54,6 @@ namespace SimolatorDesktopApp_1.Model
             _plot3.LegendBorder = OxyColors.Black;
         }
 
-
         public void SelectedFeature(string selectedItem)
         {
             _featureSelect = selectedItem;
@@ -77,30 +73,30 @@ namespace SimolatorDesktopApp_1.Model
             _plot3.Series.Clear();
             LineSeries lineSeries = new LineSeries();
             LineSeries lineSeries2 = new LineSeries();
-            LineSeries lineSeries3 = new LineSeries { LineStyle = LineStyle.Dot};
+            LineSeries lineSeries3 = new LineSeries { LineStyle = LineStyle.Dot, MarkerType = MarkerType.Circle, MarkerSize = 2, MarkerFill = OxyColors.Red };
             LineSeries lineSeries4 = new LineSeries();
             StringBuilder f1 = new StringBuilder(_featureSelect);
             StringBuilder f1Saver = new StringBuilder(_featureSelect);
             StringBuilder buffer = new StringBuilder();
             StringBuilder f2 = _functionsDll.myGetMyCorrelatedFeature(f1, buffer);
-            //Console.WriteLine(f1 + "                " + f2);
             _plot1.LegendTitle = _featureSelect;
             _plot2.LegendTitle = buffer.ToString();
-            //_functionsDll.myGetLinearReg(f1, f2);
             if (f2.ToString() != "")
             {
-                _functionsDll.myGetLinearReg(f1Saver, f2);
-                float y1 = _functionsDll.myGetYLine((float)valuesMap[_featureSelect][0]);
-                float y2 = _functionsDll.myGetYLine((float)valuesMap[_featureSelect][valuesMap[_featureSelect].Length - 1]);
-                lineSeries4.Points.Add(new DataPoint((float)valuesMap[_featureSelect][0], y1));
-                lineSeries4.Points.Add(new DataPoint((float)valuesMap[_featureSelect][valuesMap[_featureSelect].Length - 1], y2));
+                Line l = AnomalyDetectionUtil.LinearReg(valuesMap[_featureSelect], valuesMap[f2.ToString()], valuesMap[_featureSelect].Length - 1);
+                double y1 = l.f(-1);
+                double y2 = l.f(1);
+                double min = Math.Min(valuesMap[_featureSelect].Min(), valuesMap[f2.ToString()].Min());
+                double max = Math.Min(valuesMap[_featureSelect].Max(), valuesMap[f2.ToString()].Max());
+                lineSeries4.Points.Add(new DataPoint(min, y1));
+                lineSeries4.Points.Add(new DataPoint(max, y2));
             }
             if (lineIndex < 300)
             {
                 for (int i = 0; i <= lineIndex; i++)
                 {
                     lineSeries.Points.Add(new DataPoint(i, valuesMap[_featureSelect][i]));
-                    if(!f2.ToString().Equals(""))
+                    if(f2.ToString() != "")
                     {
                         lineSeries2.Points.Add(new DataPoint(i, valuesMap[f2.ToString()][i]));
                         lineSeries3.Points.Add(new DataPoint(valuesMap[_featureSelect][i], valuesMap[f2.ToString()][i]));
@@ -130,8 +126,6 @@ namespace SimolatorDesktopApp_1.Model
             PlotFeature2 = _plot2;
             PlotCorrelatedFeatures = _plot3;
         }
-
-
 
         public PlotModel PlotFeature1
         {

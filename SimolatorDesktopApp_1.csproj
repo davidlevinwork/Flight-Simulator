@@ -75,6 +75,9 @@
       <HintPath>packages\OxyPlot.Wpf.2.0.0\lib\net45\OxyPlot.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="ReachFramework" />
+    <Reference Include="shared_DLL">
+      <HintPath>..\DLL מעודכן יותר\Debug\shared_DLL.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -114,13 +117,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\FunctionsDLL.cs" />
+    <Compile Include="Model\C++\AnomalyDetectionUtil.cs" />
+    <Compile Include="Model\CircleDLL.cs" />
     <Compile Include="Model\DashBoardModel.cs" />
     <Compile Include="Model\FilesUpload.cs" />
     <Compile Include="Model\GraphsModel.cs" />
+    <Compile Include="Model\IDLL.cs" />
     <Compile Include="Model\ISimulatorConnector.cs" />
     <Compile Include="Model\JoystickDashBoardModel.cs" />
     <Compile Include="Model\JoystickModel.cs" />
+    <Compile Include="Model\LineDLL.cs" />
     <Compile Include="Model\PopOutModel.cs" />
     <Compile Include="Model\SimulatorConnectorModel.cs" />
     <Compile Include="Model\SimulatorModel.cs" />
@@ -244,5 +250,6 @@
     <Resource Include="View\Resources\rightSpeed.png" />
     <Resource Include="View\Resources\stop.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
