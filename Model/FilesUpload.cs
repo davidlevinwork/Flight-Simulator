@@ -28,7 +28,7 @@ namespace SimolatorDesktopApp_1.Model
 
         public FilesUpload()
         {
-            //_graphsModel = (Application.Current as App)._graphModel;
+
         }
 
         public void INotifyPropertyChanged(string propName)

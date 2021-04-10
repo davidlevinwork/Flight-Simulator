@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace SimolatorDesktopApp_1.Model
 {
-    interface IDLL
+    public interface IDLL
     {
-
+        void myGetTimeSeries();
         void myGetHybridDetector();
         void myCallLearnNormal();
         StringBuilder myGetMyCorrelatedFeature(StringBuilder src, StringBuilder dst);

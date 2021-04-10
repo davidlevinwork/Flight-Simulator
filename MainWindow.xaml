@@ -40,10 +40,12 @@
         </Controls:Slider>
 
         <Controls:GraphsUserControl />
-
+        <Controls:AlgoritemDetect Grid.ColumnSpan="2" Margin="455,180,3.8,110.4" Grid.RowSpan="2"/>
         <StackPanel Grid.Row="0" Grid.Column="1" AllowDrop="True" Background="LightGray" Drop="XmlDropStackPanel_Drop" Height="100" VerticalAlignment="Top" Margin="32.667,29,30.667,0" >
             <Label x:Name="_xmlFileNameLabel" FontSize="12" HorizontalAlignment="Center" Content="Drag xml File"/>
         </StackPanel>
+        <Button Content="line anomaly" Grid.Column="1" HorizontalAlignment="Left" Margin="32.8,297,0,0" VerticalAlignment="Top" Width="75" Click="lineAnomalyClick"/>
+        <Button Content="circle anomaly" Grid.Column="1" HorizontalAlignment="Left" Margin="31.8,333,0,0" VerticalAlignment="Top" Width="76" Click="circleAnomalyClick"/>
 
     </Grid>
 </Window>

@@ -17,7 +17,7 @@ namespace SimolatorDesktopApp_1.Model
     {
         private Dictionary<int, string> _featuresMap = new Dictionary<int, string>();
         private FilesUpload _filesUpload = (Application.Current as App)._filesUpload;
-        private CircleDLL _functionsDll = (Application.Current as App)._functionsDLL;
+        private IDLL _dllType = (Application.Current as App)._lineDLL;
         private ObservableCollection<string> _toViewListFeatures = new ObservableCollection<string>();
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -28,6 +28,12 @@ namespace SimolatorDesktopApp_1.Model
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
+
+        public void SetDllType(IDLL dllType)
+        {
+            _dllType = dllType;
+        }
+
         public void makeLearnNormal(string path)
         {
             Thread t = new Thread(delegate ()
@@ -44,9 +50,9 @@ namespace SimolatorDesktopApp_1.Model
                 //functionsdll.calllearnnormal(functionsdll.hybrid, functionsdll.time_series);
                 //console.writeline("learnnnnnnnnn !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
-                _functionsDll.myGetTimeSeries();
-                _functionsDll.myGetHybridDetector();
-                _functionsDll.myCallLearnNormal();
+               // _dllType.myGetTimeSeries();
+               // _dllType.myGetHybridDetector();
+                // _dllType.myCallLearnNormal();
                 Console.WriteLine("learnnnnnnnnn !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             });
             t.Start();

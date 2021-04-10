@@ -21,10 +21,11 @@ namespace SimolatorDesktopApp_1.Model
         private PlotModel _plot3;
         private string _featureSelect = "";
         private int _numOfValues = 0;
-        private CircleDLL _functionsDll = (Application.Current as App)._functionsDLL;
         private Dictionary<string, double[]> _allValuesMap;
+        private IDLL _dllType;
         public GraphsModel()
         {
+            _dllType = (Application.Current as App)._lineDLL;
             _allValuesMap = new Dictionary<string, double[]>();
             _plot1 = new PlotModel();
             _plot2 = new PlotModel();
@@ -54,6 +55,13 @@ namespace SimolatorDesktopApp_1.Model
             _plot3.LegendBorder = OxyColors.Black;
         }
 
+        public void SetDllType(IDLL dllType)
+        {
+            // _dllType = dllType;
+            LineDll lineDll = new LineDll();
+            lineDll.myCallLearnNormal();
+        }
+
         public void SelectedFeature(string selectedItem)
         {
             _featureSelect = selectedItem;
@@ -73,12 +81,12 @@ namespace SimolatorDesktopApp_1.Model
             _plot3.Series.Clear();
             LineSeries lineSeries = new LineSeries();
             LineSeries lineSeries2 = new LineSeries();
-            LineSeries lineSeries3 = new LineSeries { LineStyle = LineStyle.Dot, MarkerType = MarkerType.Circle, MarkerSize = 2, MarkerFill = OxyColors.Red };
+            LineSeries lineSeries3 = new LineSeries { LineStyle = LineStyle.Dot, MarkerType = MarkerType.Circle, MarkerSize = 2, MarkerFill = OxyColors.Gray };
             LineSeries lineSeries4 = new LineSeries();
             StringBuilder f1 = new StringBuilder(_featureSelect);
             StringBuilder f1Saver = new StringBuilder(_featureSelect);
             StringBuilder buffer = new StringBuilder();
-            StringBuilder f2 = _functionsDll.myGetMyCorrelatedFeature(f1, buffer);
+            StringBuilder f2 = _dllType.myGetMyCorrelatedFeature(f1, buffer);
             _plot1.LegendTitle = _featureSelect;
             _plot2.LegendTitle = buffer.ToString();
             if (f2.ToString() != "")
