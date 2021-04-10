@@ -25,6 +25,8 @@ namespace SimolatorDesktopApp_1.View.controls
         private const string disconnected = "Simulator Disconnected";
         private const string connected = "Simulator Connected";
         VMConnectControl _vmConnectControl;
+        Dialog _dialog;
+
         public ConnectControl()
         {
             InitializeComponent();
@@ -55,6 +57,7 @@ namespace SimolatorDesktopApp_1.View.controls
         /// <param name="e"></param>
         private void ButtonPressedConnect(object sender, RoutedEventArgs e)
         {
+            popUp();
             try
             {
                 _vmConnectControl.VMConnect(ipContextTextBox.Text, Int32.Parse(portContextTextBox.Text));
@@ -64,10 +67,16 @@ namespace SimolatorDesktopApp_1.View.controls
                 DisconnectButton.Visibility = Visibility.Visible;
                 this.connectDisplayStatus(); // connect succsess
             }
-            catch(Exception _exception)
+            catch (Exception _exception)
             {
                 this.connectDisplayStatus(); // connect failed
             }
+        }
+
+        private void popUp()
+        {
+            var newWindow = new Dialog();
+            newWindow.ShowDialog();
         }
 
         /// <summary>
