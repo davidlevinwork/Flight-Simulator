@@ -34,6 +34,7 @@ namespace SimolatorDesktopApp_1
         public enum Status { active, connect, disconnect, inActive }
         private const string disconnected = "Simulator Disconnected";
         private const string connected = "Simulator Connected";
+        private GraphsModel _graphsModel = (System.Windows.Application.Current as App)._graphModel;
         public MainWindow()
         {
             InitializeComponent();
@@ -95,6 +96,18 @@ namespace SimolatorDesktopApp_1
 
         }
 
+        private void circleAnomalyClick(object sender, RoutedEventArgs e)
+        {
+            _graphsModel.SetDllType((System.Windows.Application.Current as App)._circleDLL);
+
+        }
+
+        private void lineAnomalyClick(object sender, RoutedEventArgs e)
+        {
+            _graphsModel.SetDllType((System.Windows.Application.Current as App)._lineDLL);
+            //(System.Windows.Application.Current as App)._lineDLL.myCallLearnNormal();
+        }
+
         private void ConnectControl_Loaded_1(object sender, RoutedEventArgs e)
         {
             Console.WriteLine("asdasd");
@@ -153,7 +166,7 @@ namespace SimolatorDesktopApp_1
                 if (String.Equals("xml", fileType) || String.Equals("xaml", fileType))
                 {
                     _xmlFileNameLabel.Content = fileName;
-                    (System.Windows.Application.Current as App)._filesUpload.xmlUpload();
+                    (System.Windows.Application.Current as App)._popOutModel.makeLearnNormal(pathXml);
                     //ifValidXmlFile = true;
                 }
                 else

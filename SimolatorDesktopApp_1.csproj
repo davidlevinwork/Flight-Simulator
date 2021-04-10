@@ -39,6 +39,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -48,10 +49,14 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CsvHelper, Version=26.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
       <HintPath>packages\CsvHelper.26.1.0\lib\net47\CsvHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="DllCircle">
+      <HintPath>Plugins\DLL של CIRCLE\DllCircle\Debug\DllCircle.dll</HintPath>
     </Reference>
     <Reference Include="LumenWorks.Framework.IO, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5ad3ea2f85776344, processorArchitecture=MSIL">
       <HintPath>packages\LumenWorksCsvReader.4.0.0\lib\net461\LumenWorks.Framework.IO.dll</HintPath>
@@ -69,6 +74,9 @@
       <HintPath>packages\OxyPlot.Wpf.2.0.0\lib\net45\OxyPlot.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="ReachFramework" />
+    <Reference Include="shared_DLL">
+      <HintPath>Plugins\DDL של LINE\Debug\shared_DLL.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -108,23 +116,32 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\AlgoritemDetectModel.cs" />
+    <Compile Include="Model\C++\AnomalyDetectionUtil.cs" />
+    <Compile Include="Model\CircleDLL.cs" />
     <Compile Include="Model\DashBoardModel.cs" />
     <Compile Include="Model\FilesUpload.cs" />
     <Compile Include="Model\GraphsModel.cs" />
+    <Compile Include="Model\IDLL.cs" />
     <Compile Include="Model\ISimulatorConnector.cs" />
     <Compile Include="Model\JoystickDashBoardModel.cs" />
     <Compile Include="Model\JoystickModel.cs" />
+    <Compile Include="Model\LineDLL.cs" />
+    <Compile Include="Model\PopOutModel.cs" />
     <Compile Include="Model\SimulatorConnectorModel.cs" />
     <Compile Include="Model\SimulatorModel.cs" />
     <Compile Include="Model\SliderModel.cs" />
     <Compile Include="Model\UploadCsvFile.cs" />
+    <Compile Include="ViewModel\VMAlgoritemDetect.cs" />
     <Compile Include="ViewModel\VMConnectControl.cs" />
     <Compile Include="ViewModel\VMDashBoard.cs" />
     <Compile Include="ViewModel\VMGraphs.cs" />
     <Compile Include="ViewModel\VMJoystick.cs" />
     <Compile Include="ViewModel\VMJoystickDashBoard.cs" />
     <Compile Include="ViewModel\VMSlider.cs" />
-    <Compile Include="ViewModel\VMuploadCsv.cs" />
+    <Compile Include="View\controls\AlgoritemDetect.xaml.cs">
+      <DependentUpon>AlgoritemDetect.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\controls\ConnectControl.xaml.cs">
       <DependentUpon>ConnectControl.xaml</DependentUpon>
     </Compile>
@@ -158,6 +175,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\controls\AlgoritemDetect.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\controls\ConnectControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -226,13 +247,18 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="View\Resources\leftSpeed.png" />
     <Resource Include="View\Resources\pause.png" />
     <Resource Include="View\Resources\play.png" />
     <Resource Include="View\Resources\rightSpeed.png" />
     <Resource Include="View\Resources\stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Plugins\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using OxyPlot;
 using OxyPlot.Axes;
@@ -19,26 +20,46 @@ namespace SimolatorDesktopApp_1.Model
         private PlotModel _plot2;
         private PlotModel _plot3;
         private string _featureSelect = "";
-        private double[] values = new double[2500];
         private int _numOfValues = 0;
         private Dictionary<string, double[]> _allValuesMap;
+        private IDLL _dllType;
         public GraphsModel()
         {
+            _dllType = (Application.Current as App)._lineDLL;
             _allValuesMap = new Dictionary<string, double[]>();
             _plot1 = new PlotModel();
             _plot2 = new PlotModel();
             _plot3 = new PlotModel();
-            //_plot1.LegendTitle = "Legend";
             _plot1.LegendOrientation = LegendOrientation.Horizontal;
             _plot1.LegendPlacement = LegendPlacement.Outside;
             _plot1.LegendPosition = LegendPosition.TopLeft;
-            //_plot1.LegendBackground = OxyColor.FromAColor(200, OxyColors.White);
+            _plot1.LegendBackground = OxyColor.FromAColor(200, OxyColors.Blue);
             _plot1.LegendBorder = OxyColors.Black;
-            var dateAxis = new DateTimeAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, IntervalLength = 100 };
-            _plot1.Axes.Add(dateAxis);
             var valueAxis = new LinearAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot };
             _plot1.Axes.Add(valueAxis);
 
+            _plot2.LegendOrientation = LegendOrientation.Horizontal;
+            _plot2.LegendPlacement = LegendPlacement.Outside;
+            _plot2.LegendPosition = LegendPosition.TopLeft;
+            _plot2.LegendBorder = OxyColors.Black;
+
+            var valueAxis2 = new LinearAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot };
+            _plot2.Axes.Add(valueAxis2);
+
+            //var valueAxis3 = new LinearAxis() { MajorGridlineStyle = LineStyle.None, MinorGridlineStyle = LineStyle.Dot };
+            //_plot3.Axes.Add(valueAxis3);
+
+            _plot3.LegendOrientation = LegendOrientation.Horizontal;
+            _plot3.LegendPlacement = LegendPlacement.Outside;
+            _plot3.LegendPosition = LegendPosition.TopLeft;
+            _plot3.LegendBorder = OxyColors.Black;
+        }
+
+        public void SetDllType(IDLL dllType)
+        {
+            // _dllType = dllType;
+            LineDll lineDll = new LineDll();
+            lineDll.myCallLearnNormal();
         }
 
         public void SelectedFeature(string selectedItem)
@@ -53,51 +74,66 @@ namespace SimolatorDesktopApp_1.Model
 
         public void updateGraph(Dictionary<string, double[]> valuesMap, int lineIndex)
         {
-            
+            if (_featureSelect == "")
+                return;
             _plot1.Series.Clear();
+            _plot2.Series.Clear();
+            _plot3.Series.Clear();
             LineSeries lineSeries = new LineSeries();
-            if (lineIndex < 70)
+            LineSeries lineSeries2 = new LineSeries();
+            LineSeries lineSeries3 = new LineSeries { LineStyle = LineStyle.Dot, MarkerType = MarkerType.Circle, MarkerSize = 2, MarkerFill = OxyColors.Gray };
+            LineSeries lineSeries4 = new LineSeries();
+            StringBuilder f1 = new StringBuilder(_featureSelect);
+            StringBuilder f1Saver = new StringBuilder(_featureSelect);
+            StringBuilder buffer = new StringBuilder();
+            StringBuilder f2 = _dllType.myGetMyCorrelatedFeature(f1, buffer);
+            _plot1.LegendTitle = _featureSelect;
+            _plot2.LegendTitle = buffer.ToString();
+            if (f2.ToString() != "")
+            {
+                Line l = AnomalyDetectionUtil.LinearReg(valuesMap[_featureSelect], valuesMap[f2.ToString()], valuesMap[_featureSelect].Length - 1);
+                double y1 = l.f(-1);
+                double y2 = l.f(1);
+                double min = Math.Min(valuesMap[_featureSelect].Min(), valuesMap[f2.ToString()].Min());
+                double max = Math.Min(valuesMap[_featureSelect].Max(), valuesMap[f2.ToString()].Max());
+                lineSeries4.Points.Add(new DataPoint(min, y1));
+                lineSeries4.Points.Add(new DataPoint(max, y2));
+            }
+            if (lineIndex < 300)
             {
                 for (int i = 0; i <= lineIndex; i++)
                 {
                     lineSeries.Points.Add(new DataPoint(i, valuesMap[_featureSelect][i]));
+                    if(f2.ToString() != "")
+                    {
+                        lineSeries2.Points.Add(new DataPoint(i, valuesMap[f2.ToString()][i]));
+                        lineSeries3.Points.Add(new DataPoint(valuesMap[_featureSelect][i], valuesMap[f2.ToString()][i]));
+                    }
                 }
             }
             else
             {
-                for (int i = lineIndex - 70; i <= lineIndex; i++)
+                for (int i = lineIndex - 300; i <= lineIndex; i++)
                 {
                     lineSeries.Points.Add(new DataPoint(i, valuesMap[_featureSelect][i]));
+                    if (f2.ToString() != "")
+                    {
+                        lineSeries2.Points.Add(new DataPoint(i, valuesMap[f2.ToString()][i]));
+                        lineSeries3.Points.Add(new DataPoint(valuesMap[_featureSelect][i], valuesMap[f2.ToString()][i]));
+                    }
                 }
             }
             _plot1.Series.Add(lineSeries);
+            _plot2.Series.Add(lineSeries2);
+            _plot3.Series.Add(lineSeries3);
+            _plot3.Series.Add(lineSeries4);
             _plot1.InvalidatePlot(true);
+            _plot2.InvalidatePlot(true);
+            _plot3.InvalidatePlot(true);
             PlotFeature1 = _plot1;
-            ////double value = double.Parse(lineValues[featuresMap.FirstOrDefault(x => x.Value == _featureSelect).Key], CultureInfo.InvariantCulture);
-            //// values[_numOfValues++] = value;
-            //LineSeries lineSeries = new LineSeries();
-
-            //for (int i = 0; i < _numOfValues; i++)
-            //{
-            //    lineSeries.Points.Add(new DataPoint(i, values[i]));
-            //    Console.WriteLine(values[i]);
-            //}
-            //Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-
-            //// lineSeries.Title = Limi
-            //_plot1.Series.Add(lineSeries);
-            ////var series1 = new LineSeries { Title = "Series 1", MarkerType = MarkerType.Circle };
-            ////series1.Points.Add(new DataPoint((double)lineIndex/10.0, value));
-            //_plot1.InvalidatePlot(true);
-            //Console.WriteLine((double)lineIndex / 10.0);
-            //// Console.WriteLine(value);
-            //PlotFeature1 = _plot1;
-            ////var series2 = new LineSeries { Title = "Series 2", MarkerType = MarkerType.Square };
-
-            //// _plot1.Series.Add(series2);
+            PlotFeature2 = _plot2;
+            PlotCorrelatedFeatures = _plot3;
         }
-
-
 
         public PlotModel PlotFeature1
         {

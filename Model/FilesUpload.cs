@@ -19,7 +19,7 @@ namespace SimolatorDesktopApp_1.Model
         private Dictionary<int, string> _featuresMap = new Dictionary<int, string>();
         private VMGraphs _vmGraphs = (Application.Current as App)._vmGraphs;
         private GraphsModel _graphsModel = (Application.Current as App)._graphModel;
-        private string[] _userCsvFile;
+        private string[] _myCsvFile, _userCsvFile;
         private ObservableCollection<string> _toViewListFeatures = new ObservableCollection<string>();
         Dictionary<string, double[]> _allValues = new Dictionary<string, double[]>();
         bool isCsvUploaded = false, isXmlUploaded = false;
@@ -28,7 +28,7 @@ namespace SimolatorDesktopApp_1.Model
 
         public FilesUpload()
         {
-            //_graphsModel = (Application.Current as App)._graphModel;
+
         }
 
         public void INotifyPropertyChanged(string propName)
@@ -73,12 +73,11 @@ namespace SimolatorDesktopApp_1.Model
             }
         }
 
-        public void xmlUpload()
+        public void xmlUpload(string path)
         {
-            //Console.WriteLine("entered xmlUpload!!!!!!!!!!!!!!!!!!!!!1");
             try 
             {
-                XDocument doc = XDocument.Load("C:/Program Files/FlightGear 2020.3.6/data/Protocol/playback_small.xml");
+                XDocument doc = XDocument.Load(path);
                 string xmlFile = doc.ToString();
                 string[] words = xmlFile.Split(' ');
                 int location = 0;
@@ -111,11 +110,10 @@ namespace SimolatorDesktopApp_1.Model
                     _toViewListFeatures.Add(_featuresMap[i]);
                 }
                 _vmGraphs.VM_AddToList = _toViewListFeatures;
-                if (isCsvUploaded)
-                {
-                    writeNewCSVFile();
-                    isXmlUploaded = false;
-                }
+                string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
+                string csvPath = projectDirectory + '\\' + "reg_flight.csv";
+                _myCsvFile = File.ReadAllLines(csvPath);
+                writeLearnCSVFile();
             }
             catch
             {
@@ -129,25 +127,23 @@ namespace SimolatorDesktopApp_1.Model
             try 
             {
                 _userCsvFile = File.ReadAllLines(csvPath);
-                isCsvUploaded = true;
-                if (isXmlUploaded)
-                {
-                    writeNewCSVFile();
-                    isCsvUploaded = false;
-                }
+                Console.WriteLine(_userCsvFile.Length);
+                writeDetectCSVFile();
                 return _userCsvFile;
             }
-           catch(Exception e)
+            catch(Exception e)
             {
                 Console.WriteLine("error csvvvvvvv");
                 return null;
             }
         }
 
-        public void writeNewCSVFile()
+
+
+        public void writeLearnCSVFile()
         {
             string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
-            string path = projectDirectory + '\\' + "timeseries.csv";
+            string path = projectDirectory + '\\' + "learnNormalTimeSeries.csv";
             char delimiter = ',';
             string line = "";
             int i;
@@ -156,12 +152,32 @@ namespace SimolatorDesktopApp_1.Model
                 line += _featuresMap[i] + delimiter;
             }
             line += _featuresMap[i] + Environment.NewLine;
-            for(i = 0; i < _userCsvFile.Length; i++)
+            for(i = 0; i < _myCsvFile.Length; i++)
+            {
+                line += _myCsvFile[i] + Environment.NewLine;
+            }
+            File.WriteAllText(path, line);
+        }
+
+
+        public void writeDetectCSVFile()
+        {
+            string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
+            string csvPath = projectDirectory + '\\' + "detectTimeSeries.csv";
+            char delimiter = ',';
+            string line = "";
+            int i;
+            for (i = 0; i < _featuresMap.Count - 1; i++)
+            {
+                line += _featuresMap[i] + delimiter;
+            }
+            line += _featuresMap[i] + Environment.NewLine;
+            for (i = 0; i < _userCsvFile.Length; i++)
             {
                 line += _userCsvFile[i] + Environment.NewLine;
             }
+            File.WriteAllText(csvPath, line);
             updateDictionary();
-            File.WriteAllText(path, line);
         }
 
         public void updateDictionary()
@@ -169,13 +185,10 @@ namespace SimolatorDesktopApp_1.Model
             Dictionary<string, double[]> allValues = new Dictionary<string, double[]>();
             for (int i = 0; i < _featuresMap.Count; i++)
             {
-                //if (i > 0 && _featuresMap[i] == _featuresMap[i - 1])
-                //    _featuresMap[i] = _featuresMap[i] + "2";
-                allValues.Add(_featuresMap[i], new double[2174]);
+                allValues.Add(_featuresMap[i], new double[_userCsvFile.Length]);
                 Console.WriteLine(_featuresMap[i]);
             }
-
-            for(int i = 0; i < 2174; i++)
+            for (int i = 0; i < _userCsvFile.Length; i++)
             {
                 string[] line = _userCsvFile[i].Split(',');
                 for (int j = 0; j < allValues.Count; j++)

@@ -1,0 +1,26 @@
+﻿<UserControl x:Class="SimolatorDesktopApp_1.View.controls.AlgoritemDetect"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SimolatorDesktopApp_1.View.controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="110" d:DesignWidth="250">
+    <Grid>
+        <ListView x:Name="ListViewAlgoritems" ItemsSource="{Binding Path=VM_AddToMyList}" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="112" SelectionChanged="ListViewAlgoritems_SelectionChanged">
+            <ListView.View>
+                <GridView x:Name="GridViewFeatures">
+                    <GridViewColumn Header="Features" Width="170"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView HorizontalAlignment="Left" Height="100" Margin="117,0,-0.4,0" VerticalAlignment="Top" Width="133">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+    </Grid>
+</UserControl>
