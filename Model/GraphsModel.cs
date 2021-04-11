@@ -20,12 +20,13 @@ namespace SimolatorDesktopApp_1.Model
         private PlotModel _plot2;
         private PlotModel _plot3;
         private string _featureSelect = "";
+        private string _correlativeFeature = "";
         private int _numOfValues = 0;
         private Dictionary<string, double[]> _allValuesMap;
-        private IDLL _dllType;
+        private LineDll _dll;
         public GraphsModel()
         {
-            _dllType = (Application.Current as App)._lineDLL;
+            _dll = (Application.Current as App)._lineDLL;
             _allValuesMap = new Dictionary<string, double[]>();
             _plot1 = new PlotModel();
             _plot2 = new PlotModel();
@@ -55,16 +56,28 @@ namespace SimolatorDesktopApp_1.Model
             _plot3.LegendBorder = OxyColors.Black;
         }
 
-        public void SetDllType(IDLL dllType)
+/*        public void SetDllType(IDLL dllType)
         {
-            // _dllType = dllType;
-            LineDll lineDll = new LineDll();
-            lineDll.myCallLearnNormal();
-        }
+            _dllType = dllType;
+            _dllType.myCallLearnNormal();
+        }*/
 
         public void SelectedFeature(string selectedItem)
         {
             _featureSelect = selectedItem;
+            StringBuilder f1 = new StringBuilder(_featureSelect);
+            StringBuilder buffer = new StringBuilder();
+            _correlativeFeature = _dll.myGetMyCorrelatedFeature(f1, buffer).ToString();
+            ObservableCollection<string> anomaliesViewList = new ObservableCollection<string>();
+            int size = _dll.getTimeStepList().Count;
+            for (int i = 0; i < size; i++)
+            {
+                if(_dll.getDescriptionsList()[i].Equals(_featureSelect + '-' + _correlativeFeature))
+                {
+                    anomaliesViewList.Add("Anomaly at " + _dll.getTimeStepList()[i].ToString());
+                }
+            }
+            (Application.Current as App)._algoritemDetectModel.AddAnomaliesToMyList = anomaliesViewList;
         }
 
         public void updateAllValues(Dictionary<string, double[]> allValues)
@@ -82,20 +95,24 @@ namespace SimolatorDesktopApp_1.Model
             LineSeries lineSeries = new LineSeries();
             LineSeries lineSeries2 = new LineSeries();
             LineSeries lineSeries3 = new LineSeries { LineStyle = LineStyle.Dot, MarkerType = MarkerType.Circle, MarkerSize = 2, MarkerFill = OxyColors.Gray };
+            LineSeries lineSeries3H = new LineSeries { LineStyle = LineStyle.Dot, MarkerType = MarkerType.Circle, MarkerSize = 2, MarkerFill = OxyColors.Red };
             LineSeries lineSeries4 = new LineSeries();
-            StringBuilder f1 = new StringBuilder(_featureSelect);
-            StringBuilder f1Saver = new StringBuilder(_featureSelect);
-            StringBuilder buffer = new StringBuilder();
-            StringBuilder f2 = _dllType.myGetMyCorrelatedFeature(f1, buffer);
+            //StringBuilder f1 = new StringBuilder(_featureSelect);
+            //_plot3.Series.Add(new FunctionSeries((x) => Math.Sqrt(Math.Max(16 - Math.Pow(x, 2), 0)), -4, 4, 0.1, "x^2 + y^2 = 16") { Color = OxyColors.Red });
+            //_plot3.Series.Add(new FunctionSeries((x) => - Math.Sqrt(Math.Max(16 - Math.Pow(x, 2), 0)), -4, 4, 0.1) { Color = OxyColors.Red });
+            //StringBuilder f1Saver = new StringBuilder(_featureSelect);
+            //StringBuilder buffer = new StringBuilder();
+            //StringBuilder f2 = _dll.myGetMyCorrelatedFeature(f1, buffer);
             _plot1.LegendTitle = _featureSelect;
-            _plot2.LegendTitle = buffer.ToString();
-            if (f2.ToString() != "")
+            _plot2.LegendTitle = _correlativeFeature.ToString();
+            _plot3.LegendTitle = "correlattive features";
+            if (_correlativeFeature.ToString() != "")
             {
-                Line l = AnomalyDetectionUtil.LinearReg(valuesMap[_featureSelect], valuesMap[f2.ToString()], valuesMap[_featureSelect].Length - 1);
-                double y1 = l.f(-1);
-                double y2 = l.f(1);
-                double min = Math.Min(valuesMap[_featureSelect].Min(), valuesMap[f2.ToString()].Min());
-                double max = Math.Min(valuesMap[_featureSelect].Max(), valuesMap[f2.ToString()].Max());
+                Line l = AnomalyDetectionUtil.LinearReg(valuesMap[_featureSelect], valuesMap[_correlativeFeature.ToString()], valuesMap[_featureSelect].Length - 1);
+                double min = Math.Min(valuesMap[_featureSelect].Min(), valuesMap[_correlativeFeature.ToString()].Min());
+                double max = Math.Max(valuesMap[_featureSelect].Max(), valuesMap[_correlativeFeature.ToString()].Max());
+                double y1 = l.f(min);
+                double y2 = l.f(max);
                 lineSeries4.Points.Add(new DataPoint(min, y1));
                 lineSeries4.Points.Add(new DataPoint(max, y2));
             }
@@ -104,10 +121,22 @@ namespace SimolatorDesktopApp_1.Model
                 for (int i = 0; i <= lineIndex; i++)
                 {
                     lineSeries.Points.Add(new DataPoint(i, valuesMap[_featureSelect][i]));
-                    if(f2.ToString() != "")
+                    if(_correlativeFeature.ToString() != "")
                     {
-                        lineSeries2.Points.Add(new DataPoint(i, valuesMap[f2.ToString()][i]));
-                        lineSeries3.Points.Add(new DataPoint(valuesMap[_featureSelect][i], valuesMap[f2.ToString()][i]));
+                        lineSeries2.Points.Add(new DataPoint(i, valuesMap[_correlativeFeature.ToString()][i]));
+                        if (_dll.isAnomalyPoint(_featureSelect + '-' + _correlativeFeature.ToString(), i))
+                        {
+                            lineSeries3H.Points.Add(new DataPoint(valuesMap[_featureSelect][i], valuesMap[_correlativeFeature.ToString()][i]));
+                        }
+                        else if (_correlativeFeature.ToString() != "")
+                        {
+                            lineSeries3.Points.Add(new DataPoint(valuesMap[_featureSelect][i], valuesMap[_correlativeFeature.ToString()][i]));
+                        }
+                    }
+                    else
+                    {
+                        _plot2.LegendTitle = "no correlative feature!";
+                        _plot3.LegendTitle = "no correlative feature!";
                     }
                 }
             }
@@ -116,16 +145,29 @@ namespace SimolatorDesktopApp_1.Model
                 for (int i = lineIndex - 300; i <= lineIndex; i++)
                 {
                     lineSeries.Points.Add(new DataPoint(i, valuesMap[_featureSelect][i]));
-                    if (f2.ToString() != "")
+                    if (_correlativeFeature.ToString() != "")
                     {
-                        lineSeries2.Points.Add(new DataPoint(i, valuesMap[f2.ToString()][i]));
-                        lineSeries3.Points.Add(new DataPoint(valuesMap[_featureSelect][i], valuesMap[f2.ToString()][i]));
+                        lineSeries2.Points.Add(new DataPoint(i, valuesMap[_correlativeFeature.ToString()][i]));
+                        if (_dll.isAnomalyPoint(_featureSelect + '-' + _correlativeFeature.ToString(), i))
+                        {
+                            lineSeries3H.Points.Add(new DataPoint(valuesMap[_featureSelect][i], valuesMap[_correlativeFeature.ToString()][i]));
+                        }
+                        else if (_correlativeFeature.ToString() != "")
+                        {
+                            lineSeries3.Points.Add(new DataPoint(valuesMap[_featureSelect][i], valuesMap[_correlativeFeature.ToString()][i]));
+                        }
+                    }
+                    else
+                    {
+                        _plot2.LegendTitle = "no correlative feature!";
+                        _plot3.LegendTitle = "no correlative feature!";
                     }
                 }
             }
             _plot1.Series.Add(lineSeries);
             _plot2.Series.Add(lineSeries2);
             _plot3.Series.Add(lineSeries3);
+            _plot3.Series.Add(lineSeries3H);
             _plot3.Series.Add(lineSeries4);
             _plot1.InvalidatePlot(true);
             _plot2.InvalidatePlot(true);

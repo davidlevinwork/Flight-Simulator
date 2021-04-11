@@ -12,39 +12,39 @@ namespace SimolatorDesktopApp_1.Model
     {
         public CircleDLL() {}
 
-        [DllImport("shared_DLL.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("DllCircle.dll", CallingConvention = CallingConvention.Cdecl)]
         private static extern IntPtr getTimeSeries
            ([MarshalAs(UnmanagedType.LPStr)] StringBuilder csvFileName);
 
-        [DllImport("shared_DLL.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("shareDllCircled_DLL.dll", CallingConvention = CallingConvention.Cdecl)]
         private static extern void getMyCorrelatedFeature(IntPtr time_series, StringBuilder f1, StringBuilder buffer);
 
-        [DllImport("shared_DLL.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("DllCircle.dll", CallingConvention = CallingConvention.Cdecl)]
         private static extern IntPtr getHybridDetector();
 
-        [DllImport("shared_DLL.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("DllCircle.dll", CallingConvention = CallingConvention.Cdecl)]
         private static extern void callLearnNormal(IntPtr hybrid, IntPtr ts);
 
-        [DllImport("shared_DLL.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("DllCircle.dll", CallingConvention = CallingConvention.Cdecl)]
         private static extern IntPtr getLinearReg(IntPtr time_series, StringBuilder f1, StringBuilder f2);
-        [DllImport("shared_DLL.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("DllCircle.dll", CallingConvention = CallingConvention.Cdecl)]
         private static extern float getYLine(Line line, float x);
 
-        [DllImport("shared_DLL.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("DllCircle.dll", CallingConvention = CallingConvention.Cdecl)]
         private static extern void updateAnomaly
         (IntPtr hybrid, IntPtr time_series,
         [MarshalAs(UnmanagedType.LPArray)] string[] descriptor);
 
-        [DllImport("shared_DLL.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("DllCircle.dll", CallingConvention = CallingConvention.Cdecl)]
         private static extern IntPtr getRupperAnomaly(IntPtr time_series, IntPtr hybrid);
 
-        [DllImport("shared_DLL.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("DllCircle.dll", CallingConvention = CallingConvention.Cdecl)]
         private static extern int getSizeRupper(IntPtr rupper);
 
-        [DllImport("shared_DLL.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("DllCircle.dll", CallingConvention = CallingConvention.Cdecl)]
         private static extern void getDescriptionRupper(IntPtr rupper, int i, StringBuilder buffer);
 
-        [DllImport("shared_DLL.dll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("DllCircle.dll", CallingConvention = CallingConvention.Cdecl)]
         private static extern float getTimeStepRupper(IntPtr rupper, int i);
 
         private static IntPtr hybrid = IntPtr.Zero;

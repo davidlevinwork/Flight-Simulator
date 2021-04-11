@@ -31,7 +31,13 @@ namespace SimolatorDesktopApp_1.View.controls
 
         private void ListViewAlgoritems_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            _vMAlgoritemDetect.vmSelectedAlgorithm(ListViewAlgorithms.SelectedItem.ToString());
         }
-    }
+
+        private void ListViewAnomalies_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(ListViewAnomalies.SelectedItem != null)
+                _vMAlgoritemDetect.vmSelectedAnomaly(ListViewAnomalies.SelectedItem.ToString());
+        }
+}
 }

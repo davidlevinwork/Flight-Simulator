@@ -16,7 +16,6 @@ namespace SimolatorDesktopApp_1
     /// </summary>
     public partial class App : Application
     {
-
         public JoystickDashBoardModel _joystickDashBoardModel { get; private set; }
         public GraphsModel _graphModel { get; private set; }
         public VMGraphs _vmGraphs { get; private set; }
@@ -28,6 +27,8 @@ namespace SimolatorDesktopApp_1
         public CircleDLL _circleDLL { get; private set; }
         public LineDll _lineDLL { get; private set; }
         public AlgoritemDetectModel _algoritemDetectModel { get; private set; }
+        public SliderModel _sliderModel { get; private set; }
+
 
 
 
@@ -44,6 +45,7 @@ namespace SimolatorDesktopApp_1
             _joystickModel = new JoystickModel();
             _joystickDashBoardModel = new JoystickDashBoardModel();
             _algoritemDetectModel = new AlgoritemDetectModel();
+            _sliderModel = new SliderModel(_simultorConnectorModel);
             // Create main application window
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();

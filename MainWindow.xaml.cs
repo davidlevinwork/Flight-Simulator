@@ -98,13 +98,13 @@ namespace SimolatorDesktopApp_1
 
         private void circleAnomalyClick(object sender, RoutedEventArgs e)
         {
-            _graphsModel.SetDllType((System.Windows.Application.Current as App)._circleDLL);
+            //_graphsModel.SetDllType((System.Windows.Application.Current as App)._circleDLL);
 
         }
 
         private void lineAnomalyClick(object sender, RoutedEventArgs e)
         {
-            _graphsModel.SetDllType((System.Windows.Application.Current as App)._lineDLL);
+            //_graphsModel.SetDllType((System.Windows.Application.Current as App)._lineDLL);
             //(System.Windows.Application.Current as App)._lineDLL.myCallLearnNormal();
         }
 

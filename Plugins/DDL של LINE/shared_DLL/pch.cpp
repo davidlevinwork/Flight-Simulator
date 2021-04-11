@@ -8,16 +8,14 @@
 extern "C" _declspec(dllexport)
 void* getTimeSeries(const char* str)
 {
-    //TimeSeries* ts = new TimeSeries(str);
     return (void*) new TimeSeries(str);
 }
 
 
 extern "C" _declspec(dllexport)
-void callLearnNormal(HybridAnomalyDetector* hybrid, TimeSeries* ts)
+void callLearnNormal(HybridAnomalyDetector* hybrid, TimeSeries & ts)
 {
-    TimeSeries temp(*ts);
-    hybrid->learnNormal(temp);
+    hybrid->learnNormal(ts);
 }
 
 extern "C" _declspec(dllexport)
@@ -29,18 +27,6 @@ void updateAnomaly(const TimeSeries & ts, HybridAnomalyDetector * hybrid, const 
 		//timeSteps[i] = vec[i].timeStep;
 	}
 }
-
-//extern "C" _declspec(dllexport)
-//void getMyCorrelatedFeature(HybridAnomalyDetector* hybrid, char* str, char* buffer) {
-//    for (int i = 0; i < hybrid->getNormalModel().size(); ++i)
-//    {
-//        if (!strcmp(hybrid->getNormalModel()[i].feature1.c_str(), str))
-//        {
-//            strcpy(buffer, hybrid->getNormalModel()[i].feature2.c_str());
-//            break;
-//        }
-//    }
-//}
 
 extern "C" _declspec(dllexport)
 void* getHybridDetector()
@@ -102,8 +88,9 @@ void getDescriptionRupper(Rupper* rupper, int i, char* buffer) {
 }
 
 extern "C" _declspec(dllexport)
-float getTimeStepRupper(Rupper* rupper, int i) {
+int getTimeStepRupper(Rupper* rupper, int i) {
 	return rupper->getTimeStepByIndex(i);
 }
 
- //When you are using pre-compiled headers, this source file is necessary for compilation to succeed.
+
+// When you are using pre-compiled headers, this source file is necessary for compilation to succeed.

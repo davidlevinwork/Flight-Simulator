@@ -15,8 +15,7 @@ public:
 
 	void getDescByIndex(int i, char* buffer);
 
-	int getTimeStepByIndex(int i);
-
+	float getTimeStepByIndex(int i);
 };
 
 int Rupper::getSize() {
@@ -28,6 +27,6 @@ void Rupper::getDescByIndex(int i, char* buffer) {
 	buffer[_vecAnomaly[i].description.length()] = '\0';
 }
 
-int Rupper::getTimeStepByIndex(int i) {
+float Rupper::getTimeStepByIndex(int i) {
 	return _vecAnomaly[i].timeStep;
 }

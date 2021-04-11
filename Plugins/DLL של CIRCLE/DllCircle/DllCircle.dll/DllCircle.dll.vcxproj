@@ -162,6 +162,7 @@
     <ClInclude Include="HybridAnomalyDetector.h" />
     <ClInclude Include="minCircle.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Rupper.h" />
     <ClInclude Include="timeseries.h" />
   </ItemGroup>
   <ItemGroup>

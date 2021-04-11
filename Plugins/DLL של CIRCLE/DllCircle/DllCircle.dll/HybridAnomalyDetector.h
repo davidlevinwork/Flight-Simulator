@@ -58,6 +58,7 @@ void HybridAnomalyDetector::makeStruct(const TimeSeries& ts, const string& f1, c
     Line line(0, 0);
     float threshold = 0;
     Circle circle = findMinCircle(ts.getMapMatrix().at(f1), ts.getMapMatrix().at(f2), ts.getNumOfData());
+    circle.radius *= 1.1f;
     correlatedFeatures cfs{ /// make the struct with all the data we calculate
             f1, f2, maxPearson, line, threshold, circle
     };

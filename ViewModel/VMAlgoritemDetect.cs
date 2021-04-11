@@ -12,7 +12,7 @@ namespace SimolatorDesktopApp_1.ViewModel
     public class VMAlgoritemDetect : INotifyPropertyChanged
     {
         private AlgoritemDetectModel _algoritemDetectModel;
-        private ObservableCollection<string> _toViewListFeatures = new ObservableCollection<string>();
+        //private ObservableCollection<string> _toViewListFeatures = new ObservableCollection<string>();
         public event PropertyChangedEventHandler PropertyChanged;
 
         public VMAlgoritemDetect(AlgoritemDetectModel algoritemDetectModel)
@@ -27,12 +27,27 @@ namespace SimolatorDesktopApp_1.ViewModel
 
         public ObservableCollection<string> VM_AddToMyList
         {
-            get { return _toViewListFeatures; }
+            get { return _algoritemDetectModel.AddToMyList; }
             set
             {
-                _toViewListFeatures = value;
+                _algoritemDetectModel.AddToMyList = value;
                 INotifyPropertyChanged("VM_AddToMyList");
             }
+        }
+
+        public ObservableCollection<string> VM_AddAnomaliesToMyList
+        {
+            get { return _algoritemDetectModel.AddAnomaliesToMyList; }
+            set
+            {
+                _algoritemDetectModel.AddAnomaliesToMyList = value;
+                INotifyPropertyChanged("VM_AddAnomaliesToMyList");
+            }
+        }
+
+        public void vmSelectedAnomaly(string anomaly)
+        {
+            _algoritemDetectModel.selectedAnomaly(anomaly);
         }
 
         private void INotifyPropertyChanged(string propName)
@@ -41,6 +56,11 @@ namespace SimolatorDesktopApp_1.ViewModel
             {
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
+        }
+
+        internal void vmSelectedAlgorithm(string selectedItem)
+        {
+            _algoritemDetectModel.SelectedAlgorithm(selectedItem);
         }
 
     }

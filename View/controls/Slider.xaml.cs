@@ -32,7 +32,7 @@ namespace SimolatorDesktopApp_1.View.controls
         public Slider()
         {
             InitializeComponent();
-            _VMSlider = new VMSlider(new SliderModel((Application.Current as App)._simultorConnectorModel));
+            _VMSlider = new VMSlider((Application.Current as App)._sliderModel);
             DataContext = _VMSlider;
         }
 

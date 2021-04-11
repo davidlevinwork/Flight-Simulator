@@ -1,5 +1,6 @@
 // pch.cpp: source file corresponding to the pre-compiled header
 #include "pch.h"
+#include "Rupper.h"
 #include "timeseries.h"
 #include "HybridAnomalyDetector.h"
 #define _CRT_SECURE_NO_WARNINGS
@@ -87,5 +88,27 @@ extern "C" _declspec(dllexport)
 float getYLine(Line l, float x) {
     return l.f(x);
 }
+
+extern "C" _declspec(dllexport)
+void* getRupperAnomaly(const TimeSeries & ts, HybridAnomalyDetector * hybrid) {
+    vector<AnomalyReport> vec = hybrid->detect(ts);
+    return new Rupper(vec);
+}
+
+extern "C" _declspec(dllexport)
+int getSizeRupper(Rupper * rupper) {
+    return rupper->getSize();
+}
+
+extern "C" _declspec(dllexport)
+void getDescriptionRupper(Rupper * rupper, int i, char* buffer) {
+    rupper->getDescByIndex(i, buffer);
+}
+
+extern "C" _declspec(dllexport)
+float getTimeStepRupper(Rupper * rupper, int i) {
+    return rupper->getTimeStepByIndex(i);
+}
+
 
 //When you are using pre-compiled headers, this source file is necessary for compilation to succeed.
