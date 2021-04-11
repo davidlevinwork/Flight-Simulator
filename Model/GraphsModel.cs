@@ -80,6 +80,7 @@ namespace SimolatorDesktopApp_1.Model
             (Application.Current as App)._algoritemDetectModel.AddAnomaliesToMyList = anomaliesViewList;
         }
 
+
         public void updateAllValues(Dictionary<string, double[]> allValues)
         {
             _allValuesMap = allValues;

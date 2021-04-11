@@ -178,6 +178,7 @@ namespace SimolatorDesktopApp_1.Model
             }
             File.WriteAllText(csvPath, line);
             updateDictionary();
+            (Application.Current as App)._lineDLL.playDetect();
         }
 
         public void updateDictionary()

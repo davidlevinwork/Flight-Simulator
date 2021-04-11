@@ -25,9 +25,10 @@ namespace SimolatorDesktopApp_1
         public JoystickModel _joystickModel { get; private set; }
         public PopOutModel _popOutModel { get; private set; }
         public CircleDLL _circleDLL { get; private set; }
-        public LineDll _lineDLL { get; private set; }
         public AlgoritemDetectModel _algoritemDetectModel { get; private set; }
         public SliderModel _sliderModel { get; private set; }
+
+        public LineDll _lineDLL { get; private set; }
 
 
 
@@ -44,8 +45,8 @@ namespace SimolatorDesktopApp_1
             _dashBoardModel = new DashBoardModel();
             _joystickModel = new JoystickModel();
             _joystickDashBoardModel = new JoystickDashBoardModel();
-            _algoritemDetectModel = new AlgoritemDetectModel();
             _sliderModel = new SliderModel(_simultorConnectorModel);
+            _algoritemDetectModel = new AlgoritemDetectModel();
             // Create main application window
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();

@@ -16,6 +16,7 @@ namespace SimolatorDesktopApp_1.Model
         private ObservableCollection<string> _toViewListFeatures = new ObservableCollection<string>();
         private ObservableCollection<string> _anomaliesViewList = new ObservableCollection<string>();
         private string _algorithmSelect;
+        private LineDll _dll = (Application.Current as App)._lineDLL;
 
         public AlgoritemDetectModel()
         {
@@ -28,7 +29,6 @@ namespace SimolatorDesktopApp_1.Model
                 _toViewListFeatures.Add(fileName);
             }
             AddToMyList = _toViewListFeatures;
-            (Application.Current as App)._lineDLL.setDllPath(targetDirectory + '\\' + _toViewListFeatures[1]);
         }
 
         public ObservableCollection<string> AddToMyList
@@ -74,19 +74,21 @@ namespace SimolatorDesktopApp_1.Model
 
         public void SelectedAlgorithm(string selectedItem)
         {
+            Console.WriteLine("444444444444444444444444444444444444444444444444444444444444444444444444444444444444444");
             AddAnomaliesToMyList = new ObservableCollection<string>();
             string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
             string targetDirectory = projectDirectory + '\\' + "Plugins" + '\\' + selectedItem;
-            (Application.Current as App)._lineDLL.setDllPath(targetDirectory);
-/*            _algorithmSelect = selectedItem;
-            if (selectedItem.Equals("shared_DLL.dll"))
-            {
-                (Application.Current as App)._graphModel.SetDllType((Application.Current as App)._lineDLL);
-            } 
-            else if (selectedItem.Equals("DllCircle.dll"))
-            {
-                (Application.Current as App)._graphModel.SetDllType((Application.Current as App)._circleDLL);
-            }*/
+            _dll.setDllPath(targetDirectory);
+            _dll.playDetect();
+            /*            _algorithmSelect = selectedItem;
+                        if (selectedItem.Equals("shared_DLL.dll"))
+                        {
+                            (Application.Current as App)._graphModel.SetDllType((Application.Current as App)._lineDLL);
+                        } 
+                        else if (selectedItem.Equals("DllCircle.dll"))
+                        {
+                            (Application.Current as App)._graphModel.SetDllType((Application.Current as App)._circleDLL);
+                        }*/
         }
 
     }

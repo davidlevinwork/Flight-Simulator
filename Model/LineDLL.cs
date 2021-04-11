@@ -233,9 +233,14 @@ namespace SimolatorDesktopApp_1.Model
                 return;
             }
             myCallLearnNormal();
+        }
+
+
+        public void playDetect()
+        {
             myDetectAnomalies();
             int size = setDllgetSizeRupper(wrapper);
-            for(int i = 0; i < size; i++)
+            for (int i = 0; i < size; i++)
             {
                 timeStepsList.Add(setDllgetTimeStepRupper(wrapper, i));
                 StringBuilder buffer = new StringBuilder("", 100);
@@ -272,7 +277,7 @@ namespace SimolatorDesktopApp_1.Model
             for (int i = 0; i < size; i++)
             {
                 if (timeStepsList[i] == line && descriptionsList[i].Equals(description))
-                    return true;
+                   return true;
             }
             return false;
         }

@@ -46,7 +46,8 @@ namespace SimolatorDesktopApp_1.View
                 {
                     flag = true;
                     _xmlFile.Content = fileName;
-                    (System.Windows.Application.Current as App)._filesUpload.xmlUpload(pathXml);
+                    (System.Windows.Application.Current as App)._popOutModel.makeLearnNormal(pathXml);
+                    //(System.Windows.Application.Current as App)._filesUpload.xmlUpload(pathXml);
                     //ifValidXmlFile = true;
                 }
                 else

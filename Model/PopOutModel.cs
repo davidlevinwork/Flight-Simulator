@@ -36,8 +36,8 @@ namespace SimolatorDesktopApp_1.Model
 
         public void makeLearnNormal(string path)
         {
-            Thread t = new Thread(delegate ()
-            {
+            //Thread t = new Thread(delegate ()
+           // {
                 _filesUpload.xmlUpload(path);
                 Console.WriteLine("start!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
@@ -54,8 +54,21 @@ namespace SimolatorDesktopApp_1.Model
                // _dllType.myGetHybridDetector();
                 // _dllType.myCallLearnNormal();
                 Console.WriteLine("learnnnnnnnnn !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            });
-            t.Start();
+                List<string> dllNames = new List<string>();
+                string targetDirectory = projectDirectory + '\\' + "Plugins";
+                string[] dllEntries = Directory.GetFiles(targetDirectory);
+                foreach (string dllName in dllEntries)
+                {
+                    string fileName = Path.GetFileName(dllName);
+                    dllNames.Add(fileName);
+                }
+             (Application.Current as App)._algoritemDetectModel.AddAnomaliesToMyList = new ObservableCollection<string>();
+             (Application.Current as App)._lineDLL.setDllPath(targetDirectory + '\\' + dllNames[1]);
+
+            //(Application.Current as App)._algoritemDetectModel.SelectedAlgorithm(dllNames[1], 0);
+                //(Application.Current as App)._graphModel.initizlizeDefaultDLL(targetDirectory + '\\' + dllNames[1]);
+            //});
+            //t.Start();
         }
     }
 }
