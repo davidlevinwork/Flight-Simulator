@@ -19,6 +19,7 @@ The application also shows the user updated data in real-time from the flight.
 * Multithreading Programming
 * Architectural and design pattern
 * Communication and Client-Server Architecture
+* OxyPlot - A cross-platform plotting library for .NET
 
 ## Documentation files
 You can view the UML chart under the folder ```UML```
