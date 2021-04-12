@@ -12,7 +12,6 @@ namespace SimolatorDesktopApp_1.ViewModel
     public class VMAlgoritemDetect : INotifyPropertyChanged
     {
         private AlgoritemDetectModel _algoritemDetectModel;
-        //private ObservableCollection<string> _toViewListFeatures = new ObservableCollection<string>();
         public event PropertyChangedEventHandler PropertyChanged;
 
         public VMAlgoritemDetect(AlgoritemDetectModel algoritemDetectModel)

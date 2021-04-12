@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SimolatorDesktopApp_1.View.controls"
              xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-             mc:Ignorable="d" Height="800" Width="1100"  Background="#323C54">
+             mc:Ignorable="d" Height="800" Width="1100" >
 
     <UserControl.Resources>
         <ControlTemplate x:Key="simpleSlider" TargetType="{x:Type Slider}">
@@ -57,23 +57,41 @@
         </Grid.RowDefinitions>
 
         <!--   inner joystick and its components  !-->
-        <local:Joystick  Grid.Row="1" Grid.Column="0"  Grid.ColumnSpan="3" Grid.RowSpan="2"
+        <local:Joystick Grid.Column="3"  Grid.ColumnSpan="2" Grid.RowSpan="3"
             x:Name="innerJoystick"
             HorizontalAlignment="Center" 
-            VerticalAlignment="Center"/>
+            VerticalAlignment="Center" Margin="3.6,95,21.8,165"/>
 
         <!--   slider of Throttle  !-->
-        <Slider  Grid.Row="1"  Grid.ColumnSpan="3" Grid.Column="3"  x:Name="ThrottleSlider"
-                 TickFrequency="0.1" Value="{Binding Path=VM_Throttle}" Maximum="1" Minimum="0" VerticalAlignment="Center" Width="500" Template="{StaticResource simpleSlider}" />
-        <Label  Grid.ColumnSpan="3" Grid.Row="1" Grid.Column="3" Content="&lt;- Throttle -&gt;" HorizontalAlignment="Center"  VerticalAlignment="Top" FontSize="45"  Foreground="#747E96" />
+        <Slider  Grid.Row="1"  Grid.ColumnSpan="3"  x:Name="ThrottleSlider"
+                 TickFrequency="0.1" Value="{Binding Path=VM_Throttle}" Maximum="1" Minimum="0" VerticalAlignment="Center" Width="500" Template="{StaticResource simpleSlider}" Margin="-106,134,156.4,191" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2" >
+            <Slider.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90.379"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Slider.RenderTransform>
+        </Slider>
+        <Label  Grid.ColumnSpan="2" Grid.Row="1" Content="&lt;- Throttle -&gt;" HorizontalAlignment="Center"  VerticalAlignment="Top" FontSize="45"  Foreground="Black" Margin="-79,150,160.2,0" Grid.RowSpan="2" RenderTransformOrigin="0.5,0.5" >
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90.738"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
 
         <!--   slider of Ruder  !-->
-        <Slider Grid.Row="2"  Grid.ColumnSpan="3" Grid.Column="3" x:Name="RudderSlider" Width="500" VerticalAlignment="Center"
-                TickFrequency="0.1" Minimum ="-1" Maximum="1" Value="{Binding VM_Rudder}" Template="{StaticResource simpleSlider}"/>
-        <Label Grid.Row="2"  Grid.ColumnSpan="3" Grid.Column="3" Content="&lt;- Rudder -&gt;" FontSize="45" Foreground="#747E96" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <Slider Grid.Row="3"  Grid.ColumnSpan="4" Grid.Column="1" x:Name="RudderSlider" Width="500" VerticalAlignment="Center"
+                TickFrequency="0.1" Minimum ="-1" Maximum="1" Value="{Binding VM_Rudder}" Template="{StaticResource simpleSlider}" Margin="116.8,22,116.8,102"/>
+        <Label Grid.Row="3"  Grid.ColumnSpan="2" Grid.Column="2" Content="&lt;- Rudder -&gt;" FontSize="45" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="51.6,108,47.6,0"/>
 
         <!--   elevator  !-->
-        <Label Grid.Row="1" Grid.Column="0" Content="&lt;- Elevator -&gt;" HorizontalAlignment="Left"  VerticalAlignment="Center" FontSize="45" Foreground="#747E96" Grid.ColumnSpan="2" Margin="76,55,0,82" >
+        <Label Grid.Column="2" Content="&lt;- Elevator -&gt;" HorizontalAlignment="Left"  VerticalAlignment="Center" FontSize="45" Foreground="Black" Grid.ColumnSpan="3" Margin="149.6,145,0,192" Grid.RowSpan="2" >
             <Label.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -84,6 +102,6 @@
         </Label>
 
         <!--   aileron  !-->
-        <Label Grid.Row="3"  Grid.ColumnSpan="3" Grid.Column="0" Content="&lt;- Aileron -&gt;" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="45" Foreground="#747E96"/>
+        <Label Grid.Row="2"  Grid.ColumnSpan="2" Grid.Column="3" Content="&lt;- Aileron -&gt;" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="45" Foreground="Black"  Margin="71.6,100,20.8,0"/>
     </Grid>
 </UserControl>

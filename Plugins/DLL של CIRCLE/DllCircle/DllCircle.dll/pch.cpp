@@ -3,6 +3,7 @@
 #include "Rupper.h"
 #include "timeseries.h"
 #include "HybridAnomalyDetector.h"
+#include "DrawingWrapper.h"
 #define _CRT_SECURE_NO_WARNINGS
 
 extern "C" _declspec(dllexport)
@@ -64,7 +65,7 @@ void getMyCorrelatedFeature(const TimeSeries &ts, char* src, char* buffer) {
     if (fabs(maxPearson) > 0.5)
         strcpy(buffer, f2.c_str());
     else
-        strcpy(buffer, "");
+        strcpy(buffer,"");
 }
 
 extern "C" _declspec(dllexport)
@@ -108,6 +109,34 @@ void getDescriptionRupper(Rupper * rupper, int i, char* buffer) {
 extern "C" _declspec(dllexport)
 float getTimeStepRupper(Rupper * rupper, int i) {
     return rupper->getTimeStepByIndex(i);
+}
+
+extern "C" _declspec(dllexport)
+void* getDrawingRupper(TimeSeries & ts, char* f1, char* f2, HybridAnomalyDetector * hybrid) {
+    vector<float> toReturn;
+    string s1 = f1, s2 = f2;
+    int size = hybrid->getNormalModel().size();
+    for (int i = 0; i < size; i++) {
+        if (!hybrid->getNormalModel()[i].feature1.compare(s1) && !hybrid->getNormalModel()[i].feature2.compare(s2)) {
+            return new DrawingWrapper(hybrid->getNormalModel()[i].circle);
+        }
+    }
+    cout << "buggggggggggggggggggggggggg" << endl;
+}
+
+extern "C" _declspec(dllexport)
+int getSizeDrawingWrapper(DrawingWrapper * drawingWrapper) {
+    return drawingWrapper->getSize();
+}
+
+extern "C" _declspec(dllexport)
+float getXValueByIndexDrawingWrapper(DrawingWrapper * drawingWrapper, int i) {
+    return drawingWrapper->getXValueByIndex(i);
+}
+
+extern "C" _declspec(dllexport)
+float getYValueByIndexDrawingWrapper(DrawingWrapper * drawingWrapper, int i) {
+    return drawingWrapper->getYValueByIndex(i);
 }
 
 

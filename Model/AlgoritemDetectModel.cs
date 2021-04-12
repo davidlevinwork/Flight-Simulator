@@ -15,8 +15,7 @@ namespace SimolatorDesktopApp_1.Model
         public event PropertyChangedEventHandler PropertyChanged;
         private ObservableCollection<string> _toViewListFeatures = new ObservableCollection<string>();
         private ObservableCollection<string> _anomaliesViewList = new ObservableCollection<string>();
-        private string _algorithmSelect;
-        private LineDll _dll = (Application.Current as App)._lineDLL;
+        private DllAlgorithms _dll = (Application.Current as App)._algorithmDll;
 
         public AlgoritemDetectModel()
         {
@@ -74,21 +73,11 @@ namespace SimolatorDesktopApp_1.Model
 
         public void SelectedAlgorithm(string selectedItem)
         {
-            Console.WriteLine("444444444444444444444444444444444444444444444444444444444444444444444444444444444444444");
             AddAnomaliesToMyList = new ObservableCollection<string>();
             string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
             string targetDirectory = projectDirectory + '\\' + "Plugins" + '\\' + selectedItem;
             _dll.setDllPath(targetDirectory);
             _dll.playDetect();
-            /*            _algorithmSelect = selectedItem;
-                        if (selectedItem.Equals("shared_DLL.dll"))
-                        {
-                            (Application.Current as App)._graphModel.SetDllType((Application.Current as App)._lineDLL);
-                        } 
-                        else if (selectedItem.Equals("DllCircle.dll"))
-                        {
-                            (Application.Current as App)._graphModel.SetDllType((Application.Current as App)._circleDLL);
-                        }*/
         }
 
     }

@@ -22,7 +22,6 @@ namespace SimolatorDesktopApp_1.Model
         private string[] _myCsvFile, _userCsvFile;
         private ObservableCollection<string> _toViewListFeatures = new ObservableCollection<string>();
         Dictionary<string, double[]> _allValues = new Dictionary<string, double[]>();
-        bool isCsvUploaded = false, isXmlUploaded = false;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -63,16 +62,6 @@ namespace SimolatorDesktopApp_1.Model
             }
         }
 
-        public bool IsXmlUploaded
-        {
-            get { return isXmlUploaded; }
-            set
-            {
-                isXmlUploaded = value;
-                INotifyPropertyChanged("IsXmlUploaded");
-            }
-        }
-
         public void xmlUpload(string path)
         {
             try 
@@ -86,11 +75,8 @@ namespace SimolatorDesktopApp_1.Model
                 {
                     if (words[i].Contains("<output>"))
                     {
-                       // Console.WriteLine("entered xmlUpload!!!!!!!!!!!!!!!!!!!!!2");
                         while (!words[i].Contains("</output>"))
                         {
-                            //Console.WriteLine("entered xmlUpload!!!!!!!!!!!!!!!!!!!!!3");
-
                             if (words[i].StartsWith("<name>"))
                             {
                                 sub = words[i].Split('>')[1];
@@ -102,7 +88,6 @@ namespace SimolatorDesktopApp_1.Model
                         break;
                     }
                 }
-                isXmlUploaded = true;
                 for(int i = 0; i < _featuresMap.Count; i++)
                 {
                     if (i > 0 && _featuresMap[i] == _featuresMap[i - 1])
@@ -178,7 +163,7 @@ namespace SimolatorDesktopApp_1.Model
             }
             File.WriteAllText(csvPath, line);
             updateDictionary();
-            (Application.Current as App)._lineDLL.playDetect();
+            (Application.Current as App)._algorithmDll.playDetect();
         }
 
         public void updateDictionary()

@@ -17,9 +17,6 @@ using System.Windows.Shapes;
 
 namespace SimolatorDesktopApp_1.View.controls
 {
-    /// <summary>
-    /// Interaction logic for GraphsUserControl.xaml
-    /// </summary>
     public partial class GraphsUserControl : UserControl
     {
 
@@ -32,21 +29,7 @@ namespace SimolatorDesktopApp_1.View.controls
             _vmGraphs = (Application.Current as App)._vmGraphs;
             DataContext = _vmGraphs;
             InitializeComponent();
-            //paintGraph();
         }
-
-        /*
-        private void paintGraph()
-        {
-            this.ListViewFeatures.View = GridViewFeatures;
-            for (int i = 0; i < _filesUpload.FeaturesMap.Count; i++)
-            {
-                //this.ListViewFeatures.Items.Add(_filesUpload.FeaturesMap[i]);
-            }
-            this.ListViewFeatures.Items.Add("a");
-            this.ListViewFeatures.Items.Add("b");
-        }
-        */
 
         private void ListViewFeatures_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

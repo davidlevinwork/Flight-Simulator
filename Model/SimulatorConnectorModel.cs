@@ -18,8 +18,6 @@ namespace SimolatorDesktopApp_1.Model
     {
         TcpClient aClient;
         NetworkStream stream;
-        //private static readonly Mutex mut = new Mutex();
-        // public int conectionAttempts;
         private bool isConnected = false;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -75,8 +73,6 @@ namespace SimolatorDesktopApp_1.Model
             aClient = new TcpClient(ip, port);
             stream = aClient.GetStream();
             IsConnected = true; // set property connect
-            // SimulatorModel simulatorModel = new SimulatorModel(this);
-            // simulatorModel.startSimulator();
         }
 
         public void Disconnect()
@@ -91,7 +87,7 @@ namespace SimolatorDesktopApp_1.Model
 
         public string Read()
         {
-            return "need to finish Read function";
+            return "";
         }
 
         public void Write(string command)
@@ -103,17 +99,11 @@ namespace SimolatorDesktopApp_1.Model
                 NetworkStream stream = this.aClient.GetStream();
                 stream.Flush();
                 stream.Write(buffer, 0, buffer.Length);
-                // Console.WriteLine("enter write scope");
             }
             catch
             {
-
+                Console.WriteLine("Failed in write command!");
             }
-        }
-
-        public string WriteCommand(string word)
-        {
-            return "need to finish WriteCommand function";
         }
     }
 }

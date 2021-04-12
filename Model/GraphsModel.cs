@@ -23,10 +23,12 @@ namespace SimolatorDesktopApp_1.Model
         private string _correlativeFeature = "";
         private int _numOfValues = 0;
         private Dictionary<string, double[]> _allValuesMap;
-        private LineDll _dll;
+        private DllAlgorithms _dll;
+        private List<double> _XValuesDrawingWrapper = new List<double>();
+        private List<double> _YValuesDrawingWrapper = new List<double>();
         public GraphsModel()
         {
-            _dll = (Application.Current as App)._lineDLL;
+            _dll = (Application.Current as App)._algorithmDll;
             _allValuesMap = new Dictionary<string, double[]>();
             _plot1 = new PlotModel();
             _plot2 = new PlotModel();
@@ -34,7 +36,7 @@ namespace SimolatorDesktopApp_1.Model
             _plot1.LegendOrientation = LegendOrientation.Horizontal;
             _plot1.LegendPlacement = LegendPlacement.Outside;
             _plot1.LegendPosition = LegendPosition.TopLeft;
-            _plot1.LegendBackground = OxyColor.FromAColor(200, OxyColors.Blue);
+            _plot1.LegendBackground = OxyColor.FromAColor(200, OxyColors.Transparent);
             _plot1.LegendBorder = OxyColors.Black;
             var valueAxis = new LinearAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot };
             _plot1.Axes.Add(valueAxis);
@@ -43,12 +45,11 @@ namespace SimolatorDesktopApp_1.Model
             _plot2.LegendPlacement = LegendPlacement.Outside;
             _plot2.LegendPosition = LegendPosition.TopLeft;
             _plot2.LegendBorder = OxyColors.Black;
+            _plot2.LegendBackground = OxyColor.FromAColor(200, OxyColors.Transparent);
+
 
             var valueAxis2 = new LinearAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot };
             _plot2.Axes.Add(valueAxis2);
-
-            //var valueAxis3 = new LinearAxis() { MajorGridlineStyle = LineStyle.None, MinorGridlineStyle = LineStyle.Dot };
-            //_plot3.Axes.Add(valueAxis3);
 
             _plot3.LegendOrientation = LegendOrientation.Horizontal;
             _plot3.LegendPlacement = LegendPlacement.Outside;
@@ -56,18 +57,14 @@ namespace SimolatorDesktopApp_1.Model
             _plot3.LegendBorder = OxyColors.Black;
         }
 
-/*        public void SetDllType(IDLL dllType)
-        {
-            _dllType = dllType;
-            _dllType.myCallLearnNormal();
-        }*/
-
         public void SelectedFeature(string selectedItem)
         {
             _featureSelect = selectedItem;
             StringBuilder f1 = new StringBuilder(_featureSelect);
+            StringBuilder f1Saver = new StringBuilder(_featureSelect);
             StringBuilder buffer = new StringBuilder();
-            _correlativeFeature = _dll.myGetMyCorrelatedFeature(f1, buffer).ToString();
+            _correlativeFeature = _dll.myGetMyCorrelatedFeature(f1Saver, buffer).ToString();
+            StringBuilder f2 = new StringBuilder(_correlativeFeature);
             ObservableCollection<string> anomaliesViewList = new ObservableCollection<string>();
             int size = _dll.getTimeStepList().Count;
             for (int i = 0; i < size; i++)
@@ -78,6 +75,19 @@ namespace SimolatorDesktopApp_1.Model
                 }
             }
             (Application.Current as App)._algoritemDetectModel.AddAnomaliesToMyList = anomaliesViewList;
+            _XValuesDrawingWrapper.Clear();
+            _YValuesDrawingWrapper.Clear();
+            if (!f2.ToString().Equals(""))
+            {
+                IntPtr vecForDrawing = _dll.myGetDrawingRupper(f1, f2);
+                int sizeVecDrawingWrapper = _dll.setDllgetSizeDrawingWrapper(vecForDrawing);
+                for (int i = 0; i < sizeVecDrawingWrapper; i++)
+                {
+                    _XValuesDrawingWrapper.Add(_dll.setDllgetXValueByIndexDrawingWrapper(vecForDrawing, i));
+                    _YValuesDrawingWrapper.Add(_dll.setDllgetYValueByIndexDrawingWrapper(vecForDrawing, i));
+                }
+            }
+
         }
 
 
@@ -95,27 +105,19 @@ namespace SimolatorDesktopApp_1.Model
             _plot3.Series.Clear();
             LineSeries lineSeries = new LineSeries();
             LineSeries lineSeries2 = new LineSeries();
-            LineSeries lineSeries3 = new LineSeries { LineStyle = LineStyle.Dot, MarkerType = MarkerType.Circle, MarkerSize = 2, MarkerFill = OxyColors.Gray };
-            LineSeries lineSeries3H = new LineSeries { LineStyle = LineStyle.Dot, MarkerType = MarkerType.Circle, MarkerSize = 2, MarkerFill = OxyColors.Red };
+            LineSeries lineSeries3 = new LineSeries { LineStyle = LineStyle.None, MarkerType = MarkerType.Circle, MarkerSize = 2, MarkerFill = OxyColors.Gray };
+            LineSeries lineSeries3H = new LineSeries { LineStyle = LineStyle.None, MarkerType = MarkerType.Circle, MarkerSize = 2, MarkerFill = OxyColors.Red };
             LineSeries lineSeries4 = new LineSeries();
-            //StringBuilder f1 = new StringBuilder(_featureSelect);
-            //_plot3.Series.Add(new FunctionSeries((x) => Math.Sqrt(Math.Max(16 - Math.Pow(x, 2), 0)), -4, 4, 0.1, "x^2 + y^2 = 16") { Color = OxyColors.Red });
-            //_plot3.Series.Add(new FunctionSeries((x) => - Math.Sqrt(Math.Max(16 - Math.Pow(x, 2), 0)), -4, 4, 0.1) { Color = OxyColors.Red });
-            //StringBuilder f1Saver = new StringBuilder(_featureSelect);
-            //StringBuilder buffer = new StringBuilder();
-            //StringBuilder f2 = _dll.myGetMyCorrelatedFeature(f1, buffer);
             _plot1.LegendTitle = _featureSelect;
             _plot2.LegendTitle = _correlativeFeature.ToString();
             _plot3.LegendTitle = "correlattive features";
+
             if (_correlativeFeature.ToString() != "")
             {
-                Line l = AnomalyDetectionUtil.LinearReg(valuesMap[_featureSelect], valuesMap[_correlativeFeature.ToString()], valuesMap[_featureSelect].Length - 1);
-                double min = Math.Min(valuesMap[_featureSelect].Min(), valuesMap[_correlativeFeature.ToString()].Min());
-                double max = Math.Max(valuesMap[_featureSelect].Max(), valuesMap[_correlativeFeature.ToString()].Max());
-                double y1 = l.f(min);
-                double y2 = l.f(max);
-                lineSeries4.Points.Add(new DataPoint(min, y1));
-                lineSeries4.Points.Add(new DataPoint(max, y2));
+                for (int i = 0; i < _XValuesDrawingWrapper.Count; i++)
+                {
+                    lineSeries4.Points.Add(new DataPoint(_XValuesDrawingWrapper[i], _YValuesDrawingWrapper[i]));
+                }
             }
             if (lineIndex < 300)
             {

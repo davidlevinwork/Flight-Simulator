@@ -13,6 +13,5 @@ namespace SimolatorDesktopApp_1.Model
         void Write(string command);
         string Read();
         void Disconnect();
-        string WriteCommand(string command);
     }
 }

@@ -120,20 +120,16 @@
     </ApplicationDefinition>
     <Compile Include="Model\AlgoritemDetectModel.cs" />
     <Compile Include="Model\C++\AnomalyDetectionUtil.cs" />
-    <Compile Include="Model\CircleDLL.cs" />
     <Compile Include="Model\DashBoardModel.cs" />
     <Compile Include="Model\FilesUpload.cs" />
     <Compile Include="Model\GraphsModel.cs" />
-    <Compile Include="Model\IDLL.cs" />
     <Compile Include="Model\ISimulatorConnector.cs" />
     <Compile Include="Model\JoystickDashBoardModel.cs" />
     <Compile Include="Model\JoystickModel.cs" />
-    <Compile Include="Model\LineDLL.cs" />
+    <Compile Include="Model\DllAlgorithms.cs" />
     <Compile Include="Model\PopOutModel.cs" />
     <Compile Include="Model\SimulatorConnectorModel.cs" />
-    <Compile Include="Model\SimulatorModel.cs" />
     <Compile Include="Model\SliderModel.cs" />
-    <Compile Include="Model\UploadCsvFile.cs" />
     <Compile Include="ViewModel\VMAlgoritemDetect.cs" />
     <Compile Include="ViewModel\VMConnectControl.cs" />
     <Compile Include="ViewModel\VMDashBoard.cs" />
@@ -229,68 +225,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
-    <None Include="Plugins\DDL של LINE\Debug\shared_DLL.dll.metagen" />
-    <None Include="Plugins\DDL של LINE\Debug\shared_DLL.exp" />
-    <None Include="Plugins\DDL של LINE\Debug\shared_DLL.lib" />
-    <None Include="Plugins\DDL של LINE\shared_DLL\Debug\.NETFramework,Version=v4.0.AssemblyAttributes.obj" />
-    <None Include="Plugins\DDL של LINE\shared_DLL\Debug\dllmain.obj" />
-    <None Include="Plugins\DDL של LINE\shared_DLL\Debug\pch.obj" />
-    <None Include="Plugins\DDL של LINE\shared_DLL\Debug\shared_DLL.Build.CppClean.log" />
-    <None Include="Plugins\DDL של LINE\shared_DLL\Debug\shared_DLL.dll.recipe" />
-    <None Include="Plugins\DDL של LINE\shared_DLL\Debug\shared_DLL.log" />
-    <None Include="Plugins\DDL של LINE\shared_DLL\Debug\shared_DLL.pch" />
-    <None Include="Plugins\DDL של LINE\shared_DLL\Debug\shared_DLL.tlog\CL.command.1.tlog" />
-    <None Include="Plugins\DDL של LINE\shared_DLL\Debug\shared_DLL.tlog\CL.read.1.tlog" />
-    <None Include="Plugins\DDL של LINE\shared_DLL\Debug\shared_DLL.tlog\CL.write.1.tlog" />
-    <None Include="Plugins\DDL של LINE\shared_DLL\Debug\shared_DLL.tlog\link.command.1.tlog" />
-    <None Include="Plugins\DDL של LINE\shared_DLL\Debug\shared_DLL.tlog\link.read.1.tlog" />
-    <None Include="Plugins\DDL של LINE\shared_DLL\Debug\shared_DLL.tlog\link.write.1.tlog" />
-    <None Include="Plugins\DDL של LINE\shared_DLL\Debug\shared_DLL.tlog\metagen.read.1.tlog" />
-    <None Include="Plugins\DDL של LINE\shared_DLL\Debug\shared_DLL.tlog\metagen.write.1.tlog" />
-    <None Include="Plugins\DDL של LINE\shared_DLL\Debug\shared_DLL.tlog\shared_DLL.lastbuildstate" />
-    <None Include="Plugins\DDL של LINE\shared_DLL\Debug\shared_DLL.tlog\shared_DLL.write.1u.tlog" />
-    <None Include="Plugins\DDL של LINE\shared_DLL\shared_DLL.vcxproj" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\.vs\DllCircle\v16\.suo" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\.vs\DllCircle\v16\Browse.VC.db" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\.vs\DllCircle\v16\Browse.VC.db-shm" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\.vs\DllCircle\v16\Browse.VC.db-wal" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\.vs\DllCircle\v16\Browse.VC.opendb" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\.vs\DllCircle\v16\ipch\75e2280482965933.ipch" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\.vs\DllCircle\v16\ipch\793d36a6f65258f8.ipch" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\.vs\DllCircle\v16\ipch\a596d47c4a334ef8.ipch" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\.vs\DllCircle\v16\ipch\bd3cb5416743e96c.ipch" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\Debug\DllCircle.dll.metagen" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\Debug\DllCircle.exp" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\Debug\DllCircle.lib" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Debug\.NETFramework,Version=v4.0.AssemblyAttributes.obj" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Debug\DllCircle.Build.CppClean.log" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Debug\DllCircle.dll.Build.CppClean.log" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Debug\DllCircle.dll.dll.recipe" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Debug\DllCircle.dll.log" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Debug\DllCircle.dll.recipe" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Debug\DllCircle.dll.tlog\CL.command.1.tlog" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Debug\DllCircle.dll.tlog\CL.read.1.tlog" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Debug\DllCircle.dll.tlog\CL.write.1.tlog" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Debug\DllCircle.dll.tlog\DllCircle.dll.lastbuildstate" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Debug\DllCircle.dll.tlog\DllCircle.dll.write.1u.tlog" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Debug\DllCircle.dll.tlog\link.command.1.tlog" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Debug\DllCircle.dll.tlog\link.read.1.tlog" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Debug\DllCircle.dll.tlog\link.write.1.tlog" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Debug\DllCircle.dll.vcxprojAssemblyReference.cache" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Debug\DllCircle.pch" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Debug\DllCircle.tlog\CL.command.1.tlog" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Debug\DllCircle.tlog\CL.read.1.tlog" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Debug\DllCircle.tlog\CL.write.1.tlog" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Debug\DllCircle.tlog\DllCircle.lastbuildstate" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Debug\DllCircle.tlog\DllCircle.write.1u.tlog" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Debug\DllCircle.tlog\link.command.1.tlog" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Debug\DllCircle.tlog\link.read.1.tlog" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Debug\DllCircle.tlog\link.write.1.tlog" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Debug\DllCircle.tlog\metagen.read.1.tlog" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Debug\DllCircle.tlog\metagen.write.1.tlog" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Debug\dllmain.obj" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Debug\pch.obj" />
-    <None Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\DllCircle.dll.vcxproj" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -321,7 +255,6 @@
     <Resource Include="View\Resources\rightSpeed.png" />
     <Resource Include="View\Resources\stop.png" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="View\Resources\final_image.png" />
     <Resource Include="View\Resources\first_img.png" />
@@ -333,48 +266,13 @@
     <Resource Include="View\Resources\third_img.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Plugins\DDL של LINE\Debug\shared_DLL.dll" />
-    <Content Include="Plugins\DDL של LINE\Debug\shared_DLL.pdb" />
-    <Content Include="Plugins\DDL של LINE\shared_DLL.sln" />
-    <Content Include="Plugins\DDL של LINE\shared_DLL\AnomalyDetector.h" />
-    <Content Include="Plugins\DDL של LINE\shared_DLL\anomaly_detection_util.cpp" />
-    <Content Include="Plugins\DDL של LINE\shared_DLL\anomaly_detection_util.h" />
-    <Content Include="Plugins\DDL של LINE\shared_DLL\Debug\.NETFramework,Version=v4.0.AssemblyAttributes.asm" />
-    <Content Include="Plugins\DDL של LINE\shared_DLL\Debug\.NETFramework,Version=v4.0.AssemblyAttributes.cpp" />
-    <Resource Include="Plugins\DDL של LINE\shared_DLL\Debug\shared_DLL.vcxproj.FileListAbsolute.txt" />
-    <Content Include="Plugins\DDL של LINE\shared_DLL\Debug\vc142.pdb" />
-    <Content Include="Plugins\DDL של LINE\shared_DLL\dllmain.cpp" />
-    <Content Include="Plugins\DDL של LINE\shared_DLL\framework.h" />
-    <Content Include="Plugins\DDL של LINE\shared_DLL\HybridAnomalyDetector.h" />
-    <Content Include="Plugins\DDL של LINE\shared_DLL\pch.cpp" />
-    <Content Include="Plugins\DDL של LINE\shared_DLL\pch.h" />
-    <Content Include="Plugins\DDL של LINE\shared_DLL\Rupper.cpp" />
-    <Content Include="Plugins\DDL של LINE\shared_DLL\Rupper.h" />
-    <Content Include="Plugins\DDL של LINE\shared_DLL\shared_DLL.vcxproj.filters" />
-    <Content Include="Plugins\DDL של LINE\shared_DLL\shared_DLL.vcxproj.user" />
-    <Content Include="Plugins\DDL של LINE\shared_DLL\SimpleAnomalyDetector.h" />
-    <Content Include="Plugins\DDL של LINE\shared_DLL\timeseries.h" />
-    <Content Include="Plugins\DLL של CIRCLE\DllCircle\Debug\DllCircle.dll" />
-    <Content Include="Plugins\DLL של CIRCLE\DllCircle\Debug\DllCircle.pdb" />
-    <Content Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\AnomalyDetector.h" />
-    <Content Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\anomaly_detection_util.h" />
-    <Content Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Debug\.NETFramework,Version=v4.0.AssemblyAttributes.asm" />
-    <Content Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Debug\.NETFramework,Version=v4.0.AssemblyAttributes.cpp" />
-    <Resource Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Debug\DllCircle.dll.vcxproj.FileListAbsolute.txt" />
-    <Content Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Debug\vc142.pdb" />
-    <Content Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\DllCircle.dll.vcxproj.filters" />
-    <Content Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\DllCircle.dll.vcxproj.user" />
-    <Content Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\dllmain.cpp" />
-    <Content Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\framework.h" />
-    <Content Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\HybridAnomalyDetector.h" />
-    <Content Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\minCircle.h" />
-    <Content Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\pch.cpp" />
-    <Content Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\pch.h" />
-    <Content Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\Rupper.h" />
-    <Content Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.dll\timeseries.h" />
-    <Content Include="Plugins\DLL של CIRCLE\DllCircle\DllCircle.sln" />
-    <Content Include="Plugins\DllCircle.dll" />
-    <Content Include="Plugins\shared_DLL.dll" />
+    <Resource Include="View\Resources\background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Resources\background2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Resources\background3.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

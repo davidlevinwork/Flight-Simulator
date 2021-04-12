@@ -10,7 +10,6 @@ namespace SimolatorDesktopApp_1.ViewModel
 {
     class VMConnectControl : INotifyPropertyChanged
     {
-
         SimulatorConnectorModel _simulatorConnectorModel;
         public event PropertyChangedEventHandler PropertyChanged;
 

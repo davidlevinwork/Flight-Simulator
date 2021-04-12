@@ -8,7 +8,7 @@ using System.IO;
 
 namespace SimolatorDesktopApp_1.Model
 {
-    public class LineDll : IDLL
+    public class DllAlgorithms
     {
         private IntPtr _handle = IntPtr.Zero;
 
@@ -28,7 +28,7 @@ namespace SimolatorDesktopApp_1.Model
         }
 
      
-        public LineDll() { }
+        public DllAlgorithms() { }
 
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
@@ -64,14 +64,83 @@ namespace SimolatorDesktopApp_1.Model
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate int getTimeStepRupper(IntPtr rupper, int i);
 
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public delegate IntPtr getDrawingRupper(IntPtr time_series, StringBuilder f1, StringBuilder f2, IntPtr hybrid);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public delegate float getXValueByIndexDrawingWrapper(IntPtr drawingWrapper, int i);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public delegate float getYValueByIndexDrawingWrapper(IntPtr drawingWrapper, int i);
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public delegate int getSizeDrawingWrapper(IntPtr drawingWrapper);
+
+
+
 
         private static IntPtr hybrid = IntPtr.Zero;
         private static IntPtr time_series = IntPtr.Zero;
         private static IntPtr time_series2 = IntPtr.Zero;
         private static IntPtr wrapper = IntPtr.Zero;
+        private static IntPtr DrawingWrapper = IntPtr.Zero;
         private static List<string> descriptionsList = new List<string>();
         private static List<int> timeStepsList = new List<int>();
 
+
+
+
+        public IntPtr setDllgetDrawingRupper(IntPtr time_series, StringBuilder f1, StringBuilder f2, IntPtr hybrid)
+        {
+            IntPtr funcaddr = NativeMethods.GetProcAddress(_handle, "getDrawingRupper");
+            if (funcaddr == IntPtr.Zero)
+            {
+                Console.WriteLine("fail loading function getDrawingRupper");
+                return funcaddr;
+            }
+            getDrawingRupper function = Marshal.GetDelegateForFunctionPointer(funcaddr, typeof(getDrawingRupper)) as getDrawingRupper;
+
+            return function.Invoke(time_series, f1, f2, hybrid);
+        }
+
+        public float setDllgetXValueByIndexDrawingWrapper(IntPtr drawingWrapper, int i)
+        {
+            IntPtr funcaddr = NativeMethods.GetProcAddress(_handle, "getXValueByIndexDrawingWrapper");
+            if (funcaddr == IntPtr.Zero)
+            {
+                Console.WriteLine("fail loading function getXValueByIndexDrawingWrapper");
+                return 0;
+            }
+            getXValueByIndexDrawingWrapper function = Marshal.GetDelegateForFunctionPointer(funcaddr, typeof(getXValueByIndexDrawingWrapper)) as getXValueByIndexDrawingWrapper;
+
+            return function.Invoke(drawingWrapper, i);
+        }
+
+        public float setDllgetYValueByIndexDrawingWrapper(IntPtr drawingWrapper, int i)
+        {
+            IntPtr funcaddr = NativeMethods.GetProcAddress(_handle, "getYValueByIndexDrawingWrapper");
+            if (funcaddr == IntPtr.Zero)
+            {
+                Console.WriteLine("fail loading function getYValueByIndexDrawingWrapper");
+                return 0;
+            }
+            getYValueByIndexDrawingWrapper function = Marshal.GetDelegateForFunctionPointer(funcaddr, typeof(getYValueByIndexDrawingWrapper)) as getYValueByIndexDrawingWrapper;
+
+            return function.Invoke(drawingWrapper, i);
+        }
+
+        public int setDllgetSizeDrawingWrapper(IntPtr drawingWrapper)
+        {
+            IntPtr funcaddr = NativeMethods.GetProcAddress(_handle, "getSizeDrawingWrapper");
+            if (funcaddr == IntPtr.Zero)
+            {
+                Console.WriteLine("fail loading function getSizeDrawingWrapper");
+                return 0;
+            }
+            getSizeDrawingWrapper function = Marshal.GetDelegateForFunctionPointer(funcaddr, typeof(getSizeDrawingWrapper)) as getSizeDrawingWrapper;
+
+            return function.Invoke(drawingWrapper);
+        }
 
         public IntPtr setDllgetTimeSeries([MarshalAs(UnmanagedType.LPStr)] StringBuilder csvFileName)
         {
@@ -305,30 +374,6 @@ namespace SimolatorDesktopApp_1.Model
                 myGetTimeSeries();
             }
             setDllcallLearnNormal(hybrid, time_series);
-
-
-           /* string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
-            string newCsvPath = projectDirectory + '\\' + "detectTimeSeries.csv";
-            StringBuilder path = new StringBuilder(newCsvPath);
-            time_series2 = setDllgetTimeSeries(path);
-            IntPtr rupper = setDllgetRupperAnomaly(time_series2, hybrid);
-            int size = setDllgetSizeRupper(rupper);
-            float x = setDllgetTimeStepRupper(rupper, 0);
-            Console.WriteLine(size);
-            for(int i = 0; i < size; i++)
-            {
-                StringBuilder buffer = new StringBuilder("", 100);
-                setDllgetDescriptionRupper(rupper, i, buffer);
-                Console.WriteLine(buffer);
-                Console.WriteLine(setDllgetTimeStepRupper(rupper, i));
-            }*/
-            /*            Console.WriteLine(x);
-                        Console.WriteLine("Buffer");
-                        StringBuilder buffer = new StringBuilder("", 100);
-                         getDescriptionRupper(rupper, 0, buffer);
-                        Console.WriteLine(buffer);*/
-
-            // updateAnomaly(time_series2, hybrid, s);
         }
 
         public void myDetectAnomalies()
@@ -352,6 +397,11 @@ namespace SimolatorDesktopApp_1.Model
             }
             setDllgetMyCorrelatedFeature(time_series, src, dst);
             return dst;
+        }
+
+        public IntPtr myGetDrawingRupper(StringBuilder f1, StringBuilder f2)
+        {
+            return setDllgetDrawingRupper(time_series, f1, f2, hybrid);
         }
 
 

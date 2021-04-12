@@ -11,9 +11,7 @@ namespace SimolatorDesktopApp_1
     using SimolatorDesktopApp_1.Model;
     using SimolatorDesktopApp_1.ViewModel;
     using System;
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
+
     public partial class App : Application
     {
         public JoystickDashBoardModel _joystickDashBoardModel { get; private set; }
@@ -24,19 +22,16 @@ namespace SimolatorDesktopApp_1
         public DashBoardModel _dashBoardModel { get; private set; }
         public JoystickModel _joystickModel { get; private set; }
         public PopOutModel _popOutModel { get; private set; }
-        public CircleDLL _circleDLL { get; private set; }
         public AlgoritemDetectModel _algoritemDetectModel { get; private set; }
         public SliderModel _sliderModel { get; private set; }
-
-        public LineDll _lineDLL { get; private set; }
+        public DllAlgorithms _algorithmDll { get; private set; }
 
 
 
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            _circleDLL = new CircleDLL();
-            _lineDLL = new LineDll();
+            _algorithmDll = new DllAlgorithms();
             _graphModel = new GraphsModel();
             _vmGraphs = new VMGraphs(_graphModel);
             _filesUpload = new FilesUpload();

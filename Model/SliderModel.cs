@@ -14,7 +14,6 @@ namespace SimolatorDesktopApp_1.Model
     public class SliderModel : INotifyPropertyChanged
     {
         public SimulatorConnectorModel _simulatorConnectorModel;
-        private int _minLine = 0;
         private int _maxLine = 1;
         private int _indexLine = 0;
         private string[] _linesArray;
@@ -43,6 +42,7 @@ namespace SimolatorDesktopApp_1.Model
             _graphsModel = (Application.Current as App)._graphModel;
             time = TimeSpan.FromSeconds(_timer);
         }
+
         public int IndexLine
         {
             get
@@ -145,10 +145,8 @@ namespace SimolatorDesktopApp_1.Model
                     stopFlag = false;
                     while (_simulatorConnectorModel.IsConnected && (IndexLine < _maxLine) && !stopFlag)
                     {
-                        //Console.WriteLine(_linesArray[IndexLine]);
                         _simulatorConnectorModel.Write(_linesArray[IndexLine]);
                         int speedRate =(int)(100 / _speed);
-                        //Console.WriteLine(_speed);
                         Thread.Sleep(speedRate);
                         IndexLine++;
                         _manualResetEvent.WaitOne(Timeout.Infinite);

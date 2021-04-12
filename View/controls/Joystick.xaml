@@ -8,8 +8,8 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid RenderTransformOrigin="0.498,0.496">
-        <Canvas  x:Name="Base" Margin="0" Width="340" Height="340">
-            <Ellipse HorizontalAlignment="Left" Height="340" VerticalAlignment="Top" Width="340">
+        <Canvas  x:Name="Base" Margin="0" Width="400" Height="400">
+            <Ellipse HorizontalAlignment="Left" Height="400" VerticalAlignment="Top" Width="400">
                 <Ellipse.Fill>
                     <RadialGradientBrush>
                         <GradientStop Color="#FF2C2A2A" Offset="1" />
@@ -18,7 +18,7 @@
                 </Ellipse.Fill>
             </Ellipse>
 
-            <Ellipse HorizontalAlignment="Left" Height="170" VerticalAlignment="Top" Width="170" Canvas.Left="84" Canvas.Top="84" RenderTransformOrigin="0.492,0.492">
+            <Ellipse HorizontalAlignment="Left" Height="230" VerticalAlignment="Top" Width="230" Canvas.Left="84" Canvas.Top="84" RenderTransformOrigin="0.492,0.492">
                 <Ellipse.Fill>
                     <RadialGradientBrush>
                         <GradientStop Color="#FF0E0E0E" Offset="1" />
@@ -29,13 +29,13 @@
             </Ellipse>
 
             <Ellipse x:Name="Point"
-            Canvas.Left="123"
-            Canvas.Top="123"  
+            Canvas.Left="137"
+            Canvas.Top="138"  
             HorizontalAlignment="Center" 
             VerticalAlignment="Center"
             Margin= "{Binding VM_Location}"   
-            Width="90"
-            Height="90"
+            Width="120"
+            Height="120"
             Fill="#FF8A8A8A"
             Stroke="Black"
             StrokeThickness="0.1" RenderTransformOrigin="0.487,0.526" />
@@ -85,13 +85,13 @@
             -->
 
 
-            <Path Data="M205.75,65.625 L226.875,47.25 L248.5,65.625 z" Fill="#FF575757" HorizontalAlignment="Left" Height="18.375" Stretch="Fill" UseLayoutRounding="False" VerticalAlignment="Top" Width="42.75" Canvas.Left="147.875" Canvas.Top="37.625" />
-            <Path Data="M205.75,65.625 L226.875,47.25 L248.5,65.625 z" Fill="#FF575757" HorizontalAlignment="Left" Height="18.375" Stretch="Fill" UseLayoutRounding="False" VerticalAlignment="Top" Width="42.75" RenderTransformOrigin="0.5,0.5" Canvas.Left="147.875" Canvas.Top="284.125">
+            <Path Data="M205.75,65.625 L226.875,47.25 L248.5,65.625 z" Fill="#FF575757" HorizontalAlignment="Left" Height="18.375" Stretch="Fill" UseLayoutRounding="False" VerticalAlignment="Top" Width="42.75" Canvas.Left="178.4" Canvas.Top="34.07" RenderTransformOrigin="3.942,1.621" />
+            <Path Data="M205.75,65.625 L226.875,47.25 L248.5,65.625 z" Fill="#FF575757" HorizontalAlignment="Left" Height="18.375" Stretch="Fill" UseLayoutRounding="False" VerticalAlignment="Top" Width="42.75" RenderTransformOrigin="0.5,0.5" Canvas.Left="178.4" Canvas.Top="347.67">
                 <Path.RenderTransform>
                     <ScaleTransform ScaleY="-1" />
                 </Path.RenderTransform>
             </Path>
-            <Path Data="M205.75,65.625 L226.875,47.25 L248.5,65.625 z" Fill="#FF575757" HorizontalAlignment="Left" Height="18.375" Stretch="Fill" UseLayoutRounding="False" VerticalAlignment="Top" Width="42.75" RenderTransformOrigin="0.5,0.5" Canvas.Left="270.875" Canvas.Top="162.125">
+            <Path Data="M205.75,65.625 L226.875,47.25 L248.5,65.625 z" Fill="#FF575757" HorizontalAlignment="Left" Height="18.375" Stretch="Fill" UseLayoutRounding="False" VerticalAlignment="Top" Width="42.75" RenderTransformOrigin="0.5,0.5" Canvas.Left="338.07" Canvas.Top="188">
                 <Path.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleY="-1" ScaleX="-1" />
@@ -99,7 +99,7 @@
                     </TransformGroup>
                 </Path.RenderTransform>
             </Path>
-            <Path Data="M205.75,65.625 L226.875,47.25 L248.5,65.625 z"  Fill="#FF575757" HorizontalAlignment="Left" Height="18.375" Stretch="Fill" UseLayoutRounding="False" VerticalAlignment="Top" Width="42.75" RenderTransformOrigin="0.5,0.5" Canvas.Left="24.375" Canvas.Top="163.625">
+            <Path Data="M205.75,65.625 L226.875,47.25 L248.5,65.625 z"  Fill="#FF575757" HorizontalAlignment="Left" Height="18.375" Stretch="Fill" UseLayoutRounding="False" VerticalAlignment="Top" Width="42.75" RenderTransformOrigin="0.5,0.5" Canvas.Left="13.13" Canvas.Top="189.6">
                 <Path.RenderTransform>
                     <TransformGroup>
                         <RotateTransform Angle="90" />

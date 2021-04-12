@@ -88,7 +88,5 @@ namespace SimolatorDesktopApp_1.ViewModel
         {
             _SliderModel.Speed = speedRate;
         }
-
-
     }
 }

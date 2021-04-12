@@ -42,7 +42,7 @@ namespace SimolatorDesktopApp_1.Model
             Elevator = double.Parse(commands[_filesUpload.FeaturesMap.FirstOrDefault(x => x.Value == "elevator").Key], CultureInfo.InvariantCulture);
             Rudder = double.Parse(commands[_filesUpload.FeaturesMap.FirstOrDefault(x => x.Value == "rudder").Key], CultureInfo.InvariantCulture);
             Throttle = double.Parse(commands[_filesUpload.FeaturesMap.FirstOrDefault(x => x.Value == "throttle").Key], CultureInfo.InvariantCulture);
-            Location = new Thickness(_aileron * 200, 0, 0, _elevator * 200);
+            Location = new Thickness(_aileron * 250, 0, 0, _elevator * 250);
 
         }
 

@@ -25,8 +25,8 @@
             Grid.Row="7" Width="88" Content="Continue" Height="30" FontSize="15" VerticalContentAlignment="Center" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="344,98.333,11.333,-27.667" Click="Button_Click"/>
 
         <!-- Drag XML file-->
-        <StackPanel AllowDrop="True" Background="LightGray" Drop="StackPanel_Drop_1"  Grid.Row="6" Height="49" Width="87" Margin="0,0,0,0">
-            <Label x:Name="_xmlFile" BorderBrush="Black" BorderThickness="1" FontSize="13" HorizontalAlignment="Right" Content="Drag Xml file" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="49" Margin="-1,0,-0.333,0" Width="88"/>
+        <StackPanel AllowDrop="True" Background="LightGray" Drop="StackPanel_Drop_1"  Grid.Row="6" Height="49" Width="120" Margin="0,0,0,0">
+            <Label x:Name="_xmlFile" BorderBrush="Black" BorderThickness="1" FontSize="13" HorizontalAlignment="Right" Content="Drag Xml file" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="49" Margin="0,0,0.2,0" Width="120"/>
         </StackPanel>
         <!-- First instruction-->
         <Border BorderThickness="1" BorderBrush="Black" Height="80" VerticalAlignment="Bottom" Width="300" Grid.Row="1">
@@ -55,8 +55,8 @@
         <TextBox IsEnabled="False" IsReadOnly="True" Width="400" Height="25" Margin="0,3,0,0" BorderBrush="Transparent" VerticalAlignment="Top" Grid.Row="6" Background="Transparent" Text="STEP 5: Drag the XML file" FontSize="10" FontWeight="Bold"></TextBox>
 
         <!-- Sixth instruction -->
-        <TextBox IsReadOnly="True" Height="25" Margin="17,-5,0.333,0" BorderBrush="Transparent" VerticalAlignment="Top" Grid.Row="7" Background="Transparent" Text="STEP 6: Open the Flight-Simulator, go to Settings and scroll down to 'Additional Settings" FontSize="10" FontWeight="Bold" TextChanged="TextBox_TextChanged"  IsEnabled="False"/>
-        <TextBox IsReadOnly="True" Height="25" Margin="17,5,0.333,0" BorderBrush="Transparent" VerticalAlignment="Top" Grid.Row="7" Background="Transparent" Text="And add the following two lines:" FontSize="10" FontWeight="Bold" TextChanged="TextBox_TextChanged"  IsEnabled="False"/>
+        <TextBox IsReadOnly="True" Height="25" Margin="17,-5,0.333,0" BorderBrush="Transparent" VerticalAlignment="Top" Grid.Row="7" Background="Transparent" Text="STEP 6: Open the Flight-Simulator, go to Settings and scroll down to 'Additional Settings" FontSize="10" FontWeight="Bold" IsEnabled="False"/>
+        <TextBox IsReadOnly="True" Height="25" Margin="17,5,0.333,0" BorderBrush="Transparent" VerticalAlignment="Top" Grid.Row="7" Background="Transparent" Text="And add the following two lines:" FontSize="10" FontWeight="Bold" IsEnabled="False"/>
         <TextBox IsReadOnly="True" Height="25" Margin="17,15,0.333,0" BorderBrush="Transparent" VerticalAlignment="Top" Grid.Row="7" Background="Transparent" FontSize="10" Text="--generic=socket,in,10,127.0.0.1,5400,tcp,playback_small" />
         <TextBox IsReadOnly="True" Height="25" Margin="17,25,0.333,0" BorderBrush="Transparent" VerticalAlignment="Top" Grid.Row="7" Background="Transparent" FontSize="10" Text="--fdm=null" />
         <Border BorderThickness="1" BorderBrush="Black" VerticalAlignment="Top" Height="70" Width="230" Grid.Row="7" Margin="0,34,0,0">

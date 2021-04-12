@@ -17,9 +17,6 @@ using System;
 
 namespace SimolatorDesktopApp_1.View
 {
-    /// <summary>
-    /// Interaction logic for Dialog.xaml
-    /// </summary>
     public partial class Dialog : Window
     {
         public bool flag = false;
@@ -47,13 +44,10 @@ namespace SimolatorDesktopApp_1.View
                     flag = true;
                     _xmlFile.Content = fileName;
                     (System.Windows.Application.Current as App)._popOutModel.makeLearnNormal(pathXml);
-                    //(System.Windows.Application.Current as App)._filesUpload.xmlUpload(pathXml);
-                    //ifValidXmlFile = true;
                 }
                 else
                 {
                     _xmlFile.Content = "Invalid file type";
-                    //ifValidXmlFile = false;
                 }
             }
         }
@@ -71,23 +65,6 @@ namespace SimolatorDesktopApp_1.View
                 this.Close();
                 MessageBoxResult result = System.Windows.MessageBox.Show("Now you are ready to use the app. Enjoy! ", "Flight-Simulator", MessageBoxButton.OK);
             }
-            //switch (flag)
-            //{
-            //    case false:
-            //        MessageBoxResult r = System.Windows.MessageBox.Show("Please upload the XML file.", "Flight-Simulator", MessageBoxButton.OK);
-            //        this.Show();
-            //        break;
-            //    case true:
-            //        this.Close();
-            //        MessageBoxResult result = System.Windows.MessageBox.Show("Now you are ready to use the app. Enjoy! ", "Flight-Simulator", MessageBoxButton.OK);
-            //        break;
-            //}
-            //return;
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
         }
     }
 }

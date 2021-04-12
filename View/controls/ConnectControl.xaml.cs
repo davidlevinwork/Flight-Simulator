@@ -17,9 +17,6 @@ using System.Windows.Shapes;
 
 namespace SimolatorDesktopApp_1.View.controls
 {
-    /// <summary>
-    /// Interaction logic for ConnectControl.xaml
-    /// </summary>
     public partial class ConnectControl : UserControl
     {
         private const string disconnected = "Simulator Disconnected";
@@ -30,7 +27,6 @@ namespace SimolatorDesktopApp_1.View.controls
         public ConnectControl()
         {
             InitializeComponent();
-            // _vmConnectControl = new VMConnectControl(new SimulatorConnectorModel());
             _vmConnectControl = new VMConnectControl((Application.Current as App)._simultorConnectorModel);
             DataContext = _vmConnectControl;
         }
@@ -50,11 +46,6 @@ namespace SimolatorDesktopApp_1.View.controls
             this.StatusConnectTextBlock.Visibility = Visibility.Visible; // change blockText to visiible
         }
 
-        /// <summary>
-        /// Connect button press.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ButtonPressedConnect(object sender, RoutedEventArgs e)
         {
             popUp();
@@ -78,16 +69,10 @@ namespace SimolatorDesktopApp_1.View.controls
 
         private void popUp()
         {
-            //var newWindow = new Dialog();
             _dialog = new Dialog();
             _dialog.ShowDialog();
         }
 
-        /// <summary>
-        /// Connect button press.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ButtonPressedDisconnect(object sender, RoutedEventArgs e)
         {
             try

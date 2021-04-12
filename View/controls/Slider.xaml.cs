@@ -20,9 +20,7 @@ namespace SimolatorDesktopApp_1.View.controls
     using System.Globalization;
     using System.IO;
     using DragEventArgs = System.Windows.DragEventArgs;
-    /// <summary>
-    /// Interaction logic for Slider.xaml
-    /// </summary>
+
     public partial class Slider : UserControl
     {
         private VMSlider _VMSlider;
@@ -91,7 +89,6 @@ namespace SimolatorDesktopApp_1.View.controls
             }
             catch
             {
-                Console.WriteLine("Error in combo box speed");
             }
             
         }
