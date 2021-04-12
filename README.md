@@ -4,8 +4,17 @@ C# Desktop Application using WPF .NET architecture with MVVM Architecture.
 
 ## Description
 
-The application provides the user an interface through which you can connect to a [Flight Simulator](https://www.flightgear.org/) app.  <br/>
-The application also shows the user updated data in real-time from the flight.
+The application provides the user an interface through which you can connect to a [Flight Gear](https://www.flightgear.org/) app.  <br/>
+The application also shows the user updated data in real-time from the flight, including:
+* More than 40 different data of aircraft systems
+* Detection of anomalies during flight
+* Graphical data
+* Ability to control data flow rate
+
+## More on the implementation process
+The application built in C# using WPF .NET architecture. <br/>
+All the algorithms through which the application analyzes and interrogates the flight process built in C++. <br/>
+In order for the app to use these algorithms, we have created [DLL's](https://en.wikipedia.org/wiki/Dynamic-link_library) files that allow us to bridge the gap between the different languages and framework.
 
 ## Tech/framework used
 
