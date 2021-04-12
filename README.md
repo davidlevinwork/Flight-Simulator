@@ -4,8 +4,7 @@ C# Desktop Application using WPF .NET architecture with MVVM Architecture.
 
 ## Description
 
-The application provides the user an interface through which you can connect to a [Flight Simulator](https://www.flightgear.org/) app. 
-
+The application provides the user an interface through which you can connect to a [Flight Simulator](https://www.flightgear.org/) app.  <br/>
 The application also shows the user updated data in real-time from the flight.
 
 ## Tech/framework used
