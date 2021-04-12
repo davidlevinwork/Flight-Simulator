@@ -16,6 +16,8 @@ The application built in C# using WPF .NET architecture. <br/>
 All the algorithms through which the application analyzes and interrogates the flight process built in C++. <br/>
 In order for the app to use these algorithms, we have created [DLL's](https://en.wikipedia.org/wiki/Dynamic-link_library) files that allow us to bridge the gap between the different languages and framework.
 
+From the architectural point of view of the application, we used MVVM Architecture - to ensure complete separation between the View and the Model, and used Data Binding between the View and the ViewModel to display the data.
+
 ## Tech/framework used
 
 **Built with**
