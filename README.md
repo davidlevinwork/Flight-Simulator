@@ -45,3 +45,8 @@ To download and set up 'Flight-Simulator' application, follow these steps:
 3. Run the [Flight-Gear](https://www.flightgear.org/) app
 4. Click the connect button and follow the instructions
 5. Enjoy!
+
+<p align="center">
+  <img src="images/Main_screen.jpeg" width = "600" /> 
+</p>
+ 
