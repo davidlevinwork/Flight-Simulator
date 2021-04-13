@@ -44,12 +44,12 @@ namespace SimolatorDesktopApp_1.View.controls
         {
             if (_vmConnectControl.VM_IsConnected) // check if connected
             {
-                this.StatusConnectTextBlock.Text = "Status: " + connected;
+                this.StatusConnectTextBlock.Text = connected;
                 this.StatusConnectTextBlock.Foreground = Brushes.LightGreen;
             }
             else
             {
-                this.StatusConnectTextBlock.Text = "Status: " + disconnected;
+                this.StatusConnectTextBlock.Text = disconnected;
                 this.StatusConnectTextBlock.Foreground = Brushes.Red;
             }
             this.StatusConnectTextBlock.Visibility = Visibility.Visible; // change blockText to visiible

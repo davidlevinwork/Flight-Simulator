@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SimolatorDesktopApp_1.View.controls"
              mc:Ignorable="d" 
-             d:DesignHeight="165" d:DesignWidth="400">
-    <Border BorderBrush="Black" BorderThickness="5" Height="135">
+             d:DesignHeight="175" d:DesignWidth="400">
+    <Border BorderBrush="Black" BorderThickness="5" Height="175">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -23,11 +23,12 @@
             <Label Grid.Column="0" Grid.Row="1" FontWeight="Bold" Content="PORT:" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" ></Label>
             <TextBox x:Name="portContextTextBox" Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Text="5400" Margin="58.667,0.333,58.333,0.333" Width="205" ></TextBox>
             <Button x:Name="ConnectButton" Grid.Column="1"  Grid.Row="2" Content="Connect" Margin="58.6,9.8,58,10" FontSize="25" Click="ButtonPressedConnect"/>
+            <Label Grid.Column="0" Grid.Row="3" FontWeight="Bold" Content="Status:" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" ></Label>
 
             <Button x:Name="DisconnectButton" Content="Disconnect" Grid.Row="2" Grid.Column="1" FontSize="25"
                     IsEnabled="False" Margin="58.6,9.8,58,10" Visibility="Collapsed" Click="ButtonPressedDisconnect" />
 
-            <TextBlock Text="{Binding VM_IsConnected}" x:Name="StatusConnectTextBlock" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" TextAlignment="Center"
+            <TextBlock Text="{Binding VM_IsConnected}" x:Name="StatusConnectTextBlock" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" TextAlignment="Center" Foreground="Black"
                         HorizontalAlignment="Center" Visibility="Hidden" FontSize="15"/>
         </Grid>
     </Border>
