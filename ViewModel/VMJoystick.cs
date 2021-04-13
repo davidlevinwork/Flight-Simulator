@@ -9,11 +9,17 @@ using System.Windows;
 
 namespace SimolatorDesktopApp_1.ViewModel
 {
+    /*
+     * Class ViewModel VMJoystick.
+     */
     public class VMJoystick : INotifyPropertyChanged
     {
         private JoystickModel _joystickModel;
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /*
+         * Constructor of VMJoystick
+         */
         public VMJoystick(JoystickModel joystickModel)
         {
             _joystickModel = joystickModel;
@@ -32,6 +38,9 @@ namespace SimolatorDesktopApp_1.ViewModel
             }
         }
 
+        /*
+         * Propperty - VM_Location parameter.
+         */
         public Thickness VM_Location
         {
             get
@@ -44,6 +53,9 @@ namespace SimolatorDesktopApp_1.ViewModel
             }
         }
 
+        /*
+         * Propperty - VM_Aileron parameter.
+         */
         public double VM_Aileron
         {
             get
@@ -56,6 +68,9 @@ namespace SimolatorDesktopApp_1.ViewModel
             }
         }
 
+        /*
+         * Propperty - VM_Elevator parameter.
+         */
         public double VM_Elevator
         {
             get { return _joystickModel.Elevator; }
@@ -64,6 +79,10 @@ namespace SimolatorDesktopApp_1.ViewModel
                 _joystickModel.Elevator = value;
             }
         }
+
+        /*
+         * Propperty - VM_Rudder parameter.
+         */
         public double VM_Rudder
         {
             get { return _joystickModel.Rudder; }
@@ -72,6 +91,10 @@ namespace SimolatorDesktopApp_1.ViewModel
                 _joystickModel.Rudder = value;
             }
         }
+
+        /*
+         * Propperty - VM_Throttle parameter.
+         */
         public double VM_Throttle
         {
             get { return _joystickModel.Throttle; }

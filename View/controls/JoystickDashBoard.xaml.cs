@@ -16,11 +16,16 @@ using System.Windows.Shapes;
 
 namespace SimolatorDesktopApp_1.View.controls
 {
-
+    /*
+     * Class View JoystickDashBoard.
+     */
     public partial class JoystickDashBoard : UserControl
     {
         private VMJoystickDashBoard _vmJoystickDashBoard;
 
+        /*
+         * Constructor of JoystickDashBoard
+         */
         public JoystickDashBoard()
         {
             InitializeComponent();

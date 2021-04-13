@@ -8,11 +8,17 @@ using System.Threading.Tasks;
 
 namespace SimolatorDesktopApp_1.ViewModel
 {
+    /*
+     * Class ViewModel VMJoystickDashBoard.
+     */
     public class VMJoystickDashBoard : INotifyPropertyChanged
     {
         private JoystickDashBoardModel _joystickDashBoardModel;
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /*
+         * Constructor of VMJoystickDashBoard.
+         */
         public VMJoystickDashBoard(JoystickDashBoardModel joystickDashBoardModel)
         {
             _joystickDashBoardModel = joystickDashBoardModel;
@@ -31,6 +37,9 @@ namespace SimolatorDesktopApp_1.ViewModel
             }
         }
 
+        /*
+         * Property - VM_Rudder parameter.
+         */
         public double VM_Rudder
         {
             get { return _joystickDashBoardModel.Rudder; }
@@ -39,6 +48,10 @@ namespace SimolatorDesktopApp_1.ViewModel
                 _joystickDashBoardModel.Rudder = value;
             }
         }
+
+        /*
+         * Property - VM_Throttle parameter.
+         */
         public double VM_Throttle
         {
             get { return _joystickDashBoardModel.Throttle; }

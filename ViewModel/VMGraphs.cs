@@ -11,13 +11,18 @@ using System.Windows.Controls;
 
 namespace SimolatorDesktopApp_1.ViewModel
 {
+    /*
+     * Class ViewModel VMGraphs.
+     */
     public class VMGraphs : INotifyPropertyChanged
     {
         private GraphsModel _graphsModel;
         private ObservableCollection<string> _toViewListFeatures = new ObservableCollection<string>();
-
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /*
+         * Constructor of VMGraphs.
+         */
         public VMGraphs(GraphsModel graphsModel)
         {
             _graphsModel = graphsModel;
@@ -28,6 +33,9 @@ namespace SimolatorDesktopApp_1.ViewModel
                };
         }
 
+        /*
+         * Property - VM_PlotFeature1.
+         */
         public PlotModel VM_PlotFeature1
         {
             get { return _graphsModel.PlotFeature1; }
@@ -37,6 +45,9 @@ namespace SimolatorDesktopApp_1.ViewModel
             }
         }
 
+        /*
+         * Property - VM_PlotFeature2.
+         */
         public PlotModel VM_PlotFeature2
         {
             get { return _graphsModel.PlotFeature2; }
@@ -46,6 +57,9 @@ namespace SimolatorDesktopApp_1.ViewModel
             }
         }
 
+        /*
+         * Property - VM_PlotCorrelatedFeatures.
+         */
         public PlotModel VM_PlotCorrelatedFeatures
         {
             get { return _graphsModel.PlotCorrelatedFeatures; }
@@ -55,11 +69,17 @@ namespace SimolatorDesktopApp_1.ViewModel
             }
         }
 
+        /*
+         * Function that call to _graphsModel of the selected feature.
+         */
         internal void vmSelectedFeature(string selectedItem)
         {
             _graphsModel.SelectedFeature(selectedItem);
         }
 
+        /*
+         * Property - VM_AddToList.
+         */
         public ObservableCollection<string> VM_AddToList
         {
             get { return _toViewListFeatures; }

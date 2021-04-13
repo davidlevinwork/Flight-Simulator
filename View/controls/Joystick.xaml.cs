@@ -17,20 +17,21 @@ using System.Windows.Shapes;
 
 namespace SimolatorDesktopApp_1.View.controls
 {
+    /*
+     * Class View Joystick.
+     */
     public partial class Joystick : UserControl
     {
         private VMJoystick _vmJoysick;
 
+        /*
+         * Constructor of Joystick.
+         */
         public Joystick()
         {
             InitializeComponent();
             _vmJoysick = new VMJoystick((Application.Current as App)._joystickModel);
             DataContext = _vmJoysick;
-        }
-
-        public void location(double x, double y)
-        {
-            Point.Margin = new Thickness(x, y, 0, 0);
         }
     }
 }

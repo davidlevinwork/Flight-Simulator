@@ -16,6 +16,9 @@ using System.Windows.Shapes;
 
 namespace SimolatorDesktopApp_1.View.controls
 {
+    /*
+     * Class View DashBoardFlight.
+     */
     public partial class DashBoardFlight : UserControl
     {
         private VMDashBoard _vmDashBoard;

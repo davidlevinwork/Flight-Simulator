@@ -17,9 +17,9 @@ using System.Windows.Shapes;
 
 namespace SimolatorDesktopApp_1.View.controls
 {
-    /// <summary>
-    /// Interaction logic for ConnectControl.xaml
-    /// </summary>
+    /*
+     * Class View ConnectControl.
+     */
     public partial class ConnectControl : UserControl
     {
         private const string disconnected = "Simulator Disconnected";
@@ -27,14 +27,19 @@ namespace SimolatorDesktopApp_1.View.controls
         VMConnectControl _vmConnectControl;
         Dialog _dialog;
 
+        /*
+         * Constructor of ConnectControl
+         */
         public ConnectControl()
         {
             InitializeComponent();
-            // _vmConnectControl = new VMConnectControl(new SimulatorConnectorModel());
             _vmConnectControl = new VMConnectControl((Application.Current as App)._simultorConnectorModel);
             DataContext = _vmConnectControl;
         }
 
+        /*
+         * Function for display stustus of connection with the simulator.
+         */
         private void connectDisplayStatus()
         {
             if (_vmConnectControl.VM_IsConnected) // check if connected
@@ -50,22 +55,23 @@ namespace SimolatorDesktopApp_1.View.controls
             this.StatusConnectTextBlock.Visibility = Visibility.Visible; // change blockText to visiible
         }
 
-        /// <summary>
-        /// Connect button press.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /*
+         * Function that play when connect button selected.
+         */
         private void ButtonPressedConnect(object sender, RoutedEventArgs e)
         {
             popUp();
             try
             {
-                _vmConnectControl.VMConnect(ipContextTextBox.Text, Int32.Parse(portContextTextBox.Text));
-                ConnectButton.IsEnabled = false;
-                ConnectButton.Visibility = Visibility.Collapsed;
-                DisconnectButton.IsEnabled = true;
-                DisconnectButton.Visibility = Visibility.Visible;
-                this.connectDisplayStatus(); // connect succsess
+                if (_dialog.getFlag())
+                {
+                    _vmConnectControl.VMConnect(ipContextTextBox.Text, Int32.Parse(portContextTextBox.Text));
+                    ConnectButton.IsEnabled = false;
+                    ConnectButton.Visibility = Visibility.Collapsed;
+                    DisconnectButton.IsEnabled = true;
+                    DisconnectButton.Visibility = Visibility.Visible;
+                    this.connectDisplayStatus(); // connect succsess
+                }
             }
             catch (Exception _exception)
             {
@@ -73,17 +79,18 @@ namespace SimolatorDesktopApp_1.View.controls
             }
         }
 
+        /*
+         * Function that pop up when connect button selected.
+         */
         private void popUp()
         {
-            var newWindow = new Dialog();
-            newWindow.ShowDialog();
+            _dialog = new Dialog();
+            _dialog.ShowDialog();
         }
 
-        /// <summary>
-        /// Connect button press.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /*
+         * Function that play when disconnect button is selected.
+         */
         private void ButtonPressedDisconnect(object sender, RoutedEventArgs e)
         {
             try

@@ -16,12 +16,16 @@ using System.Windows.Shapes;
 
 namespace SimolatorDesktopApp_1.View.controls
 {
-    /// <summary>
-    /// Interaction logic for AlgoritemDetect.xaml
-    /// </summary>
+    /*
+     * Class View AlgoritemDetect.
+     */
     public partial class AlgoritemDetect : UserControl
     {
         private VMAlgoritemDetect _vMAlgoritemDetect;
+
+        /*
+         * Constructor of AlgoritemDetect
+         */
         public AlgoritemDetect()
         {
             _vMAlgoritemDetect = new VMAlgoritemDetect((Application.Current as App)._algoritemDetectModel);
@@ -29,9 +33,24 @@ namespace SimolatorDesktopApp_1.View.controls
             InitializeComponent();
         }
 
+        /*
+         * Function that command the view model of AlgoritemDetect of selected Algorithm.
+         */
         private void ListViewAlgoritems_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if ((Application.Current as App)._sliderModel.get_flagIscsvUpload())
+            {
+                _vMAlgoritemDetect.vmSelectedAlgorithm(ListViewAlgorithms.SelectedItem.ToString());
+            }
         }
-    }
+
+        /*
+         * Function that command the view model of AlgoritemDetect of selected Anomaly.
+         */
+        private void ListViewAnomalies_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(ListViewAnomalies.SelectedItem != null)
+                _vMAlgoritemDetect.vmSelectedAnomaly(ListViewAnomalies.SelectedItem.ToString());
+        }
+}
 }

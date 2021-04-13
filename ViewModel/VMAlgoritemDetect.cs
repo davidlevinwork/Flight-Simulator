@@ -9,12 +9,17 @@ using System.Threading.Tasks;
 
 namespace SimolatorDesktopApp_1.ViewModel
 {
+    /*
+     * Class ViewModel VMAlgoritemDetect.
+     */
     public class VMAlgoritemDetect : INotifyPropertyChanged
     {
         private AlgoritemDetectModel _algoritemDetectModel;
-        private ObservableCollection<string> _toViewListFeatures = new ObservableCollection<string>();
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /*
+         * Constructor VMAlgoritemDetect.
+         */
         public VMAlgoritemDetect(AlgoritemDetectModel algoritemDetectModel)
         {
             _algoritemDetectModel = algoritemDetectModel;
@@ -25,14 +30,38 @@ namespace SimolatorDesktopApp_1.ViewModel
                };
         }
 
+        /*
+         * Property VM_AddToMyList.
+         */
         public ObservableCollection<string> VM_AddToMyList
         {
-            get { return _toViewListFeatures; }
+            get { return _algoritemDetectModel.AddToMyList; }
             set
             {
-                _toViewListFeatures = value;
+                _algoritemDetectModel.AddToMyList = value;
                 INotifyPropertyChanged("VM_AddToMyList");
             }
+        }
+
+        /*
+         * Property VM_AddAnomaliesToMyList.
+         */
+        public ObservableCollection<string> VM_AddAnomaliesToMyList
+        {
+            get { return _algoritemDetectModel.AddAnomaliesToMyList; }
+            set
+            {
+                _algoritemDetectModel.AddAnomaliesToMyList = value;
+                INotifyPropertyChanged("VM_AddAnomaliesToMyList");
+            }
+        }
+
+        /*
+         * Function that send command of selected anomaly to detectAlgorithmModel.
+         */
+        public void vmSelectedAnomaly(string anomaly)
+        {
+            _algoritemDetectModel.selectedAnomaly(anomaly);
         }
 
         private void INotifyPropertyChanged(string propName)
@@ -41,6 +70,14 @@ namespace SimolatorDesktopApp_1.ViewModel
             {
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
+        }
+
+        /*
+         * Function that send command of selected Algorithm to detectAlgorithmModel.
+         */
+        internal void vmSelectedAlgorithm(string selectedItem)
+        {
+            _algoritemDetectModel.SelectedAlgorithm(selectedItem);
         }
 
     }

@@ -4,20 +4,20 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SimolatorDesktopApp_1.View.controls"
-             mc:Ignorable="d" 
-             d:DesignHeight="110" d:DesignWidth="250">
+             mc:Ignorable="d" Height="200" Width="214">
+
     <Grid>
-        <ListView x:Name="ListViewAlgoritems" ItemsSource="{Binding Path=VM_AddToMyList}" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="112" SelectionChanged="ListViewAlgoritems_SelectionChanged">
+        <ListView Background="Transparent" x:Name="ListViewAlgorithms" Foreground="red" ItemsSource="{Binding Path=VM_AddToMyList}" HorizontalAlignment="Center" Height="90" VerticalAlignment="Top" Width="214" SelectionChanged="ListViewAlgoritems_SelectionChanged">
             <ListView.View>
                 <GridView x:Name="GridViewFeatures">
-                    <GridViewColumn Header="Features" Width="170"/>
+                    <GridViewColumn Header="Detect Algorithms" Width="210"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView HorizontalAlignment="Left" Height="100" Margin="117,0,-0.4,0" VerticalAlignment="Top" Width="133">
+        <ListView Background="Transparent" Foreground="red" x:Name="ListViewAnomalies" ItemsSource="{Binding Path=VM_AddAnomaliesToMyList}" HorizontalAlignment="Center" Height="105" VerticalAlignment="Bottom" Width="214" SelectionChanged="ListViewAnomalies_SelectionChanged">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="Anomaly Lines" Width="210"/>
                 </GridView>
             </ListView.View>
         </ListView>

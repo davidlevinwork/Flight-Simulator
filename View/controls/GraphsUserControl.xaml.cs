@@ -17,37 +17,28 @@ using System.Windows.Shapes;
 
 namespace SimolatorDesktopApp_1.View.controls
 {
-    /// <summary>
-    /// Interaction logic for GraphsUserControl.xaml
-    /// </summary>
+    /*
+     * Class View GraphsUserControl.
+     */
     public partial class GraphsUserControl : UserControl
     {
-
         private VMGraphs _vmGraphs;
         private FilesUpload _filesUpload;
 
+        /*
+         * Constructor of GraphsUserControl.
+         */
         public GraphsUserControl()
         {
             _filesUpload = (Application.Current as App)._filesUpload;
             _vmGraphs = (Application.Current as App)._vmGraphs;
             DataContext = _vmGraphs;
             InitializeComponent();
-            //paintGraph();
         }
 
         /*
-        private void paintGraph()
-        {
-            this.ListViewFeatures.View = GridViewFeatures;
-            for (int i = 0; i < _filesUpload.FeaturesMap.Count; i++)
-            {
-                //this.ListViewFeatures.Items.Add(_filesUpload.FeaturesMap[i]);
-            }
-            this.ListViewFeatures.Items.Add("a");
-            this.ListViewFeatures.Items.Add("b");
-        }
-        */
-
+         * Function that command to ViewModel _vmGraphs of selected feature.
+         */
         private void ListViewFeatures_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             _vmGraphs.vmSelectedFeature(ListViewFeatures.SelectedItem.ToString());

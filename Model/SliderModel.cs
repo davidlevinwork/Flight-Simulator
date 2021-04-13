@@ -11,10 +11,12 @@ using System.Windows;
 
 namespace SimolatorDesktopApp_1.Model
 {
+    /*
+     * Class MODEL SliderModel - controls the movement of the flight simulator.
+     */
     public class SliderModel : INotifyPropertyChanged
     {
         public SimulatorConnectorModel _simulatorConnectorModel;
-        private int _minLine = 0;
         private int _maxLine = 1;
         private int _indexLine = 0;
         private string[] _linesArray;
@@ -23,6 +25,7 @@ namespace SimolatorDesktopApp_1.Model
         private double _timer = 0;
         private TimeSpan time;
         private double _speed = 1.0;
+        private bool _flagIscsvUpload = false;
         private Thread t;
         private ManualResetEvent _manualResetEvent = new ManualResetEvent(true);
         private DashBoardModel _dashBoardModel;
@@ -32,7 +35,9 @@ namespace SimolatorDesktopApp_1.Model
         private GraphsModel _graphsModel;
         public event PropertyChangedEventHandler PropertyChanged;
 
-        /* Constructors: */
+        /*
+         * Constructor.
+         */
         public SliderModel(SimulatorConnectorModel simulatorConnectorModel)
         {
             _filesUpload = (Application.Current as App)._filesUpload;
@@ -43,13 +48,17 @@ namespace SimolatorDesktopApp_1.Model
             _graphsModel = (Application.Current as App)._graphModel;
             time = TimeSpan.FromSeconds(_timer);
         }
+
+        /*
+         * Property IndexLine
+         */
         public int IndexLine
         {
             get
             {
                 return _indexLine;
             }
-            set
+            set // from here we control all the flight data that represented on the screen to be according to the _indexLine.
             {
                 if (value >= _maxLine)
                     _indexLine = _maxLine - 1;
@@ -68,6 +77,9 @@ namespace SimolatorDesktopApp_1.Model
             }
         }
 
+        /*
+         * Property MaxLine - will be the number of lines in the csv file
+         */
         public int MaxLine
         {
             get
@@ -81,6 +93,9 @@ namespace SimolatorDesktopApp_1.Model
             }
         }
 
+        /*
+         * Property Speed
+         */
         public double Speed
         {
             get
@@ -94,6 +109,10 @@ namespace SimolatorDesktopApp_1.Model
             }
         }
 
+
+        /*
+         * Property TimerString
+         */
         public string TimerString
         {
             get
@@ -103,7 +122,7 @@ namespace SimolatorDesktopApp_1.Model
             set
             {
                 double d_time = double.Parse(value, CultureInfo.InvariantCulture);
-                _timer = (d_time / 10);
+                _timer = (d_time / 10); // number of line diving with 10
                 time = TimeSpan.FromSeconds(_timer);
                 INotifyPropertyChanged("TimerString");
             }
@@ -117,6 +136,9 @@ namespace SimolatorDesktopApp_1.Model
             }
         }
 
+        /*
+         * if the user pressed on stop button
+         */
         public void stop()
         {
             stopFlag = true;
@@ -124,12 +146,18 @@ namespace SimolatorDesktopApp_1.Model
             _manualResetEvent.Set();
         }
 
+        /*
+         * if the user pressed on pause button
+         */
         public void pause()
         {
             _manualResetEvent.Reset();
             puaseFlag = true;
         }
 
+        /*
+         * if the user pressed on play button
+         */
         public void play(string pathCsv)
         {
             if (pathCsv.Equals("")) // if path csv not recived  
@@ -140,17 +168,15 @@ namespace SimolatorDesktopApp_1.Model
                 puaseFlag = false;
                 return;
             }
-            t = new Thread(delegate ()
+            t = new Thread(delegate () // new thread for runnung the simulator.
                 {
                     stopFlag = false;
                     while (_simulatorConnectorModel.IsConnected && (IndexLine < _maxLine) && !stopFlag)
                     {
-                        //Console.WriteLine(_linesArray[IndexLine]);
                         _simulatorConnectorModel.Write(_linesArray[IndexLine]);
-                        int speedRate =(int)(100 / _speed);
-                        //Console.WriteLine(_speed);
+                        int speedRate =(int)(100 / _speed); // sleep time - according to the speed that the user chose.
                         Thread.Sleep(speedRate);
-                        IndexLine++;
+                        IndexLine++; // update the line (and by that - all the data on the screen will be updated).
                         _manualResetEvent.WaitOne(Timeout.Infinite);
                     }
                     IndexLine = 0;
@@ -158,12 +184,16 @@ namespace SimolatorDesktopApp_1.Model
             t.Start();
         }
 
+        /*
+         * when the user upload his csv file.
+         */
         public void uploadCsvFile(string pathCsv)
         {
             try
-            {
+            { 
                 _linesArray = _filesUpload.csvUpload(pathCsv);
                 MaxLine = _linesArray.Length; // set number of lines
+                _flagIscsvUpload = true;
             }
             catch(Exception e)
             {
@@ -171,6 +201,17 @@ namespace SimolatorDesktopApp_1.Model
             }
         }
 
+        /*
+         * Function that returns if csv is upload
+         */
+         public bool get_flagIscsvUpload()
+        {
+            return _flagIscsvUpload;
+        }
+
+        /*
+         * when the user moves the slider button or pressed on the left or right jump.
+         */
         public void updateIndexSlider(int index)
         {
             IndexLine = index;

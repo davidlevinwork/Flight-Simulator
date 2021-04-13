@@ -8,12 +8,17 @@ using System.Threading.Tasks;
 
 namespace SimolatorDesktopApp_1.ViewModel
 {
+    /*
+     * Class ViewModel VMConnectControl.
+     */
     class VMConnectControl : INotifyPropertyChanged
     {
-
         SimulatorConnectorModel _simulatorConnectorModel;
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /*
+         * Constructor VMConnectControl
+         */
         public VMConnectControl(SimulatorConnectorModel simulatorConnectorModel)
         {
             _simulatorConnectorModel = simulatorConnectorModel;
@@ -24,17 +29,25 @@ namespace SimolatorDesktopApp_1.ViewModel
                 };
         }
 
-
+        /*
+         * Call the _simulatorConnectorModel for Connect.
+         */
         public void VMConnect(string ip, int port)
         {
             _simulatorConnectorModel.Connect(ip, port);
         }
 
+        /*
+         * Call the _simulatorConnectorModel for Disconnect.
+         */
         public void VMDisconnect()
         {
             _simulatorConnectorModel.Disconnect();
         }
 
+        /*
+         * Property - VM_IsConnected.
+         */
         public bool VM_IsConnected
         {
             get { return _simulatorConnectorModel.IsConnected; }

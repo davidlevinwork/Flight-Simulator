@@ -14,16 +14,20 @@ using System.Xml.XPath;
 
 namespace SimolatorDesktopApp_1.Model
 {
+    /*
+     * Class MODEL SimulatorConnectorModel - connect / disconnect the user to the simulator.
+     */
     public class SimulatorConnectorModel : ISimulatorConnector
     {
         TcpClient aClient;
         NetworkStream stream;
-        //private static readonly Mutex mut = new Mutex();
-        // public int conectionAttempts;
         private bool isConnected = false;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /*
+         * Property IsConnected
+         */
         public bool IsConnected
         {
             get { return isConnected; }
@@ -42,6 +46,9 @@ namespace SimolatorDesktopApp_1.Model
             }
         }
 
+        /*
+         * when the user try to connect to the simulator
+         */
         public void Connect(string ip, int port)
         {
             try {
@@ -75,10 +82,11 @@ namespace SimolatorDesktopApp_1.Model
             aClient = new TcpClient(ip, port);
             stream = aClient.GetStream();
             IsConnected = true; // set property connect
-            // SimulatorModel simulatorModel = new SimulatorModel(this);
-            // simulatorModel.startSimulator();
         }
 
+        /*
+         * when the user try to disconnect to the simulator
+         */
         public void Disconnect()
         {
             if (IsConnected)
@@ -91,9 +99,12 @@ namespace SimolatorDesktopApp_1.Model
 
         public string Read()
         {
-            return "need to finish Read function";
+            return "";
         }
 
+        /*
+         * when the user try to write to the simulator
+         */
         public void Write(string command)
         {
             byte[] buffer = Encoding.ASCII.GetBytes(command + "\n");
@@ -103,17 +114,11 @@ namespace SimolatorDesktopApp_1.Model
                 NetworkStream stream = this.aClient.GetStream();
                 stream.Flush();
                 stream.Write(buffer, 0, buffer.Length);
-                // Console.WriteLine("enter write scope");
             }
             catch
             {
-
+                Console.WriteLine("Failed in write command!");
             }
-        }
-
-        public string WriteCommand(string word)
-        {
-            return "need to finish WriteCommand function";
         }
     }
 }

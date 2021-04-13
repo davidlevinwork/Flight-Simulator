@@ -13,14 +13,15 @@ using System.Xml.Linq;
 
 namespace SimolatorDesktopApp_1.Model
 {
+    /*
+     * Class MODEL PopOutModel - handle the learn of the flight after the xml uploaded in the popOut window.
+     */
     public class PopOutModel : INotifyPropertyChanged
     {
-        private Dictionary<int, string> _featuresMap = new Dictionary<int, string>();
         private FilesUpload _filesUpload = (Application.Current as App)._filesUpload;
-        private IDLL _dllType = (Application.Current as App)._lineDLL;
-        private ObservableCollection<string> _toViewListFeatures = new ObservableCollection<string>();
-
         public event PropertyChangedEventHandler PropertyChanged;
+        bool _flagIfXamlUpload = false;
+
         public void INotifyPropertyChanged(string propName)
         {
             if (this.PropertyChanged != null)
@@ -29,33 +30,34 @@ namespace SimolatorDesktopApp_1.Model
             }
         }
 
-        public void SetDllType(IDLL dllType)
-        {
-            _dllType = dllType;
-        }
-
+        /*
+         * after the xml file is uploaded - learn (from default algorithm - linearReg in our case) on the
+         * timeSeries the created from the xml (and the csv we already had).
+         */
         public void makeLearnNormal(string path)
         {
-            Thread t = new Thread(delegate ()
+            _flagIfXamlUpload = true;
+            _filesUpload.xmlUpload(path);
+            string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
+            string newCsvPath = projectDirectory + '\\' + "learnNormalTimeSeries.csv";
+            List<string> dllNames = new List<string>();
+            string targetDirectory = projectDirectory + '\\' + "Plugins";
+            string[] dllEntries = Directory.GetFiles(targetDirectory);
+            foreach (string dllName in dllEntries)
             {
-                _filesUpload.xmlUpload(path);
-                Console.WriteLine("start!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
-                string newCsvPath = projectDirectory + '\\' + "learnNormalTimeSeries.csv";
-                //stringbuilder sb = new stringbuilder(newcsvpath);
-                //functionsdll. = functionsdll.gettimeseries(sb);
-                //console.writeline("time_series !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                //functionsdll.hybrid = functionsdll.gethybriddetector();
-                //console.writeline("hybrid !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                //functionsdll.calllearnnormal(functionsdll.hybrid, functionsdll.time_series);
-                //console.writeline("learnnnnnnnnn !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                string fileName = Path.GetFileName(dllName);
+                dllNames.Add(fileName);
+            }
+            (Application.Current as App)._algoritemDetectModel.AddAnomaliesToMyList = new ObservableCollection<string>();
+            (Application.Current as App)._algorithmDll.setDllPath(targetDirectory + '\\' + dllNames[0]);
+        }
 
-               // _dllType.myGetTimeSeries();
-               // _dllType.myGetHybridDetector();
-                // _dllType.myCallLearnNormal();
-                Console.WriteLine("learnnnnnnnnn !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            });
-            t.Start();
+        /*
+         * returns true if the xml already uploaded. false otherwise.
+         */
+        public bool getFlagIfXamlUpload()
+        {
+            return _flagIfXamlUpload;
         }
     }
 }

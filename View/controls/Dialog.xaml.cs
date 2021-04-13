@@ -17,17 +17,33 @@ using System;
 
 namespace SimolatorDesktopApp_1.View
 {
-    /// <summary>
-    /// Interaction logic for Dialog.xaml
-    /// </summary>
+    /*
+     * Class View Dialog that show the PopUp window for instruct the user what to do in order
+     * torun the simulator.
+     */
     public partial class Dialog : Window
     {
         public bool flag = false;
+
+        /*
+         * Constructor of Dialog.
+         */
         public Dialog()
         {
             InitializeComponent();
         }
 
+        /*
+         * Returns flag.
+         */
+        public bool getFlag()
+        {
+            return flag;
+        }
+
+        /*
+         * Function that holds the Stack panel of the drag window of the xml file.
+         */
         private void StackPanel_Drop_1(object sender, System.Windows.DragEventArgs e)
         {
             if (e.Data.GetDataPresent(System.Windows.DataFormats.FileDrop))
@@ -40,38 +56,32 @@ namespace SimolatorDesktopApp_1.View
                 string fileType = i < 0 ? "" : tempFileName.Substring(i + 1);
                 if (String.Equals("xml", fileType) || String.Equals("xaml", fileType))
                 {
-                    flag = true;
+                    flag = true; // xml file was load.
                     _xmlFile.Content = fileName;
-                    (System.Windows.Application.Current as App)._filesUpload.xmlUpload(pathXml);
-                    //ifValidXmlFile = true;
+                    (System.Windows.Application.Current as App)._popOutModel.makeLearnNormal(pathXml);
                 }
                 else
                 {
                     _xmlFile.Content = "Invalid file type";
-                    //ifValidXmlFile = false;
                 }
             }
         }
 
+        /*
+         * Function that load when continue button is pressed.
+         */
         public void Button_Click(object sender, RoutedEventArgs e)
         {
-            switch (flag)
+            if(!flag) // check if xml file is upload.
             {
-                case false:
-                    MessageBoxResult r = System.Windows.MessageBox.Show("Please upload the XML file.", "Flight-Simulator", MessageBoxButton.OK);
-                    this.Show();
-                    break;
-                case true:
-                    this.Close();
-                    MessageBoxResult result = System.Windows.MessageBox.Show("Now you are ready to use the app. Enjoy! ", "Flight-Simulator", MessageBoxButton.OK);
-                    break;
+                MessageBoxResult r = System.Windows.MessageBox.Show("Please upload the XML file.", "Flight-Simulator", MessageBoxButton.OK);
+                this.Show();
             }
-            return;
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
+            else
+            {
+                this.Close();
+                MessageBoxResult result = System.Windows.MessageBox.Show("Now you are ready to use the app. Enjoy! ", "Flight-Simulator", MessageBoxButton.OK);
+            }
         }
     }
 }

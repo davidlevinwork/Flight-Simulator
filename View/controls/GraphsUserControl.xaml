@@ -4,37 +4,40 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:oxy="clr-namespace:OxyPlot.Wpf;assembly=OxyPlot.Wpf" 
+             xmlns:Controls="clr-namespace:SimolatorDesktopApp_1.View.controls"
              xmlns:local="clr-namespace:SimolatorDesktopApp_1.View.controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="550">
-    <Grid>
+             d:DesignHeight="450" d:DesignWidth="700">
+    <Border BorderBrush="Black" BorderThickness="7" Height="450">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-
-        <oxy:PlotView x:Name="Plot1" Model="{Binding VM_PlotFeature1}" Margin="10" Grid.Row="0" Grid.Column="1">
-        </oxy:PlotView>
-
-        <oxy:PlotView x:Name="Plot2" Model="{Binding VM_PlotFeature2}" Margin="10" Grid.Row="0" Grid.Column="2">
-        </oxy:PlotView>
-        
-        <oxy:PlotView x:Name="Plot3" Model="{Binding VM_PlotCorrelatedFeatures}" Margin="10,10.2,10.4,9.6" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+            <oxy:PlotView Background="Transparent" x:Name="Plot1" Model="{Binding VM_PlotFeature1}" Margin="10.4,10,5.2,9.8" Grid.Row="0" Grid.Column="1" Height="200" Width="200" >
             </oxy:PlotView>
 
-        <ListView x:Name="ListViewFeatures" ItemsSource="{Binding Path=VM_AddToList}" HorizontalAlignment="Left" Height="430" Margin="10,10,0,0" VerticalAlignment="Top" Width="164" Grid.RowSpan="2" SelectionChanged="ListViewFeatures_SelectionChanged">
-            <ListView.View>
-                <GridView x:Name="GridViewFeatures">
-                    <GridViewColumn Header="Features" Width="170"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-    </Grid>
+            <oxy:PlotView Background="Transparent" x:Name="Plot2" Model="{Binding VM_PlotFeature2}" Height="200"  Margin="1.8,12,10,12.8" Grid.Row="0" Grid.Column="2"/>
+
+            <oxy:PlotView x:Name="Plot3" Model="{Binding VM_PlotCorrelatedFeatures}" Margin="10.4,0.2,10,-0.4" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Background="Transparent">
+            </oxy:PlotView>
+
+            <Controls:AlgoritemDetect Grid.Row="1" Width="220"/>
+
+            <ListView Background="Transparent" Foreground="red" x:Name="ListViewFeatures" ItemsSource="{Binding Path=VM_AddToList}" HorizontalAlignment="Center" Height="200" VerticalAlignment="Center" Width="214" SelectionChanged="ListViewFeatures_SelectionChanged">
+                <ListView.View>
+                    <GridView x:Name="GridViewFeatures">
+                        <GridViewColumn Header="Features" Width="210"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+    </Border>
 </UserControl>
