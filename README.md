@@ -47,6 +47,6 @@ To download and set up 'Flight-Simulator' application, follow these steps:
 5. Enjoy!
 
 <p align="center">
-  <img src="images/Main_screen.jpeg" width = "600" /> 
+  <img src="View/Resources/Main.jpeg" width = "600" /> 
 </p>
  
