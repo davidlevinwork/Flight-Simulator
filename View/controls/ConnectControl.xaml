@@ -6,28 +6,29 @@
              xmlns:local="clr-namespace:SimolatorDesktopApp_1.View.controls"
              mc:Ignorable="d" 
              d:DesignHeight="165" d:DesignWidth="400">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+    <Border BorderBrush="Black" BorderThickness="5" Height="135">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0" Grid.Row="0" Content="IP:" FontWeight="Bold" FontSize="20"  HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="Black" ></Label>
+            <TextBox x:Name="ipContextTextBox" Height="32" Grid.Column="1" Grid.Row="0" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Text="127.0.0.1" Margin="58.667,4,58.333,0.667" Width="205"></TextBox>
+            <Label Grid.Column="0" Grid.Row="1" FontWeight="Bold" Content="PORT:" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" ></Label>
+            <TextBox x:Name="portContextTextBox" Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Text="5400" Margin="58.667,0.333,58.333,0.333" Width="205" ></TextBox>
+            <Button x:Name="ConnectButton" Grid.Column="1"  Grid.Row="2" Content="Connect" Margin="58.6,9.8,58,10" FontSize="25" Click="ButtonPressedConnect"/>
 
-        <Label Grid.Column="0" Grid.Row="0" Content="IP:" FontSize="20"  HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="Black" ></Label>
-        <TextBox x:Name="ipContextTextBox" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Text="127.0.0.1"></TextBox>
-        <Label Grid.Column="0" Grid.Row="1" Content="PORT:" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" ></Label>
-        <TextBox x:Name="portContextTextBox" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Text="5400" ></TextBox>
-        <Button x:Name="ConnectButton" Grid.Column="1"  Grid.Row="2" Content="Connect" Margin="58.6,9.8,58,10" FontSize="25" Click="ButtonPressedConnect"/>
-
-        <Button x:Name="DisconnectButton" Content="Disconnect" Grid.Row="2" Grid.Column="1" FontSize="25"
+            <Button x:Name="DisconnectButton" Content="Disconnect" Grid.Row="2" Grid.Column="1" FontSize="25"
                     IsEnabled="False" Margin="58.6,9.8,58,10" Visibility="Collapsed" Click="ButtonPressedDisconnect" />
 
-        <TextBlock Text="{Binding VM_IsConnected}" x:Name="StatusConnectTextBlock" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" TextAlignment="Center"
+            <TextBlock Text="{Binding VM_IsConnected}" x:Name="StatusConnectTextBlock" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" TextAlignment="Center"
                         HorizontalAlignment="Center" Visibility="Hidden" FontSize="15"/>
-    </Grid>
+        </Grid>
+    </Border>
 </UserControl>

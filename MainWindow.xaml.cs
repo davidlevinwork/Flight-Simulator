@@ -13,9 +13,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-//using DragEventArgs = System.Windows.DragEventArgs;
-
-
 
 namespace SimolatorDesktopApp_1
 {

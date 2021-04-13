@@ -5,38 +5,40 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SimolatorDesktopApp_1.View.controls"
              mc:Ignorable="d" Height="800" Width="1100">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="2.1*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="2.1*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="20"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <!--   header  !-->
-        <Label Content="Flight Dash Board"  Grid.Row="0" Margin="0" FontSize="100" FontWeight="Bold" Grid.ColumnSpan="5" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontStretch="Normal" Foreground="Black"/>
-        <!--   labels  !-->
-        <Label Content="Air Speed" Grid.Row="1" Grid.Column="1" FontSize="50" HorizontalAlignment="Left"  VerticalAlignment="Center"  FontStretch="Normal" Foreground="Black"/>
-        <Label Content="Roll"  Grid.Row="2" Grid.Column="1" FontSize="50" HorizontalAlignment="Left"  VerticalAlignment="Center"  FontStretch="Normal"  Foreground="Black"/>
-        <Label Content="Pitch" Grid.Row="3" Grid.Column="1" FontSize="50" HorizontalAlignment="Left"  VerticalAlignment="Center"  FontStretch="Normal"  Foreground="Black"/>
-        <Label Content="Altimeter" FontSize="50" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Left"  VerticalAlignment="Center"   FontStretch="Normal"  Foreground="Black"/>
-        <Label Content="Heading" FontSize="50" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left"  VerticalAlignment="Center" FontStretch="Normal" Foreground="Black" />
-        <Label Content="Yaw" FontSize="50" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Left"  VerticalAlignment="Center" FontStretch="Normal" Foreground="Black"/>
+    <Border BorderBrush="Black" BorderThickness="20" Height="800">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="2.1*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2.1*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="20"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!--   header  !-->
+            <Label Content="Flight Dash Board"  Grid.Row="0" Margin="0" FontSize="100" FontWeight="Bold" Grid.ColumnSpan="5" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontStretch="Normal" Foreground="Black" Background="White"/>
+            <!--   labels  !-->
+            <Label FontWeight="Bold" Content="Air Speed" Grid.Row="1" Grid.Column="1" FontSize="50" HorizontalAlignment="Left"  VerticalAlignment="Center"  FontStretch="Normal" Foreground="black" Background="White"/>
+            <Label FontWeight="Bold" Content="Roll"  Grid.Row="2" Grid.Column="1" FontSize="50" HorizontalAlignment="Left"  VerticalAlignment="Center"  FontStretch="Normal"  Foreground="Black" Background="White"/>
+            <Label FontWeight="Bold" Content="Pitch" Grid.Row="3" Grid.Column="1" FontSize="50" HorizontalAlignment="Left"  VerticalAlignment="Center"  FontStretch="Normal"  Foreground="Black" Background="White"/>
+            <Label FontWeight="Bold" Content="Altimeter" FontSize="50" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Left"  VerticalAlignment="Center"   FontStretch="Normal"  Foreground="Black" Background="White"/>
+            <Label FontWeight="Bold" Content="Heading" FontSize="50" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left"  VerticalAlignment="Center" FontStretch="Normal" Foreground="Black" Background="White"/>
+            <Label FontWeight="Bold" Content="Yaw" FontSize="50" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Left"  VerticalAlignment="Center" FontStretch="Normal" Foreground="Black" Background="White"/>
 
-        <!--   values  !-->
+            <!--   values  !-->
 
-        <Label x:Name="air_speed_value" Content="{Binding VM_AirSpeed}" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" FontSize="35" VerticalAlignment="Center" Foreground="Black"/>
-        <Label x:Name="roll_value" Content="{Binding VM_Roll}"   Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" FontSize="35" VerticalAlignment="Center" Foreground="Black"/>
-        <Label x:Name="pitch_value" Content="{Binding VM_Pitch}" Grid.Row="3" Grid.Column="2"  HorizontalAlignment="Left" FontSize="35" VerticalAlignment="Center" Foreground="Black"/>
-        <Label x:Name="altimeter_value" Content="{Binding VM_Altimeter}" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center" FontSize="35" VerticalAlignment="Center" Foreground="Black"/>
-        <Label x:Name="heading" Content="{Binding VM_Heading}" Grid.Row="2" Grid.Column="4" HorizontalAlignment="Center" FontSize="35" VerticalAlignment="Center" Foreground="Black"/>
-        <Label x:Name="yaw_value" Content="{Binding VM_Yaw}" Grid.Row="3" Grid.Column="4" HorizontalAlignment="Center" FontSize="35" VerticalAlignment="Center" Foreground="Black"/>
-    </Grid>
+            <Label FontWeight="Bold" x:Name="air_speed_value" Content="{Binding VM_AirSpeed}" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" FontSize="35" VerticalAlignment="Center" Foreground="Black" Background="White"/>
+            <Label FontWeight="Bold" x:Name="roll_value" Content="{Binding VM_Roll}"   Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" FontSize="35" VerticalAlignment="Center" Foreground="Black" Background="White"/>
+            <Label FontWeight="Bold" x:Name="pitch_value" Content="{Binding VM_Pitch}" Grid.Row="3" Grid.Column="2"  HorizontalAlignment="Left" FontSize="35" VerticalAlignment="Center" Foreground="Black" Background="White"/>
+            <Label FontWeight="Bold" x:Name="altimeter_value" Content="{Binding VM_Altimeter}" Grid.Row="1" Grid.Column="4" HorizontalAlignment="Center" FontSize="35" VerticalAlignment="Center" Foreground="Black" Background="White"/>
+            <Label FontWeight="Bold" x:Name="heading" Content="{Binding VM_Heading}" Grid.Row="2" Grid.Column="4" HorizontalAlignment="Center" FontSize="35" VerticalAlignment="Center" Foreground="Black" Background="White"/>
+            <Label FontWeight="Bold" x:Name="yaw_value" Content="{Binding VM_Yaw}" Grid.Row="3" Grid.Column="4" HorizontalAlignment="Center" FontSize="35" VerticalAlignment="Center" Foreground="Black" Background="White"/>
+        </Grid>
+    </Border>
 </UserControl>

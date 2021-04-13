@@ -55,7 +55,7 @@
         <TextBox IsEnabled="False" IsReadOnly="True" Width="400" Height="25" Margin="0,3,0,0" BorderBrush="Transparent" VerticalAlignment="Top" Grid.Row="6" Background="Transparent" Text="STEP 5: Drag the XML file" FontSize="10" FontWeight="Bold"></TextBox>
 
         <!-- Sixth instruction -->
-        <TextBox IsReadOnly="True" Height="25" Margin="17,-5,0.333,0" BorderBrush="Transparent" VerticalAlignment="Top" Grid.Row="7" Background="Transparent" Text="STEP 6: Open the Flight-Simulator, go to Settings and scroll down to 'Additional Settings" FontSize="10" FontWeight="Bold" IsEnabled="False"/>
+        <TextBox IsReadOnly="True" Height="25" Margin="17,-5,0.333,0" BorderBrush="Transparent" VerticalAlignment="Top" Grid.Row="7" Background="Transparent" Text="STEP 6: Open the Flight-Simulator, go to Settings and scroll down to 'Additional Settings" FontSize="9.95" FontWeight="Bold" IsEnabled="False"/>
         <TextBox IsReadOnly="True" Height="25" Margin="17,5,0.333,0" BorderBrush="Transparent" VerticalAlignment="Top" Grid.Row="7" Background="Transparent" Text="And add the following two lines:" FontSize="10" FontWeight="Bold" IsEnabled="False"/>
         <TextBox IsReadOnly="True" Height="25" Margin="17,15,0.333,0" BorderBrush="Transparent" VerticalAlignment="Top" Grid.Row="7" Background="Transparent" FontSize="10" Text="--generic=socket,in,10,127.0.0.1,5400,tcp,playback_small" />
         <TextBox IsReadOnly="True" Height="25" Margin="17,25,0.333,0" BorderBrush="Transparent" VerticalAlignment="Top" Grid.Row="7" Background="Transparent" FontSize="10" Text="--fdm=null" />

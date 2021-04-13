@@ -8,10 +8,24 @@ using System.IO;
 
 namespace SimolatorDesktopApp_1.Model
 {
+    /*
+     * Class DllAlgorithms - load dll algorithms for detect in generic way, each algorithm that 
+     * we want to load have implement the delgete functions.
+     */
     public class DllAlgorithms
     {
         private IntPtr _handle = IntPtr.Zero;
-
+        private static IntPtr hybrid = IntPtr.Zero;
+        private static IntPtr time_series = IntPtr.Zero;
+        private static IntPtr time_series2 = IntPtr.Zero;
+        private static IntPtr wrapper = IntPtr.Zero;
+        private static IntPtr DrawingWrapper = IntPtr.Zero;
+        private static List<string> descriptionsList = new List<string>();
+        private static List<int> timeStepsList = new List<int>();
+        
+        /*
+         * Static class for using kernel libaries which help in loading dll files.
+         */
         static class NativeMethods
         {
             [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
@@ -26,70 +40,104 @@ namespace SimolatorDesktopApp_1.Model
             [DllImport("kernel32.dll", CharSet = CharSet.Auto)]
             public static extern int GetLastError();
         }
-
-     
+        
         public DllAlgorithms() { }
 
+        /*
+         * Functions that each dll algorithm for detect have to implement.
+         */
 
+        /*
+         *  Function that Return timesSeries from csvFile of flight.
+         */
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate IntPtr getTimeSeries([MarshalAs(UnmanagedType.LPStr)] StringBuilder csvFileName);
 
+        /*
+         * Function that get timeseries and stringbuilders f1,f2 and find the correlative feature to
+         * f1 and copy it to buffer f2.
+         */
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void getMyCorrelatedFeature(IntPtr time_series, StringBuilder f1, StringBuilder buffer);
 
+        /*
+         * Function that return IntPtr of HybridDetector.
+         */
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate IntPtr getHybridDetector();
 
+        /*
+        * Function that make LearnNormal with hybried and timeseries.
+        */
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void callLearnNormal(IntPtr hybrid, IntPtr ts);
 
+        /*
+         * Function that returns liner regression.
+         *//*
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate IntPtr getLinearReg(IntPtr time_series, StringBuilder f1, StringBuilder f2);
+        public delegate IntPtr getLinearReg(IntPtr time_series, StringBuilder f1, StringBuilder f2);*/
 
+        /*
+         * Function that return y value from line and parameter x.
+         *//*
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate float getYLine(Line line, float x);
-
+        public delegate float getYLine(Line line, float x);*/
+/*
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void updateAnomaly(IntPtr hybrid, IntPtr time_series, [MarshalAs(UnmanagedType.LPArray)] string[] descriptor);
+        public delegate void updateAnomaly(IntPtr hybrid, IntPtr time_series, [MarshalAs(UnmanagedType.LPArray)] string[] descriptor);*/
 
+        /*
+         * Function that returns wrapper of anomalies vector.
+         */
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate IntPtr getRupperAnomaly(IntPtr time_series, IntPtr hybrid);
 
+        /*
+         * Function that returns size of wrapper of anomalies vector.
+         */
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate int getSizeRupper(IntPtr rupper);
 
+        /*
+         * Function that copy description of index i in wrapper to buffer.
+         */
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate void getDescriptionRupper(IntPtr rupper, int i, StringBuilder buffer);
 
+        /*
+         * Function that returns timeStep of anomaly in wrapper of anomalies vector.
+         */
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate int getTimeStepRupper(IntPtr rupper, int i);
 
+        /*
+         * Function that returns intPtr wrapper of points the draw the algorithm structure.
+         */
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate IntPtr getDrawingRupper(IntPtr time_series, StringBuilder f1, StringBuilder f2, IntPtr hybrid);
 
+        /*
+         * Function that returns x value of of index in drawingWrapper points.
+         */
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate float getXValueByIndexDrawingWrapper(IntPtr drawingWrapper, int i);
 
+        /*
+         * Function that returns y value of of index in drawingWrapper points.
+         */
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate float getYValueByIndexDrawingWrapper(IntPtr drawingWrapper, int i);
 
+        /*
+         * Function that returns size if drawingWrapper vector points.
+         */
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate int getSizeDrawingWrapper(IntPtr drawingWrapper);
 
-
-
-
-        private static IntPtr hybrid = IntPtr.Zero;
-        private static IntPtr time_series = IntPtr.Zero;
-        private static IntPtr time_series2 = IntPtr.Zero;
-        private static IntPtr wrapper = IntPtr.Zero;
-        private static IntPtr DrawingWrapper = IntPtr.Zero;
-        private static List<string> descriptionsList = new List<string>();
-        private static List<int> timeStepsList = new List<int>();
-
-
-
-
+        /*
+         * Function that Wraps the delegate function that I stated above
+         */
         public IntPtr setDllgetDrawingRupper(IntPtr time_series, StringBuilder f1, StringBuilder f2, IntPtr hybrid)
         {
             IntPtr funcaddr = NativeMethods.GetProcAddress(_handle, "getDrawingRupper");
@@ -103,6 +151,9 @@ namespace SimolatorDesktopApp_1.Model
             return function.Invoke(time_series, f1, f2, hybrid);
         }
 
+        /*
+         * Function that Wraps the delegate function that I stated above
+         */
         public float setDllgetXValueByIndexDrawingWrapper(IntPtr drawingWrapper, int i)
         {
             IntPtr funcaddr = NativeMethods.GetProcAddress(_handle, "getXValueByIndexDrawingWrapper");
@@ -116,6 +167,9 @@ namespace SimolatorDesktopApp_1.Model
             return function.Invoke(drawingWrapper, i);
         }
 
+        /*
+         * Function that Wraps the delegate function that I stated above
+         */
         public float setDllgetYValueByIndexDrawingWrapper(IntPtr drawingWrapper, int i)
         {
             IntPtr funcaddr = NativeMethods.GetProcAddress(_handle, "getYValueByIndexDrawingWrapper");
@@ -129,6 +183,9 @@ namespace SimolatorDesktopApp_1.Model
             return function.Invoke(drawingWrapper, i);
         }
 
+        /*
+         * Function that Wraps the delegate function that I stated above
+         */
         public int setDllgetSizeDrawingWrapper(IntPtr drawingWrapper)
         {
             IntPtr funcaddr = NativeMethods.GetProcAddress(_handle, "getSizeDrawingWrapper");
@@ -142,6 +199,9 @@ namespace SimolatorDesktopApp_1.Model
             return function.Invoke(drawingWrapper);
         }
 
+        /*
+         * Function that Wraps the delegate function that I stated above
+         */
         public IntPtr setDllgetTimeSeries([MarshalAs(UnmanagedType.LPStr)] StringBuilder csvFileName)
         {
             IntPtr funcaddr = NativeMethods.GetProcAddress(_handle, "getTimeSeries");
@@ -155,6 +215,9 @@ namespace SimolatorDesktopApp_1.Model
             return function.Invoke(csvFileName);
         }
 
+        /*
+         * Function that Wraps the delegate function that I stated above
+         */
         public void setDllgetMyCorrelatedFeature(IntPtr time_series, StringBuilder f1, StringBuilder buffer)
         {
             IntPtr funcaddr = NativeMethods.GetProcAddress(_handle, "getMyCorrelatedFeature");
@@ -168,6 +231,9 @@ namespace SimolatorDesktopApp_1.Model
             function.Invoke(time_series, f1, buffer);
         }
 
+        /*
+         * Function that Wraps the delegate function that I stated above
+         */
         public IntPtr setDllgetHybridDetector()
         {
             IntPtr funcaddr = NativeMethods.GetProcAddress(_handle, "getHybridDetector");
@@ -181,6 +247,9 @@ namespace SimolatorDesktopApp_1.Model
             return function.Invoke();
         }
 
+        /*
+         * Function that Wraps the delegate function that I stated above
+         */
         public void setDllcallLearnNormal(IntPtr hybrid, IntPtr ts)
         {
             IntPtr funcaddr = NativeMethods.GetProcAddress(_handle, "callLearnNormal");
@@ -194,8 +263,10 @@ namespace SimolatorDesktopApp_1.Model
             function.Invoke(hybrid, ts);
         }
 
-
-        public IntPtr setDllgetLinearReg(IntPtr time_series, StringBuilder f1, StringBuilder f2)
+        /*
+         * Function that Wraps the delegate function that I stated above
+         */
+       /* public IntPtr setDllgetLinearReg(IntPtr time_series, StringBuilder f1, StringBuilder f2)
         {
             IntPtr funcaddr = NativeMethods.GetProcAddress(_handle, "getLinearReg");
             if (funcaddr == IntPtr.Zero)
@@ -206,10 +277,12 @@ namespace SimolatorDesktopApp_1.Model
             getLinearReg function = Marshal.GetDelegateForFunctionPointer(funcaddr, typeof(getLinearReg)) as getLinearReg;
 
             return function.Invoke(time_series, f1, f2);
-        }
+        }*/
 
-
-        public float setDllgetYLine(Line line, float x)
+        /*
+         * Function that Wraps the delegate function that I stated above
+         */
+       /* public float setDllgetYLine(Line line, float x)
         {
             IntPtr funcaddr = NativeMethods.GetProcAddress(_handle, "getYLine");
             if (funcaddr == IntPtr.Zero)
@@ -220,9 +293,12 @@ namespace SimolatorDesktopApp_1.Model
             getYLine function = Marshal.GetDelegateForFunctionPointer(funcaddr, typeof(getYLine)) as getYLine;
 
             return function.Invoke(line, x);
-        }
+        }*/
 
-        public void setDllupdateAnomaly(IntPtr hybrid, IntPtr time_series, [MarshalAs(UnmanagedType.LPArray)] string[] descriptor)
+        /*
+         * Function that Wraps the delegate function that I stated above
+         */
+       /* public void setDllupdateAnomaly(IntPtr hybrid, IntPtr time_series, [MarshalAs(UnmanagedType.LPArray)] string[] descriptor)
         {
             IntPtr funcaddr = NativeMethods.GetProcAddress(_handle, "updateAnomaly");
             if (funcaddr == IntPtr.Zero)
@@ -233,9 +309,11 @@ namespace SimolatorDesktopApp_1.Model
             updateAnomaly function = Marshal.GetDelegateForFunctionPointer(funcaddr, typeof(updateAnomaly)) as updateAnomaly;
 
             function.Invoke(hybrid, time_series, descriptor);
-        }
+        }*/
 
-
+        /*
+         * Function that Wraps the delegate function that I stated above
+         */
         public IntPtr setDllgetRupperAnomaly(IntPtr time_series, IntPtr hybrid)
         {
             IntPtr funcaddr = NativeMethods.GetProcAddress(_handle, "getRupperAnomaly");
@@ -249,6 +327,9 @@ namespace SimolatorDesktopApp_1.Model
             return function.Invoke(time_series, hybrid);
         }
 
+        /*
+         * Function that Wraps the delegate function that I stated above
+         */
         public int setDllgetSizeRupper(IntPtr rupper)
         {
             IntPtr funcaddr = NativeMethods.GetProcAddress(_handle, "getSizeRupper");
@@ -262,7 +343,9 @@ namespace SimolatorDesktopApp_1.Model
             return function.Invoke(rupper);
         }
 
-
+        /*
+         * Function that Wraps the delegate function that I stated above
+         */
         public void setDllgetDescriptionRupper(IntPtr rupper, int i, StringBuilder buffer)
         {
             IntPtr funcaddr = NativeMethods.GetProcAddress(_handle, "getDescriptionRupper");
@@ -276,6 +359,9 @@ namespace SimolatorDesktopApp_1.Model
             function.Invoke(rupper, i, buffer);
         }
 
+        /*
+         * Function that Wraps the delegate function that I stated above
+         */
         public int setDllgetTimeStepRupper(IntPtr rupper, int i)
         {
             IntPtr funcaddr = NativeMethods.GetProcAddress(_handle, "getTimeStepRupper");
@@ -289,6 +375,9 @@ namespace SimolatorDesktopApp_1.Model
             return function.Invoke(rupper, i);
         }
 
+        /*
+         * Function that set the dll algorithm from the path we get.
+         */
         public void setDllPath(string dllPath)
         {
             if(_handle != IntPtr.Zero)
@@ -304,7 +393,9 @@ namespace SimolatorDesktopApp_1.Model
             myCallLearnNormal();
         }
 
-
+        /*
+         * Function that play the detect algorithm and get the anomalies we get to list.
+         */
         public void playDetect()
         {
             myDetectAnomalies();
@@ -318,6 +409,9 @@ namespace SimolatorDesktopApp_1.Model
             }
         }
 
+        /*
+         * Function that free the dll algorithm resources.
+         */
         public void freeDllPath()
         {
             descriptionsList.Clear();
@@ -340,6 +434,9 @@ namespace SimolatorDesktopApp_1.Model
             return timeStepsList;
         }
 
+        /*
+         * Function that check if there is anomaly that suitable to description and line.
+         */
         public bool isAnomalyPoint(string description, int line)
         {
             int size = timeStepsList.Count;
@@ -351,8 +448,9 @@ namespace SimolatorDesktopApp_1.Model
             return false;
         }
 
-
-      
+        /*
+         * Function that making learnNormalTimeSeries and set him.
+         */
         public void myGetTimeSeries()
         {
             string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
@@ -366,6 +464,9 @@ namespace SimolatorDesktopApp_1.Model
             hybrid = setDllgetHybridDetector();
         }
 
+        /*
+         * Function that calls to learnNormal function.
+         */
         public void myCallLearnNormal()
         {
             myGetHybridDetector();
@@ -376,6 +477,9 @@ namespace SimolatorDesktopApp_1.Model
             setDllcallLearnNormal(hybrid, time_series);
         }
 
+        /*
+         * Fucntion that set the wrapper which is the anomalies list the algorithm detect.
+         */
         public void myDetectAnomalies()
         {
             if (time_series2 == IntPtr.Zero)
@@ -386,9 +490,11 @@ namespace SimolatorDesktopApp_1.Model
                 time_series2 =  setDllgetTimeSeries(path);
             }
             wrapper = setDllgetRupperAnomaly(time_series2, hybrid);
-            Console.WriteLine(setDllgetSizeRupper(wrapper));
         }
 
+        /*
+         * Function that call to setDllgetMyCorrelatedFeature.
+         */
         public StringBuilder myGetMyCorrelatedFeature(StringBuilder src, StringBuilder dst)
         {
             if (time_series == IntPtr.Zero)
@@ -399,62 +505,13 @@ namespace SimolatorDesktopApp_1.Model
             return dst;
         }
 
+        /*
+         * Function that returns the DrawingWrapper of the algorithm.
+         */
         public IntPtr myGetDrawingRupper(StringBuilder f1, StringBuilder f2)
         {
             return setDllgetDrawingRupper(time_series, f1, f2, hybrid);
         }
-
-
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*[DllImport("shared_DLL.dll", CallingConvention = CallingConvention.Cdecl)]
-       private static extern IntPtr getTimeSeries
-           ([MarshalAs(UnmanagedType.LPStr)] StringBuilder csvFileName);
-
-       [DllImport("shared_DLL.dll", CallingConvention = CallingConvention.Cdecl)]
-       private static extern void getMyCorrelatedFeature(IntPtr time_series, StringBuilder f1, StringBuilder buffer);
-
-       [DllImport("shared_DLL.dll", CallingConvention = CallingConvention.Cdecl)]
-       private static extern IntPtr getHybridDetector();
-
-       [DllImport("shared_DLL.dll", CallingConvention = CallingConvention.Cdecl)]
-       private static extern void callLearnNormal(IntPtr hybrid, IntPtr ts);
-
-       [DllImport("shared_DLL.dll", CallingConvention = CallingConvention.Cdecl)]
-       private static extern IntPtr getLinearReg(IntPtr time_series, StringBuilder f1, StringBuilder f2);
-       [DllImport("shared_DLL.dll", CallingConvention = CallingConvention.Cdecl)]
-       private static extern float getYLine(Line line, float x);
-
-       [DllImport("shared_DLL.dll", CallingConvention = CallingConvention.Cdecl)]
-       private static extern void updateAnomaly(IntPtr hybrid, IntPtr time_series, [MarshalAs(UnmanagedType.LPArray)] string[] descriptor);
-
-       [DllImport("shared_DLL.dll", CallingConvention = CallingConvention.Cdecl)]
-       private static extern IntPtr getRupperAnomaly(IntPtr time_series, IntPtr hybrid);
-
-       [DllImport("shared_DLL.dll", CallingConvention = CallingConvention.Cdecl)]
-       private static extern int getSizeRupper(IntPtr rupper);
-
-       [DllImport("shared_DLL.dll", CallingConvention = CallingConvention.Cdecl)]
-       private static extern void getDescriptionRupper(IntPtr rupper, int i, StringBuilder buffer);
-
-       [DllImport("shared_DLL.dll", CallingConvention = CallingConvention.Cdecl)]
-       private static extern float getTimeStepRupper(IntPtr rupper, int i);*/

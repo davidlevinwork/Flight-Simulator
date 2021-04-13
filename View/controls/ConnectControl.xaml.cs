@@ -17,6 +17,9 @@ using System.Windows.Shapes;
 
 namespace SimolatorDesktopApp_1.View.controls
 {
+    /*
+     * Class View ConnectControl.
+     */
     public partial class ConnectControl : UserControl
     {
         private const string disconnected = "Simulator Disconnected";
@@ -24,6 +27,9 @@ namespace SimolatorDesktopApp_1.View.controls
         VMConnectControl _vmConnectControl;
         Dialog _dialog;
 
+        /*
+         * Constructor of ConnectControl
+         */
         public ConnectControl()
         {
             InitializeComponent();
@@ -31,6 +37,9 @@ namespace SimolatorDesktopApp_1.View.controls
             DataContext = _vmConnectControl;
         }
 
+        /*
+         * Function for display stustus of connection with the simulator.
+         */
         private void connectDisplayStatus()
         {
             if (_vmConnectControl.VM_IsConnected) // check if connected
@@ -46,6 +55,9 @@ namespace SimolatorDesktopApp_1.View.controls
             this.StatusConnectTextBlock.Visibility = Visibility.Visible; // change blockText to visiible
         }
 
+        /*
+         * Function that play when connect button selected.
+         */
         private void ButtonPressedConnect(object sender, RoutedEventArgs e)
         {
             popUp();
@@ -67,12 +79,18 @@ namespace SimolatorDesktopApp_1.View.controls
             }
         }
 
+        /*
+         * Function that pop up when connect button selected.
+         */
         private void popUp()
         {
             _dialog = new Dialog();
             _dialog.ShowDialog();
         }
 
+        /*
+         * Function that play when disconnect button is selected.
+         */
         private void ButtonPressedDisconnect(object sender, RoutedEventArgs e)
         {
             try

@@ -9,11 +9,17 @@ using SimolatorDesktopApp_1.Model;
 
 namespace SimolatorDesktopApp_1.ViewModel
 {
+    /*
+     * Class ViewModel VMDashBoard
+     */
     public class VMDashBoard : INotifyPropertyChanged
     {
         private DashBoardModel _dashBoardModel;
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /*
+         * Constructor of VMDashBoard.
+         */
         public VMDashBoard(DashBoardModel dashBoardModel)
         {
             _dashBoardModel = dashBoardModel;
@@ -32,6 +38,9 @@ namespace SimolatorDesktopApp_1.ViewModel
             }
         }
 
+        /*
+         * Property - VM_Altimeter.
+         */
         public double VM_Altimeter
         {
             get
@@ -43,7 +52,10 @@ namespace SimolatorDesktopApp_1.ViewModel
                 _dashBoardModel.Altimeter = value;
             }
         }
-            
+
+        /*
+         * Property - VM_AirSpeed.
+         */
         public double VM_AirSpeed
         {
             get { return _dashBoardModel.AirSpeed; }
@@ -52,6 +64,10 @@ namespace SimolatorDesktopApp_1.ViewModel
                 _dashBoardModel.AirSpeed = value;
             }
         }
+
+        /*
+         * Property - VM_Roll.
+         */
         public double VM_Roll
         {
             get { return _dashBoardModel.Roll; }
@@ -60,6 +76,10 @@ namespace SimolatorDesktopApp_1.ViewModel
                 _dashBoardModel.Roll = value;
             }
         }
+
+        /*
+         * Property - VM_Pitch.
+         */
         public double VM_Pitch
         {
             get { return _dashBoardModel.Pitch; }
@@ -69,6 +89,9 @@ namespace SimolatorDesktopApp_1.ViewModel
             }
         }
 
+        /*
+         * Property - VM_Yaw.
+         */
         public double VM_Yaw
         {
             get { return _dashBoardModel.Yaw; }
@@ -77,6 +100,10 @@ namespace SimolatorDesktopApp_1.ViewModel
                 _dashBoardModel.Yaw = value;
             }
         }
+
+        /*
+         * Property - VM_Heading.
+         */
         public double VM_Heading
         {
             get { return _dashBoardModel.Heading; }

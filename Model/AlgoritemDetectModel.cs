@@ -10,13 +10,20 @@ using System.Windows;
 
 namespace SimolatorDesktopApp_1.Model
 {
+    /*
+    * Class MODEL AlgoritemDetectModel - load the available dll's Algoritems in Plugin libary,
+    * which the user want to detect with them, and set the Algoritem.
+    */
     public class AlgoritemDetectModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private ObservableCollection<string> _toViewListFeatures = new ObservableCollection<string>();
+        private ObservableCollection<string> _toViewListAlgorithms = new ObservableCollection<string>();
         private ObservableCollection<string> _anomaliesViewList = new ObservableCollection<string>();
         private DllAlgorithms _dll = (Application.Current as App)._algorithmDll;
 
+        /*
+         * Constructor that add to _toViewListAlgorithms the Algorithms in the Plugin libary.
+         */
         public AlgoritemDetectModel()
         {
             string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
@@ -25,24 +32,30 @@ namespace SimolatorDesktopApp_1.Model
             foreach (string dllName in dllEntries)
             {
                 string fileName = Path.GetFileName(dllName);
-                _toViewListFeatures.Add(fileName);
+                _toViewListAlgorithms.Add(fileName);
             }
-            AddToMyList = _toViewListFeatures;
+            AddToMyList = _toViewListAlgorithms;
         }
 
+        /*
+         * Property AddToMyList
+         */
         public ObservableCollection<string> AddToMyList
         {
             get
             {
-                return _toViewListFeatures;
+                return _toViewListAlgorithms;
             }
             set
             {
-                _toViewListFeatures = value;
+                _toViewListAlgorithms = value;
                 INotifyPropertyChanged("AddToMyList");
             }
         }
 
+        /*
+        * Property AddAnomaliesToMyList - anomalies the algoritem detected
+        */
         public ObservableCollection<string> AddAnomaliesToMyList
         {
             get
@@ -56,6 +69,9 @@ namespace SimolatorDesktopApp_1.Model
             }
         }
 
+        /*
+        * When user select on anomaly, we move to the current time of the anomaly
+        */
         public void selectedAnomaly(string anomaly)
         {
             int x = anomaly.LastIndexOf(" ");
@@ -71,6 +87,10 @@ namespace SimolatorDesktopApp_1.Model
             }
         }
 
+        /*
+        * When user select the algorithm he want to load we set the DLL path and load it generic,
+        * and detect.
+        */
         public void SelectedAlgorithm(string selectedItem)
         {
             AddAnomaliesToMyList = new ObservableCollection<string>();

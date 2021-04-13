@@ -14,6 +14,9 @@ using System.Xml.XPath;
 
 namespace SimolatorDesktopApp_1.Model
 {
+    /*
+     * Class MODEL SimulatorConnectorModel - connect / disconnect the user to the simulator.
+     */
     public class SimulatorConnectorModel : ISimulatorConnector
     {
         TcpClient aClient;
@@ -22,6 +25,9 @@ namespace SimolatorDesktopApp_1.Model
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /*
+         * Property IsConnected
+         */
         public bool IsConnected
         {
             get { return isConnected; }
@@ -40,6 +46,9 @@ namespace SimolatorDesktopApp_1.Model
             }
         }
 
+        /*
+         * when the user try to connect to the simulator
+         */
         public void Connect(string ip, int port)
         {
             try {
@@ -75,6 +84,9 @@ namespace SimolatorDesktopApp_1.Model
             IsConnected = true; // set property connect
         }
 
+        /*
+         * when the user try to disconnect to the simulator
+         */
         public void Disconnect()
         {
             if (IsConnected)
@@ -90,6 +102,9 @@ namespace SimolatorDesktopApp_1.Model
             return "";
         }
 
+        /*
+         * when the user try to write to the simulator
+         */
         public void Write(string command)
         {
             byte[] buffer = Encoding.ASCII.GetBytes(command + "\n");

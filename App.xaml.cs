@@ -12,6 +12,9 @@ namespace SimolatorDesktopApp_1
     using SimolatorDesktopApp_1.ViewModel;
     using System;
 
+    /*
+     * Class that Set all Models objects of the project.
+     */
     public partial class App : Application
     {
         public JoystickDashBoardModel _joystickDashBoardModel { get; private set; }
@@ -25,9 +28,6 @@ namespace SimolatorDesktopApp_1
         public AlgoritemDetectModel _algoritemDetectModel { get; private set; }
         public SliderModel _sliderModel { get; private set; }
         public DllAlgorithms _algorithmDll { get; private set; }
-
-
-
 
         private void Application_Startup(object sender, StartupEventArgs e)
         {

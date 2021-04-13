@@ -14,6 +14,9 @@ using System.Xml.Linq;
 
 namespace SimolatorDesktopApp_1.Model
 {
+    /*
+     * Class FilesUpload - upload the XML, and CSV files.  
+     */
     public class FilesUpload : INotifyPropertyChanged
     {
         private Dictionary<int, string> _featuresMap = new Dictionary<int, string>();
@@ -22,13 +25,10 @@ namespace SimolatorDesktopApp_1.Model
         private string[] _myCsvFile, _userCsvFile;
         private ObservableCollection<string> _toViewListFeatures = new ObservableCollection<string>();
         Dictionary<string, double[]> _allValues = new Dictionary<string, double[]>();
-
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public FilesUpload()
-        {
-
-        }
+        // Constructor FilesUpload
+        public FilesUpload() { }
 
         public void INotifyPropertyChanged(string propName)
         {
@@ -38,6 +38,9 @@ namespace SimolatorDesktopApp_1.Model
             }
         }
 
+        /*
+         * Property of GetAllValues.
+         */
         public Dictionary<string, double[]> GetAllValues
         {
             get
@@ -50,18 +53,22 @@ namespace SimolatorDesktopApp_1.Model
             }
         }
 
+        /*
+         * Property of FeaturesMap.
+         */
         public Dictionary<int, string> FeaturesMap
         {
             get
             {
                 return _featuresMap;
             }
-            
-            set
-            { 
-            }
+            set { }
         }
 
+        /*
+         * Function that load the xml file with the path we get, and parser the xml file
+         * to features we need for creating csv file with columns of features.
+         */
         public void xmlUpload(string path)
         {
             try 
@@ -87,8 +94,8 @@ namespace SimolatorDesktopApp_1.Model
                         }
                         break;
                     }
-                }
-                for(int i = 0; i < _featuresMap.Count; i++)
+                } // push the featurs to _featuresMap.
+                for (int i = 0; i < _featuresMap.Count; i++)
                 {
                     if (i > 0 && _featuresMap[i] == _featuresMap[i - 1])
                         _featuresMap[i] = _featuresMap[i] + "2";
@@ -106,25 +113,27 @@ namespace SimolatorDesktopApp_1.Model
             }
         }
 
-
+        /*
+         * Function that load the csv file and returns array of lines in the csv.
+         */
         public string[] csvUpload(string csvPath)
         {
             try 
             {
                 _userCsvFile = File.ReadAllLines(csvPath);
-                Console.WriteLine(_userCsvFile.Length);
                 writeDetectCSVFile();
                 return _userCsvFile;
             }
             catch(Exception e)
             {
-                Console.WriteLine("error csvvvvvvv");
+                Console.WriteLine("error in csvUpload");
                 return null;
             }
         }
 
-
-
+        /*
+         * Function that write new csv file with the features of the xml for learn.
+         */
         public void writeLearnCSVFile()
         {
             string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
@@ -144,7 +153,9 @@ namespace SimolatorDesktopApp_1.Model
             File.WriteAllText(path, line);
         }
 
-
+        /*
+         * Function that write new csv file with the features of the xml for detect.
+         */
         public void writeDetectCSVFile()
         {
             string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
@@ -166,13 +177,15 @@ namespace SimolatorDesktopApp_1.Model
             (Application.Current as App)._algorithmDll.playDetect();
         }
 
+        /*
+         * Function that update the dictionary.
+         */
         public void updateDictionary()
         {
             Dictionary<string, double[]> allValues = new Dictionary<string, double[]>();
             for (int i = 0; i < _featuresMap.Count; i++)
             {
                 allValues.Add(_featuresMap[i], new double[_userCsvFile.Length]);
-                Console.WriteLine(_featuresMap[i]);
             }
             for (int i = 0; i < _userCsvFile.Length; i++)
             {

@@ -7,14 +7,14 @@
              mc:Ignorable="d" Height="200" Width="214">
 
     <Grid>
-        <ListView Background="Transparent" x:Name="ListViewAlgorithms" ItemsSource="{Binding Path=VM_AddToMyList}" HorizontalAlignment="Center" Height="90" VerticalAlignment="Top" Width="214" SelectionChanged="ListViewAlgoritems_SelectionChanged">
+        <ListView Background="Transparent" x:Name="ListViewAlgorithms" Foreground="red" ItemsSource="{Binding Path=VM_AddToMyList}" HorizontalAlignment="Center" Height="90" VerticalAlignment="Top" Width="214" SelectionChanged="ListViewAlgoritems_SelectionChanged">
             <ListView.View>
                 <GridView x:Name="GridViewFeatures">
                     <GridViewColumn Header="Detect Algorithms" Width="210"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView Background="Transparent" x:Name="ListViewAnomalies" ItemsSource="{Binding Path=VM_AddAnomaliesToMyList}" HorizontalAlignment="Center" Height="105" VerticalAlignment="Bottom" Width="214" SelectionChanged="ListViewAnomalies_SelectionChanged">
+        <ListView Background="Transparent" Foreground="red" x:Name="ListViewAnomalies" ItemsSource="{Binding Path=VM_AddAnomaliesToMyList}" HorizontalAlignment="Center" Height="105" VerticalAlignment="Bottom" Width="214" SelectionChanged="ListViewAnomalies_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Anomaly Lines" Width="210"/>

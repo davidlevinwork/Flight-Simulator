@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              Height="275" Width="650">
     <Grid>
-        <Slider Value="{Binding VM_IndexLine ,Mode=OneWay}" x:Name="_SliderButton" Minimum="0" Maximum="{Binding VM_MaxLine}" ValueChanged="SliderValueChanged" HorizontalAlignment="Left" Width="510" Margin="10,215,0,0" VerticalAlignment="Top" Height="24">
+        <Slider IsEnabled="False" Value="{Binding VM_IndexLine ,Mode=OneWay}" x:Name="_SliderButton" Minimum="0" Maximum="{Binding VM_MaxLine}" ValueChanged="SliderValueChanged" HorizontalAlignment="Left" Width="510" Margin="10,215,0,0" VerticalAlignment="Top" Height="24">
             <Slider.LayoutTransform>
                 <ScaleTransform ScaleY="1.9" CenterX="15" CenterY="15"/>
             </Slider.LayoutTransform>
@@ -16,38 +16,38 @@
 
         <StackPanel Background="Transparent"  AllowDrop="True"  Drop="CsvDropStackPanel_Drop" Height="85" VerticalAlignment="Top" Margin="462,109,10,0" >
             <Border BorderThickness="5" BorderBrush="Black" Height="84">
-            <Label x:Name="_csvFileNameLabel" FontSize="12" HorizontalAlignment="Center" Content="Drag CSV File"/>
+                <Label x:Name="_csvFileNameLabel" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Content="Drag CSV File"/>
             </Border>
         </StackPanel>
 
 
         <TextBlock x:Name="_timeTextBlock" Foreground="AliceBlue" HorizontalAlignment="Center" Height="25" Margin="544,221,23.6,0" FontSize="20" VerticalAlignment="Top" Width="82" Text="{Binding VM_TimerString}"/>
 
-        <Button x:Name="_leftJumpButton" Height="35" Width="35" Click="LeftJumpButton" Margin="50,139,564.6,101.2" >
+        <Button IsEnabled="False" x:Name="_leftJumpButton" Height="35" Width="35" Click="LeftJumpButton" Margin="50,139,564.6,101.2" >
             <StackPanel>
                 <Image Source="/View/Resources/leftSpeed.png" Height="35" Width="35"/>
             </StackPanel>
         </Button>
 
-        <Button x:Name="_PlayButton" Height="35" Width="35" Click="PlayButton" Margin="144,140,470.6,100.2" >
+        <Button IsEnabled="False" x:Name="_PlayButton" Height="35" Width="35" Click="PlayButton" Margin="144,140,470.6,100.2" >
             <StackPanel>
                 <Image Source="/View/Resources/play.png" Height="35" Width="35" ></Image>
             </StackPanel>
         </Button>
 
-        <Button x:Name="_rightJumpButton" Height="35" Width="35" Margin="238,140,375.6,100.2" Click="RightJumpButton">
+        <Button IsEnabled="False" x:Name="_rightJumpButton" Height="35" Width="35" Margin="238,140,375.6,100.2" Click="RightJumpButton">
             <StackPanel>
                 <Image Source="/View/Resources/rightSpeed.png" ></Image>
             </StackPanel>
         </Button>
 
-        <Button x:Name="_PauseButton" Height="35" Width="35"  Click="PauseButton" Margin="97,140,517.6,100.2">
+        <Button IsEnabled="False" x:Name="_PauseButton" Height="35" Width="35"  Click="PauseButton" Margin="97,140,517.6,100.2">
             <StackPanel>
                 <Image Source="/View/Resources/pause.png" Height="35" Width="35"></Image>
             </StackPanel>
         </Button>
 
-        <Button x:Name="_StopButton" Height="35" Width="35" Click="StopButton" Margin="191,141,423.6,99.2">
+        <Button IsEnabled="False" x:Name="_StopButton" Height="35" Width="35" Click="StopButton" Margin="191,141,423.6,99.2">
             <StackPanel>
                 <Image Source="/View/Resources/stop.png" Height="35" Width="35"/>
             </StackPanel>

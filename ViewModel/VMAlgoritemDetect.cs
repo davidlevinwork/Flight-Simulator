@@ -9,11 +9,17 @@ using System.Threading.Tasks;
 
 namespace SimolatorDesktopApp_1.ViewModel
 {
+    /*
+     * Class ViewModel VMAlgoritemDetect.
+     */
     public class VMAlgoritemDetect : INotifyPropertyChanged
     {
         private AlgoritemDetectModel _algoritemDetectModel;
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /*
+         * Constructor VMAlgoritemDetect.
+         */
         public VMAlgoritemDetect(AlgoritemDetectModel algoritemDetectModel)
         {
             _algoritemDetectModel = algoritemDetectModel;
@@ -24,6 +30,9 @@ namespace SimolatorDesktopApp_1.ViewModel
                };
         }
 
+        /*
+         * Property VM_AddToMyList.
+         */
         public ObservableCollection<string> VM_AddToMyList
         {
             get { return _algoritemDetectModel.AddToMyList; }
@@ -34,6 +43,9 @@ namespace SimolatorDesktopApp_1.ViewModel
             }
         }
 
+        /*
+         * Property VM_AddAnomaliesToMyList.
+         */
         public ObservableCollection<string> VM_AddAnomaliesToMyList
         {
             get { return _algoritemDetectModel.AddAnomaliesToMyList; }
@@ -44,6 +56,9 @@ namespace SimolatorDesktopApp_1.ViewModel
             }
         }
 
+        /*
+         * Function that send command of selected anomaly to detectAlgorithmModel.
+         */
         public void vmSelectedAnomaly(string anomaly)
         {
             _algoritemDetectModel.selectedAnomaly(anomaly);
@@ -57,6 +72,9 @@ namespace SimolatorDesktopApp_1.ViewModel
             }
         }
 
+        /*
+         * Function that send command of selected Algorithm to detectAlgorithmModel.
+         */
         internal void vmSelectedAlgorithm(string selectedItem)
         {
             _algoritemDetectModel.SelectedAlgorithm(selectedItem);

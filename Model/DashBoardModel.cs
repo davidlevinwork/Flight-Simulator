@@ -9,8 +9,13 @@ using System.Windows;
 
 namespace SimolatorDesktopApp_1.Model
 {
-    public class DashBoardModel : INotifyPropertyChanged 
+    /*
+     * Class Model DashBoardModel - takes the paramaters we send to flight simulator and update them
+     * in order they will display on view.
+     */
+    public class DashBoardModel : INotifyPropertyChanged
     {
+        // paramaters we send to simulator flight.
         private double _altimeter = 0;
         private double _airSpeed = 0;
         private double _roll = 0;
@@ -20,10 +25,15 @@ namespace SimolatorDesktopApp_1.Model
         private FilesUpload _filesUpload;
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public DashBoardModel( )
+        // Constructor DashBoardModel
+        public DashBoardModel()
         {
             _filesUpload = (Application.Current as App)._filesUpload;
         }
+
+        /*
+         * Function that update the propertyies parameters each line that we send.
+         */
         public void updateValues(string[] commands)
         {
             Altimeter = double.Parse(commands[_filesUpload.FeaturesMap.FirstOrDefault(x => x.Value == "altimeter_indicated-altitude-ft").Key], CultureInfo.InvariantCulture);
@@ -33,6 +43,7 @@ namespace SimolatorDesktopApp_1.Model
             Yaw = double.Parse(commands[_filesUpload.FeaturesMap.FirstOrDefault(x => x.Value == "side-slip-deg").Key], CultureInfo.InvariantCulture);
             Heading = double.Parse(commands[_filesUpload.FeaturesMap.FirstOrDefault(x => x.Value == "heading-deg").Key], CultureInfo.InvariantCulture);
         }
+
         public void INotifyPropertyChanged(string propName)
         {
             if (this.PropertyChanged != null)
@@ -40,7 +51,10 @@ namespace SimolatorDesktopApp_1.Model
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
-        /* Features: */
+
+        /*
+         * Property of Altimeter parameter
+         */
         public double Altimeter
         {
             get
@@ -53,9 +67,13 @@ namespace SimolatorDesktopApp_1.Model
                 INotifyPropertyChanged("Altimeter");
             }
         }
+
+        /*
+        * Property of AirSpeed parameter
+        */
         public double AirSpeed
         {
-            get 
+            get
             {
                 return _airSpeed;
             }
@@ -66,10 +84,14 @@ namespace SimolatorDesktopApp_1.Model
             }
 
         }
+
+        /*
+        * Property of Roll parameter
+        */
         public double Roll
         {
             get
-            { 
+            {
                 return _roll;
             }
             set
@@ -79,7 +101,11 @@ namespace SimolatorDesktopApp_1.Model
             }
 
         }
-    public double Pitch
+
+        /*
+        * Property of Pitch parameter
+        */
+        public double Pitch
         {
             get
             {
@@ -91,9 +117,13 @@ namespace SimolatorDesktopApp_1.Model
                 INotifyPropertyChanged("Pitch");
             }
         }
+
+        /*
+        * Property of Yaw parameter
+        */
         public double Yaw
         {
-            get 
+            get
             {
                 return _yaw;
             }
@@ -103,10 +133,14 @@ namespace SimolatorDesktopApp_1.Model
                 INotifyPropertyChanged("Yaw");
             }
         }
+
+        /*
+        * Property of Heading parameter
+        */
         public double Heading
         {
             get
-            { 
+            {
                 return _hedaing;
             }
             set
@@ -116,4 +150,4 @@ namespace SimolatorDesktopApp_1.Model
             }
         }
     }
-    }
+}
